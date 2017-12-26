@@ -1,0 +1,3 @@
+INDEX VERSION 1.130+C:\Users\shado\Dropbox\JEE\JEEWS\.metadata\.plugins\org.eclipse.jdt.core
+915616265.index
+2025520411.index

@@ -1,0 +1,26 @@
+package be.gestionhopital.metier;
+
+public class Chirurgien extends Personne{
+	//Variable d'instance
+	private String specialisation;
+	
+	//Constructeur
+	public Chirurgien() {
+		super();
+	}
+	
+	//Propriétés
+	public String getSpecialisation() {
+		return specialisation;
+	}
+
+	public void setSpecialisation(String specialisation) {
+		this.specialisation = specialisation;
+	}
+	
+	//Méthodes
+	@override
+	public void modifierInfos() {
+		
+	};
+}

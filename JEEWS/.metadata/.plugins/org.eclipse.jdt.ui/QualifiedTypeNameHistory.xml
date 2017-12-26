@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Personne"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Chirurgien"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Directeur"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Notification"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Patient"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Reservation"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Salle"/>
+<fullyQualifiedTypeName name="be.gestionhopital.metier.Secretaire"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+</qualifiedTypeNameHistroy>

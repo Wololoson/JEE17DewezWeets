@@ -1,0 +1,8 @@
+package be.gestionhopital.DAO;
+
+public class DAODirecteur extends DAO<Directeur> {
+	public DAODirecteur(Connection conn) {
+		super(conn);
+	}
+	
+}

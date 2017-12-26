@@ -1,0 +1,7 @@
+package be.gestionhopital.DAO;
+
+public class DAOPersonne extends DAO<Personne> {
+	public DAOPersonne(Connection conn) {
+		super(conn);
+	}
+}
