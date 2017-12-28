@@ -1,0 +1,9 @@
+package be.gestionhopital.connexion;
+
+public class test {
+
+	public static void main(String[] args) {
+		DriverACCESS.getInstance();
+	}
+
+}

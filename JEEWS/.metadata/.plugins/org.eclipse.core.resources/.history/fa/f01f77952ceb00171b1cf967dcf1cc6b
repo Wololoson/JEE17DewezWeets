@@ -1,0 +1,19 @@
+package be.gestionhopital.DAO;
+
+import com.sun.jersey.api.client.WebResource;
+
+public abstract class DAO<T> {
+	protected WebResource connect = null;
+	
+	public DAO(WebResource conn) {
+		this.connect = conn;
+	}
+	
+	public abstract boolean create(T obj);
+	
+	public abstract boolean delete(T obj);
+	
+	public abstract boolean update(T obj);
+	
+	public abstract T find(T obj);
+}

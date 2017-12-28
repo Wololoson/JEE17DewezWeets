@@ -1,0 +1,50 @@
+package be.gestionhopital.DAO;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Patient;
+
+public class DAOPatient extends DAO<Patient> {
+	public DAOPatient(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Patient obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("numChambre", obj.getNumChambre());
+		queryParams.add("numPatient", obj.getNumPatient());
+		
+		ClientResponse response = connect.path("chirurgien").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Patient obj) {
+		return false;
+	}
+
+	@Override
+	public boolean update(Patient obj) {
+		return false;
+	}
+
+	@Override
+	public Patient find(Patient obj) {
+		return null;
+	}
+}

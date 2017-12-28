@@ -1,0 +1,133 @@
+package be.gestionhopital.DAO;
+
+import java.io.StringReader;
+import java.sql.Date;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.Directeur;
+
+public class DAODirecteur extends DAO<Directeur> {
+	public DAODirecteur(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("code", Integer.toString(obj.getCode()));
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("code", Integer.toString(obj.getCode()));
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Directeur find(Directeur obj) {
+		String nom = null, prenom = null, numTel = null, mdp = null;
+		int id = 0, code = 0;
+		Date dateNaiss = null;
+		String responseText = connect.path("directeur/"+obj.getIdPersonne()).accept(MediaType.TEXT_XML).get(String.class);
+		
+		DocumentBuilder db = null;
+		try {
+			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(responseText));
+
+		Document doc = db.parse(is);
+		NodeList directeurNodes = doc.getElementsByTagName("chirurgien");
+		
+		for(int i = 0; i < directeurNodes.getLength(); i++) {
+				Element directeur = (Element) directeurNodes.item(i);
+				
+				NodeList idNode = chirurgien.getElementsByTagName("id");
+				Element line = (Element) idNode.item(0);
+				id = Integer.parseInt(getCharacterDataFromElement(line));
+				
+				NodeList nomNode = chirurgien.getElementsByTagName("nom");
+				line = (Element) nomNode.item(0);
+				nom = getCharacterDataFromElement(line);
+				
+				NodeList prenomNode = chirurgien.getElementsByTagName("prenom");
+				line = (Element) prenomNode.item(0);
+				prenom = getCharacterDataFromElement(line);
+				
+				NodeList numTelNode = chirurgien.getElementsByTagName("numTelephone");
+				line = (Element) numTelNode.item(0);
+				numTel = getCharacterDataFromElement(line);
+				
+				NodeList mdpNode = chirurgien.getElementsByTagName("motDePasse");
+				line = (Element) mdpNode.item(0);
+				mdp = getCharacterDataFromElement(line);
+				
+				NodeList dateNaissNode = chirurgien.getElementsByTagName("dateNaissance");
+				line = (Element) dateNaissNode.item(0);
+				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				
+				NodeList specialisationNode = chirurgien.getElementsByTagName("specialisation");
+				line = (Element) specialisationNode.item(0);
+				specialisation = getCharacterDataFromElement(line);
+		}
+		
+		return new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp);
+	}
+}

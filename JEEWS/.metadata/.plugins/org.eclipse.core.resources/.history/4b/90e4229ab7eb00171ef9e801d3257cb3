@@ -1,0 +1,64 @@
+package be.gestionhopital.DAO;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Salle;
+
+public class DAOSalle extends DAO<Salle> {
+	public DAOSalle(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("numSalle", obj.getNumSalle());
+		queryParams.add("bloc", String.valueOf(obj.getBloc()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdSalle()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("numSalle", obj.getNumSalle());
+		queryParams.add("bloc", String.valueOf(obj.getBloc()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Salle find(Salle obj) {
+		return null;
+	}
+}

@@ -1,0 +1,16 @@
+package be.gestionhopital.Models;
+
+public class ListPersonnel {
+	private static ListPersonnel instance = null;
+	
+	private ListPersonnel() {
+		
+	}
+	
+	public static synchronized ListPersonnel getInstance() {
+		if(instance == null)
+			instance = new ListPersonnel();
+		
+		return instance;
+	}
+}

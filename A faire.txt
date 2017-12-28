@@ -1,0 +1,3 @@
+- DAO : Faire comme dans chirurgien avec les autres (copier-coller + modifier)
+- Faire les autres méthodes des DAO
+- PL/SQL : Test avec le java (crash glassfish avec postman)

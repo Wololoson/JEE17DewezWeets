@@ -1,0 +1,41 @@
+package be.gestionhopital.DAO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sun.jersey.api.client.WebResource;
+
+import be.gestionhopital.Models.Personne;
+
+public class DAOPersonne extends DAO<Personne> {
+	public DAOPersonne(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public boolean delete(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public boolean update(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public Personne find(Personne obj) {
+		return null;
+	}
+	
+	public List<Personne> findAll(Personne obj){
+		List<Personne> listPers = new ArrayList<>();
+		String responseText = connect.path
+		
+		return null;
+	}
+}

@@ -1,0 +1,49 @@
+package be.gestionhopital.DAO;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Directeur;
+
+public class DAODirecteur extends DAO<Directeur> {
+	public DAODirecteur(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("code", Integer.valueOf(obj.getCode()));
+		
+		ClientResponse response = connect.path("chirurgien").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Directeur obj) {
+		return false;
+	}
+
+	@Override
+	public boolean update(Directeur obj) {
+		return false;
+	}
+
+	@Override
+	public Directeur find(Directeur obj) {
+		return null;
+	}
+}

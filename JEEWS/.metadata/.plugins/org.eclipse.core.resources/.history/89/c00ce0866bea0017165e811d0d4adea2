@@ -1,0 +1,73 @@
+package be.gestionhopital.CRUD;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import javax.ws.rs.core.Response.Status;
+
+import be.gestionhopital.Connexion.DriverACCESS;
+
+@Path("personne")
+public class PersonneCRUD {
+	private Connection conn = DriverACCESS.getInstance();
+	
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	public Response getPersonnes() {
+		String retour = "<?xml version=\"1.0\"?>";
+		
+		retour += "<listePersonne>";
+		
+		try{
+			CallableStatement getPers = conn.prepareCall("{ ? = call SelectAll.getPersonnes() }");
+			getPers.registerOutParameter(1, Types.OTHER);
+			getPers.execute();
+			ResultSet results = (ResultSet)getPers.getObject(1);
+			while(results.next()) {
+				retour += results.getDouble("IdPersonne");
+				retour += results.getString("Nom");
+				retour += results.getString("Prenom");
+				retour += results.getDate("DateNaissance");
+				retour += results.getString("NumeroTelephone");
+				retour += results.getString("MotDePasse");
+			}
+			results.close();
+			getPers.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		retour += "</listePersonne>";
+		
+		return Response.status(Status.OK).entity(retour).build();
+	}
+	
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.TEXT_XML)
+	public Response getPersonne() {
+		String retour = "";
+		
+		try {
+			CallableStatement getPers = conn.prepareCall("{ ? = call SelectOne.getPersonne(}");
+			getPers.registerOutParameter(1, Types.OTHER);
+			getPers.execute();
+			ResultSet results = (ResultSet)getPers.getObject(1);
+			if(results.next()) {
+				retour += results.get;
+			}
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return Response.status(Status.OK).entity(retour).build();
+	}
+}

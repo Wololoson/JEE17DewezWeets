@@ -1,0 +1,120 @@
+package be.gestionhopital.DAO;
+
+import java.io.StringReader;
+import java.sql.Date;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.Salle;
+
+public class DAOSalle extends DAO<Salle> {
+	public DAOSalle(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("numSalle", obj.getNumSalle());
+		queryParams.add("bloc", String.valueOf(obj.getBloc()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdSalle()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Salle obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("numSalle", obj.getNumSalle());
+		queryParams.add("bloc", String.valueOf(obj.getBloc()));
+		
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Salle find(Salle obj) {
+		String numSalle = null;
+		char bloc;
+		int id = 0;
+		String responseText = connect.path("salle/"+obj.getIdSalle()).accept(MediaType.TEXT_XML).get(String.class);
+		
+		DocumentBuilder db = null;
+		try {
+			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(responseText));
+
+		Document doc = db.parse(is);
+		NodeList salleNodes = doc.getElementsByTagName("salle");
+		
+		for(int i = 0; i < salleNodes.getLength(); i++) {
+				Element salle = (Element) salleNodes.item(i);
+				
+				NodeList idNode = salle.getElementsByTagName("id");
+				Element line = (Element) idNode.item(0);
+				id = Integer.parseInt(getCharacterDataFromElement(line));
+				
+				NodeList nomNode = salle.getElementsByTagName("nom");
+				line = (Element) nomNode.item(0);
+				numSalle = getCharacterDataFromElement(line);
+				
+				NodeList prenomNode = salle.getElementsByTagName("prenom");
+				line = (Element) prenomNode.item(0);
+				bloc = getCharacterDataFromElement(line);
+		}
+		
+		return new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp);
+	}
+	
+	public static String getCharacterDataFromElement(Element e) {
+	    Node child = e.getFirstChild();
+	    if (child instanceof CharacterData) {
+	      CharacterData cd = (CharacterData) child;
+	      return cd.getData();
+	    }
+	    return "";
+	  }
+}

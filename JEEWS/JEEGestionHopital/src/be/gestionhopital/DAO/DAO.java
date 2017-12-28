@@ -1,19 +1,23 @@
 package be.gestionhopital.DAO;
 
-import java.sql.Connection;
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
+import com.sun.jersey.api.client.WebResource;
 
 public abstract class DAO<T> {
-	protected Connection connect = null;
+	protected WebResource connect = null;
 	
-	public DAO(Connection conn) {
+	public DAO(WebResource conn) {
 		this.connect = conn;
 	}
 	
-	public abstract boolean create(T obj);
+	public abstract boolean create(T obj) throws SAXException, IOException;
 	
-	public abstract boolean delete(T obj);
+	public abstract boolean delete(T obj) throws SAXException, IOException;
 	
-	public abstract boolean update(T obj);
+	public abstract boolean update(T obj) throws SAXException, IOException;
 	
-	public abstract T find(T obj);
+	public abstract T find(int id) throws SAXException, IOException;
 }

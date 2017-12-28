@@ -1,0 +1,71 @@
+package be.gestionhopital.Factory;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+
+import be.gestionhopital.DAO.DAO;
+import be.gestionhopital.DAO.DAOChirurgien;
+import be.gestionhopital.DAO.DAODirecteur;
+import be.gestionhopital.DAO.DAONotification;
+import be.gestionhopital.DAO.DAOPatient;
+import be.gestionhopital.DAO.DAOPersonne;
+import be.gestionhopital.DAO.DAOReservation;
+import be.gestionhopital.DAO.DAOSalle;
+import be.gestionhopital.DAO.DAOSecretaire;
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.Directeur;
+import be.gestionhopital.Models.Notification;
+import be.gestionhopital.Models.Patient;
+import be.gestionhopital.Models.Personne;
+import be.gestionhopital.Models.Reservation;
+import be.gestionhopital.Models.Salle;
+import be.gestionhopital.Models.Secretaire;
+
+public class DAOFactory extends AbstractDAOFactory {
+	protected static final ClientConfig config = new DefaultClientConfig();
+	protected static final Client client = Client.create(config);
+	protected static final WebResource service = client.resource(getBaseURI());
+	
+
+	@Override
+	public DAO<Personne> getPersonneDAO() {
+		return new DAOPersonne(config);
+	}
+
+	@Override
+	public DAO<Chirurgien> getChirurgienDAO() {
+		return new DAOChirurgien(config);
+	}
+
+	@Override
+	public DAO<Directeur> getDirecteurDAO() {
+		return new DAODirecteur(config);
+	}
+
+	@Override
+	public DAO<Notification> getNotificationDAO() {
+		return new DAONotification(config);
+	}
+
+	@Override
+	public DAO<Patient> getPatientDAO() {
+		return new DAOPatient(config);
+	}
+
+	@Override
+	public DAO<Reservation> getReservationDAO() {
+		return new DAOReservation(config);
+	}
+
+	@Override
+	public DAO<Salle> getSalleDAO() {
+		return new DAOSalle(config);
+	}
+
+	@Override
+	public DAO<Secretaire> getSecretaireDAO() {
+		return new DAOSecretaire(config);
+	}
+}

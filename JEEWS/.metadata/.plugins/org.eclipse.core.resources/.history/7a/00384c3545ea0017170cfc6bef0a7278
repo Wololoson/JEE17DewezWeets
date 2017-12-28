@@ -1,0 +1,13 @@
+package be.gestionhopital.CRUD;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+
+@Path("personne")
+public class PersonneCRUD {
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	public Response getPersonnes() {
+		
+	}
+}

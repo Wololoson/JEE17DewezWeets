@@ -1,0 +1,57 @@
+2017-12-20 10:36:36,463 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-20 19:28:58,507 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-12-21 07:35:18,351 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-21 08:35:19,425 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-21 10:32:40,670 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-21 14:41:09,647 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-22 09:17:00,839 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-22 17:22:53,903 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2017-12-23 18:54:42,729 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-12-25 13:13:18,701 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-12-25 13:13:19,186 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Updating Gradle version information cache failed. Using outdated cache.
+2017-12-26 13:44:34,126 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2017-12-26 14:10:20,934 [Worker-32] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: JEEGestionHopital:JEEGestionHopital:0.0.1-SNAPSHOT @ C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\pom.xml.
+2017-12-26 14:10:23,716 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:23,717 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:10:23,720 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:23,721 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:10:23,772 [Worker-32] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /JEEGestionHopital/src
+2017-12-26 14:10:23,773 [Worker-32] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /JEEGestionHopital/src/test/java because it overlaps with /JEEGestionHopital/src
+2017-12-26 14:10:24,258 [Worker-32] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2017-12-26 14:10:24,599 [Worker-32] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: JEEGestionHopital:JEEGestionHopital:0.0.1-SNAPSHOT @ C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\pom.xml.
+2017-12-26 14:10:25,399 [Worker-32] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /JEEGestionHopital/src
+2017-12-26 14:10:25,400 [Worker-32] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /JEEGestionHopital/src/test/java because it overlaps with /JEEGestionHopital/src
+2017-12-26 14:10:25,654 [Worker-32] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for JEEGestionHopital
+2017-12-26 14:10:25,669 [Worker-32] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2017-12-26 14:10:25,895 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:25,896 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:10:25,898 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:25,899 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:10:25,900 [Worker-21] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of JEEGestionHopital
+2017-12-26 14:10:25,900 [Worker-21] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for JEEGestionHopital
+2017-12-26 14:10:25,905 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.maven.plugins:maven-clean-plugin:jar:2.5 is missing, no dependency information available
+2017-12-26 14:10:25,914 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:41,581 [Worker-32] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: JEEGestionHopital:JEEGestionHopital:0.0.1-SNAPSHOT @ C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\pom.xml.
+2017-12-26 14:10:42,908 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:42,909 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:10:42,910 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:42,911 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:10:42,911 [Worker-32] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of JEEGestionHopital
+2017-12-26 14:10:42,911 [Worker-32] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for JEEGestionHopital
+2017-12-26 14:10:42,915 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:44,103 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:44,104 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:10:44,106 [Worker-32] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:10:44,109 [Worker-32] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:11:33,464 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:11:33,464 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:11:33,465 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:11:33,466 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:11:35,646 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:11:35,647 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:11:35,649 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:11:35,649 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2017-12-26 14:13:35,332 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:13:35,333 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2017-12-26 14:13:35,334 [Worker-27] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-12-26 14:13:35,335 [Worker-27] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources

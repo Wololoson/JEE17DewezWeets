@@ -1,0 +1,57 @@
+package be.gestionhopital.Factory;
+
+import java.sql.Connection;
+
+import be.gestionhopital.Connexion.DriverACCESS;
+import be.gestionhopital.DAO.*;
+import be.gestionhopital.Models.*;
+
+public class DAOFactory extends AbstractDAOFactory {
+	protected static final Connection conn = DriverACCESS.getInstance();
+
+	@Override
+	public DAO<Personne> getPersonneDAO() {
+		return new DAOPersonne(conn);
+	}
+
+	@Override
+	public DAO<Chirurgien> getChirurgienDAO() {
+		return null;
+	}
+
+	@Override
+	public DAO<Directeur> getDirecteurDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DAO<Notification> getNotificationDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DAO<Patient> getPatientDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DAO<Reservation> getReservationDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DAO<Salle> getSalleDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DAO<Secretaire> getSecretaireDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

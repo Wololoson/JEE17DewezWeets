@@ -1,0 +1,56 @@
+package be.gestionhopital.DAO;
+
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.core.MediaType;
+import javax.xml.parsers.*;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import com.sun.jersey.api.client.WebResource;
+
+import be.gestionhopital.Models.Personne;
+import jdk.internal.org.xml.sax.InputSource;
+
+public class DAOPersonne extends DAO<Personne> {
+	public DAOPersonne(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public boolean delete(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public boolean update(Personne obj) {
+		return false;
+	}
+
+	@Override
+	public Personne find(Personne obj) {
+		return null;
+	}
+	
+	public List<Personne> findAll(Personne obj){
+		List<Personne> listPers = new ArrayList<>();
+		String responseText = connect.path("personne").accept(MediaType.TEXT_XML).get(String.class);
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(responseText));
+
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getElementsByTagName("employee");
+		
+		return null;
+	}
+}

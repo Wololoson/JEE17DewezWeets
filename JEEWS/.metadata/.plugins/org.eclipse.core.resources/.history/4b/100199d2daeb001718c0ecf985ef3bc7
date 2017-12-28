@@ -1,0 +1,160 @@
+package be.gestionhopital.DAO;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Factory.AbstractDAOFactory;
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.Notification;
+import be.gestionhopital.Models.Patient;
+import be.gestionhopital.Models.Reservation;
+import be.gestionhopital.Models.Salle;
+
+public class DAOReservation extends DAO<Reservation> {
+	public DAOReservation(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Reservation find(Reservation obj) {
+		return null;
+	}
+	
+	public List<Reservation> findAll() throws ParserConfigurationException, SAXException, IOException{
+		List<Reservation> listRes = new ArrayList<>();
+		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		DAO<Chirurgien> DAOChirurgien = adf.getChirurgienDAO();
+		DAO<Salle> DAOSalle = adf.getSalleDAO();
+		DAO<Patient> DAOPatient = adf.getPatientDAO();
+		
+		String commentaire = null, idPers = null, numPatient = null, idSalle = null;
+		Chirurgien chir = null;
+		Salle salle = null;
+		Patient pati = null;
+		Date dateHeure = null;
+		String responseText = connect.path("reservation").accept(MediaType.TEXT_XML).get(String.class);
+		
+		DocumentBuilder db = null;
+		try {
+			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(responseText));
+
+		Document doc = db.parse(is);
+		NodeList listReservationsNodes = doc.getElementsByTagName("listeReservation");
+		
+		for(int i = 0; i < listReservationsNodes.getLength(); i++) {
+			Element noti = (Element) listReservationsNodes.item(i);
+			
+			NodeList reservationNodes = noti.getElementsByTagName("reservation");
+			
+			for(int j = 0; j < reservationNodes.getLength(); j++) {
+				Element reservation = (Element) reservationNodes.item(j);
+				
+				NodeList idPersNode = reservation.getElementsByTagName("idPers");
+				Element line = (Element) idPersNode.item(0);
+				idPers = getCharacterDataFromElement(line);
+				chir = DAOChirurgien.find(new Chirurgien("", Integer.parseInt(idPers), "", "", null, "", ""));
+				
+				NodeList idSalleNode = reservation.getElementsByTagName("idSalle");
+				line = (Element) idSalleNode.item(0);
+				idSalle = getCharacterDataFromElement(line);
+				salle = DAOSalle.find(new Salle(Integer.parseInt(idSalle), "", '\0'));
+				
+				NodeList numPatientNode = reservation.getElementsByTagName("numPatient");
+				line = (Element) numPatientNode.item(0);
+				numPatient = getCharacterDataFromElement(line);
+				pati = DAOPatient.find(new Patient("", "", Integer.parseInt(idPers), "", "", null, "", ""));
+				
+				
+			}
+			
+			listRes.add(new Reservation(chir, salle, pati, dateHeure));
+		}
+		
+		return listRes;
+	}
+	
+	public static String getCharacterDataFromElement(Element e) {
+	    Node child = e.getFirstChild();
+	    if (child instanceof CharacterData) {
+	      CharacterData cd = (CharacterData) child;
+	      return cd.getData();
+	    }
+	    return "";
+	  }
+}

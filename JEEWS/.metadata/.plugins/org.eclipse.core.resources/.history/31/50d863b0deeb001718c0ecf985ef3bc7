@@ -1,0 +1,21 @@
+package be.gestionhopital.Models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListPersonnel {
+	private static ListPersonnel instance = null;
+	private List<Secretaire> listSecretaire = new ArrayList<>();
+	private List<Chirurgien> listChirurgien = new ArrayList<>();
+	
+	private ListPersonnel() {
+		
+	}
+	
+	public static synchronized ListPersonnel getInstance() {
+		if(instance == null)
+			instance = new ListPersonnel();
+		
+		return instance;
+	}
+}

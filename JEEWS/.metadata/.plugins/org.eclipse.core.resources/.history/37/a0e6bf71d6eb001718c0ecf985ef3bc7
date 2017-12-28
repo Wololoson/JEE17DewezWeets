@@ -1,0 +1,71 @@
+package be.gestionhopital.DAO;
+
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Reservation;
+
+public class DAOReservation extends DAO<Reservation> {
+	public DAOReservation(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Reservation obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
+		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
+		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Reservation find(Reservation obj) {
+		return null;
+	}
+}

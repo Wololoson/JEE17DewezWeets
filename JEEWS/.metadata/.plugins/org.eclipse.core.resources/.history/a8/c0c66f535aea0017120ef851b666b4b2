@@ -1,0 +1,48 @@
+package be.gestionhopital.CRUD;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Types;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import javax.ws.rs.core.Response.Status;
+
+import be.gestionhopital.Connexion.DriverACCESS;
+import be.gestionhopital.Factory.AbstractDAOFactory;
+import be.gestionhopital.Factory.DAOFactory;
+
+@Path("personne")
+public class PersonneCRUD {
+	private Connection conn = DriverACCESS.getInstance();
+	
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	public Response getPersonnes() {
+		String retour = "<?xml version=\"1.0\"?>";
+		
+		retour += "<listePersonne>";
+		
+		CallableStatement getPersonne = conn.prepareCall("{ ? = call getPersonne() }");
+		getPersonne.registerOutParameter(1, Types.OTHER);
+		getPersonne.execute();
+		ResultSet results = (ResultSet)getPersonne.getObject(1);
+		while(results.next()) {
+			retour += "<personne>";
+			retour += "<id></id>";
+			retour += "<nom></nom>";
+			retour += "<prenom></prenom>";
+			retour += "<dateNaissance></dateNaissance>";
+			retour += "<numTelephone></numTelephone>";
+			retour += "<motDePasse></motDePasse>";
+			retour += "</personne>";
+		}
+		results.close();
+		getPersonne.close();
+		
+		retour += "</listePersonne>";
+		
+		return Response.status(Status.OK).entity(retour).build();
+	}
+}
