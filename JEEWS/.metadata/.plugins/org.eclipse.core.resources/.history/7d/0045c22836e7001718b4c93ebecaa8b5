@@ -1,6 +1,0 @@
-package be.gestionhopital.metier;
-
-public class Patient extends Personne {
-	//Variables d'instance
-	
-}

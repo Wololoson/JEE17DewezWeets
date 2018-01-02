@@ -3,6 +3,7 @@ package be.gestionhopital.Models;
 import java.sql.Date;
 
 public class Chirurgien extends Personne{
+	private static final long serialVersionUID = -6713247746739201921L;
 	//Variable d'instance
 	private String specialisation;
 	

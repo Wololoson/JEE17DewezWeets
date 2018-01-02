@@ -1,6 +1,7 @@
 package be.gestionhopital.Models;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import org.xml.sax.SAXException;
 import be.gestionhopital.DAO.DAOReservation;
 import be.gestionhopital.Factory.AbstractDAOFactory;
 
-public class ListReservation {
+public class ListReservation implements Serializable {
+	private static final long serialVersionUID = 6264935516442700531L;
 	private static ListReservation instance = null;
 	private List<Reservation> listReservation = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
@@ -25,21 +27,32 @@ public class ListReservation {
 		}
 	}
 	
-	public void ajouterPatient(Reservation r) {
+	public List<Reservation> getListReservation() {
+		return listReservation;
+	}
+
+	public void setListReservation(List<Reservation> listReservation) {
+		this.listReservation = listReservation;
+	}
+
+	public void ajouterReservation(Reservation r) {
 		listReservation.add(r);
+		resDAO.create(r);
 	}
 	
 	public void modifierReservation(Reservation before, Reservation after) {
 		for(Reservation res : listReservation) {
 			if(before.equals(res)) {
 				res.modifierReservation(after);
+				resDAO.update(res);
 			}
 		}
 	}
 	
-	public void supprimerPatient(Reservation r) {
+	public void supprimerReservation(Reservation r) {
 		for(Reservation res : listReservation) {
 			if(r.equals(res)) {
+				resDAO.delete(res);
 				listReservation.remove(res);
 			}
 		}

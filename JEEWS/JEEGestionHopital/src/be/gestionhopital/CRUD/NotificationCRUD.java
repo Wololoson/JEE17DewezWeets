@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -17,47 +16,45 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import be.gestionhopital.Connexion.DriverACCESS;
+import oracle.jdbc.internal.OracleTypes;
 
 @Path("notification")
 public class NotificationCRUD {
 	private Connection conn = DriverACCESS.getInstance();
+	
+	public NotificationCRUD() {}
 	
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getNotifications() throws SQLException {
 		CallableStatement getNotif = null;
 		ResultSet results = null;
-		ResultSet obj = null;
-		int i = 0;
 		String retour = "<?xml version=\"1.0\"?>";
 		
 		retour += "<listeNotifications>";
 		
 		try{
 			getNotif = conn.prepareCall("{ ? = call SelectAll.getNotifications() }");
-			getNotif.registerOutParameter(1, Types.OTHER);
+			getNotif.registerOutParameter(1, OracleTypes.CURSOR);
 			getNotif.execute();
 			while((results = (ResultSet)getNotif.getObject(1)) != null) {
-				while((obj = (ResultSet)results.getObject(i)) != null) {
-					while(results.next()) {
-						retour += "<notification>";
-						retour += "<id>"+results.getDouble("IdNotification")+"</id>";
-						retour += "<priorite>"+results.getString("Priorite")+"</priorite>";
-						retour += "<type>"+results.getString("Type_Notification")+"</type>";
-						retour += "<commentaire>"+results.getDate("Commentaire")+"</commentaire>";
-						retour += "<idPers>"+results.getString("IdPersonne")+"</idPers>";
-						retour += "</notification>";
-					}
+				while(results.next()) {
+					retour += "<notification>";
+					retour += "<id>"+results.getInt("IdNotification")+"</id>";
+					retour += "<priorite>"+results.getString("Priorite")+"</priorite>";
+					retour += "<type>"+results.getString("Type_Notification")+"</type>";
+					retour += "<commentaire>"+results.getDate("Commentaire")+"</commentaire>";
+					retour += "<idPers>"+results.getString("IdPersonne")+"</idPers>";
+					retour += "</notification>";
 				}
-				i++;
+				results.close();
 			}
+			getNotif.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			if(obj != null)
-				obj.close();
 			if(results != null)
 				results.close();
 			if(getNotif != null)
@@ -70,7 +67,7 @@ public class NotificationCRUD {
 	}
 	
 	@POST
-	public void insertNotification(@FormParam("priorite") String priorite, @FormParam("type") String type, @FormParam("commentaire") String commentaire, @FormParam("idPers") double idPers) throws SQLException {
+	public Response insertNotification(@FormParam("priorite") String priorite, @FormParam("type") String type, @FormParam("commentaire") String commentaire, @FormParam("idPers") double idPers) throws SQLException {
 		CallableStatement insertNotif = null;
 		
 		try {
@@ -80,6 +77,7 @@ public class NotificationCRUD {
 			insertNotif.setString(3, commentaire);
 			insertNotif.setDouble(4, idPers);
 			insertNotif.executeUpdate();
+			return Response.status(200).entity(insertNotif.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -88,6 +86,7 @@ public class NotificationCRUD {
 			if(insertNotif != null)
 				insertNotif.close();
 		}
+		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@DELETE

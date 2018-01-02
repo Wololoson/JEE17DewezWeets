@@ -1,7 +1,0 @@
-package be.gestionhopital.DAO;
-
-public class DAOSalle extends DAO<Salle> {
-	public DAOSalle(Connection conn) {
-		super(conn);
-	}
-}

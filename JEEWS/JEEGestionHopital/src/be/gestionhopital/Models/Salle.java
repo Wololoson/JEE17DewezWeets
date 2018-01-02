@@ -1,6 +1,14 @@
 package be.gestionhopital.Models;
 
-public class Salle {
+import java.io.IOException;
+import java.io.Serializable;
+
+import org.xml.sax.SAXException;
+
+import be.gestionhopital.Factory.AbstractDAOFactory;
+
+public class Salle implements Serializable {
+	private static final long serialVersionUID = 2269384722883408644L;
 	//Variables d'instance
 	private int idSalle;
 	private String numSalle;
@@ -67,5 +75,14 @@ public class Salle {
 		return true;
 	}
 	
-	
+	public void ajouterSalle() {
+		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		try {
+			adf.getSalleDAO().create(this);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

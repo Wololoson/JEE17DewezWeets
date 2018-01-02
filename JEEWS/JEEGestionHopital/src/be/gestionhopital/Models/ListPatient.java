@@ -1,6 +1,7 @@
 package be.gestionhopital.Models;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import org.xml.sax.SAXException;
 import be.gestionhopital.DAO.DAOPatient;
 import be.gestionhopital.Factory.AbstractDAOFactory;
 
-public class ListPatient {
+public class ListPatient implements Serializable {
+	private static final long serialVersionUID = -8613172557670583L;
 	private static ListPatient instance = null;
 	private List<Patient> listPatient = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
@@ -25,13 +27,31 @@ public class ListPatient {
 		}
 	}
 	
-	public void ajouterPatient(Personne p) {
-		listPatient.add((Patient)p);
+	public List<Patient> getListPatient() {
+		return listPatient;
+	}
+
+	public void setListPatient(List<Patient> listPatient) {
+		this.listPatient = listPatient;
+	}
+
+	public void ajouterPatient(Patient p) {
+		boolean found = false;
+		for(Patient pa : listPatient) {
+			if(p.equals(pa)) 
+				found = true;
+		}
+		
+		if(!found) {
+			listPatient.add(p);
+			patiDAO.create(p);
+		}
 	}
 	
-	public void supprimerPatient(Personne p) {
+	public void supprimerPatient(Patient p) {
 		for(Patient pa : listPatient) {
 			if(p.equals(pa)) {
+				patiDAO.delete(pa);
 				listPatient.remove(pa);
 			}
 		}

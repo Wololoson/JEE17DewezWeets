@@ -154,7 +154,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listSecretairesNodes = doc.getElementsByTagName("listeSecretaire");
+		NodeList listSecretairesNodes = doc.getElementsByTagName("listeSecretaires");
 		
 		for(int i = 0; i < listSecretairesNodes.getLength(); i++) {
 			Element secr = (Element) listSecretairesNodes.item(i);
@@ -176,6 +176,10 @@ public class DAOSecretaire extends DAO<Secretaire> {
 				line = (Element) prenomNode.item(0);
 				prenom = getCharacterDataFromElement(line);
 				
+				NodeList dateNaissNode = secretaire.getElementsByTagName("dateNaissance");
+				line = (Element) dateNaissNode.item(0);
+				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				
 				NodeList numTelNode = secretaire.getElementsByTagName("numTelephone");
 				line = (Element) numTelNode.item(0);
 				numTel = getCharacterDataFromElement(line);
@@ -184,16 +188,12 @@ public class DAOSecretaire extends DAO<Secretaire> {
 				line = (Element) mdpNode.item(0);
 				mdp = getCharacterDataFromElement(line);
 				
-				NodeList dateNaissNode = secretaire.getElementsByTagName("dateNaissance");
-				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
-				
 				NodeList serviceNode = secretaire.getElementsByTagName("service");
 				line = (Element) serviceNode.item(0);
 				service = getCharacterDataFromElement(line);
+				
+				listSecr.add(new Secretaire(service, id, nom, prenom, dateNaiss, numTel, mdp));
 			}
-			
-			listSecr.add(new Secretaire(service, id, nom, prenom, dateNaiss, numTel, mdp));
 		}
 		
 		return listSecr;

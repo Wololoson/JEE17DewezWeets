@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -19,46 +18,44 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import be.gestionhopital.Connexion.DriverACCESS;
+import oracle.jdbc.internal.OracleTypes;
 
 @Path("reservation")
 public class ReservationCRUD {
 	private Connection conn = DriverACCESS.getInstance();
+	
+	public ReservationCRUD() {}
 	
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getReservations() throws SQLException {
 		CallableStatement getRes = null;
 		ResultSet results = null;
-		ResultSet obj = null;
-		int i = 0;
 		String retour = "<?xml version=\"1.0\"?>";
 		
 		retour += "<listeReservations>";
 		
 		try{
 			getRes = conn.prepareCall("{ ? = call SelectAll.getReservations() }");
-			getRes.registerOutParameter(1, Types.OTHER);
+			getRes.registerOutParameter(1, OracleTypes.CURSOR);
 			getRes.execute();
-			while((results = (ResultSet)getRes.getObject(1)) != null) {
-				while((obj = (ResultSet)results.getObject(i)) != null) {
-					while(results.next()) {
-						retour += "<reservation>";
-						retour += "<idPers>"+results.getDouble("IdPersonne")+"</idPers>";
-						retour += "<idSalle>"+results.getDouble("IdSalle")+"</idSalle>";
-						retour += "<numPatient>"+results.getDouble("NumeroPatient")+"</numPatient>";
-						retour += "<dateHeure>"+results.getDate("DateHeure")+"</dateHeure>";
-						retour += "</reservation>";
-					}
+			if((results = (ResultSet)getRes.getObject(1)) != null) {
+				while(results.next()) {
+					retour += "<reservation>";
+					retour += "<idPers>"+results.getInt("IdPersonne")+"</idPers>";
+					retour += "<idSalle>"+results.getInt("IdSalle")+"</idSalle>";
+					retour += "<numPatient>"+results.getInt("NumeroPatient")+"</numPatient>";
+					retour += "<dateHeure>"+results.getDate("DateHeure")+"</dateHeure>";
+					retour += "</reservation>";
 				}
-				i++;
+				results.close();
 			}
+			getRes.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			if(obj != null)
-				obj.close();
 			if(results != null)
 				results.close();
 			if(getRes != null)
@@ -71,7 +68,7 @@ public class ReservationCRUD {
 	}
 	
 	@POST
-	public void insertReservation(@FormParam("idPers") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") double numPatient, @FormParam("dateHeure") Date dateHeure) throws SQLException {
+	public Response insertReservation(@FormParam("idPers") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") double numPatient, @FormParam("dateHeure") Date dateHeure) throws SQLException {
 		CallableStatement insertRes = null;
 		
 		try {
@@ -81,6 +78,7 @@ public class ReservationCRUD {
 			insertRes.setDouble(3, numPatient);
 			insertRes.setDate(4, dateHeure);
 			insertRes.executeUpdate();
+			return Response.status(200).entity(insertRes.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -89,6 +87,7 @@ public class ReservationCRUD {
 			if(insertRes != null)
 				insertRes.close();
 		}
+		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@PUT

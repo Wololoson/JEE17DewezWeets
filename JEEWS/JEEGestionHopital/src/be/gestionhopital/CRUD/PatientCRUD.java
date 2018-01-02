@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -20,50 +19,48 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import be.gestionhopital.Connexion.DriverACCESS;
+import oracle.jdbc.internal.OracleTypes;
 
 @Path("patient")
 public class PatientCRUD {
 	private Connection conn = DriverACCESS.getInstance();
+	
+	public PatientCRUD() {}
 	
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getPatients() throws SQLException {
 		CallableStatement getPati = null;
 		ResultSet results = null;
-		ResultSet obj = null;
-		int i = 0;
 		String retour = "<?xml version=\"1.0\"?>";
 		
 		retour += "<listePatients>";
 		
 		try{
 			getPati = conn.prepareCall("{ ? = call SelectAll.getPatients() }");
-			getPati.registerOutParameter(1, Types.OTHER);
+			getPati.registerOutParameter(1, OracleTypes.CURSOR);
 			getPati.execute();
 			while((results = (ResultSet)getPati.getObject(1)) != null) {
-				while((obj = (ResultSet)results.getObject(i)) != null) {
-					while(results.next()) {
-						retour += "<patient>";
-						retour += "<id>"+results.getDouble("IdPersonne")+"</id>";
-						retour += "<nom>"+results.getString("Nom")+"</nom>";
-						retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-						retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
-						retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
-						retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
-						retour += "<numeroChambre>"+results.getString("NumeroChambre")+"</numeroChambre>";
-						retour += "<numeroPatient>"+results.getString("NumeroPatient")+"</numeroPatient>";
-						retour += "</patient>";
-					}
+				while(results.next()) {
+					retour += "<patient>";
+					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
+					retour += "<nom>"+results.getString("Nom")+"</nom>";
+					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
+					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
+					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
+					retour += "<numeroChambre>"+results.getString("NumeroChambre")+"</numeroChambre>";
+					retour += "<numeroPatient>"+results.getString("NumeroPatient")+"</numeroPatient>";
+					retour += "</patient>";
 				}
-				i++;
+				results.close();
 			}
+			getPati.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			if(obj != null)
-				obj.close();
 			if(results != null)
 				results.close();
 			if(getPati != null)
@@ -85,13 +82,13 @@ public class PatientCRUD {
 		
 		try {
 			getPati = conn.prepareCall("{ ? = call SelectOne.getPatient(?)}");
-			getPati.registerOutParameter(1, Types.OTHER);
+			getPati.registerOutParameter(1, OracleTypes.CURSOR);
 			getPati.setDouble(2, id);
 			getPati.execute();
 			results = (ResultSet)getPati.getObject(1);
 			if(results.next()) {
 				retour += "<patient>";
-				retour += "<id>"+results.getDouble("IdPersonne")+"</id>";
+				retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 				retour += "<nom>"+results.getString("Nom")+"</nom>";
 				retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
 				retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
@@ -117,7 +114,7 @@ public class PatientCRUD {
 	}
 	
 	@POST
-	public void insertPatient(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("numCh") String numCh, @FormParam("numPa") String numPa) throws SQLException {
+	public Response insertPatient(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("numCh") String numCh, @FormParam("numPa") String numPa) throws SQLException {
 		CallableStatement insertPati = null;
 		
 		try {
@@ -130,6 +127,7 @@ public class PatientCRUD {
 			insertPati.setString(6, numCh);
 			insertPati.setString(7, numPa);
 			insertPati.executeUpdate();
+			return Response.status(200).entity(insertPati.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -138,6 +136,7 @@ public class PatientCRUD {
 			if(insertPati != null)
 				insertPati.close();
 		}
+		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@PUT

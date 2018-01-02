@@ -114,7 +114,7 @@ public class DAOReservation extends DAO<Reservation> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listReservationsNodes = doc.getElementsByTagName("listeReservation");
+		NodeList listReservationsNodes = doc.getElementsByTagName("listeReservations");
 		
 		for(int i = 0; i < listReservationsNodes.getLength(); i++) {
 			Element noti = (Element) listReservationsNodes.item(i);

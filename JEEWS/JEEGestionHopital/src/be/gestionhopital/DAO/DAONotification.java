@@ -104,7 +104,7 @@ public class DAONotification extends DAO<Notification> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listNotificationsNodes = doc.getElementsByTagName("listeNotification");
+		NodeList listNotificationsNodes = doc.getElementsByTagName("listeNotifications");
 		
 		for(int i = 0; i < listNotificationsNodes.getLength(); i++) {
 			Element noti = (Element) listNotificationsNodes.item(i);

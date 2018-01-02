@@ -1,0 +1,177 @@
+package be.gestionhopital.CRUD;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import be.gestionhopital.Connexion.DriverACCESS;
+import oracle.jdbc.internal.OracleTypes;
+
+@Path("secretaire")
+public class SecretaireCRUD {
+	private Connection conn = DriverACCESS.getInstance();
+	
+	public SecretaireCRUD() {}
+	
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	public Response getSecretaires() throws SQLException {
+		CallableStatement getSecr = null;
+		ResultSet results = null;
+		String retour = "<?xml version=\"1.0\"?>";
+		
+		retour += "<listeSecretaires>";
+		
+		try{
+			getSecr = conn.prepareCall("{ ? = call SelectAll.getSecretaires() }");
+			getSecr.registerOutParameter(1, OracleTypes.CURSOR);
+			getSecr.execute();
+			while((results = (ResultSet)getSecr.getObject(1)) != null) {
+				while(results.next()) {
+					retour += "<secretaire>";
+					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
+					retour += "<nom>"+results.getString("Nom")+"</nom>";
+					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
+					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
+					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
+					retour += "<service>"+results.getString("Service_Secr")+"</service>";
+					retour += "</secretaire>";
+				}
+				results.close();
+			}
+			getSecr.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(results != null)
+				results.close();
+			if(getSecr != null)
+				getSecr.close();
+		}
+		
+		retour += "</listeSecretaires>";
+		
+		return Response.status(Status.OK).entity(retour).build();
+	}
+	
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.TEXT_XML)
+	public Response getSecretaire(@PathParam("id") int id) throws SQLException {
+		String retour = "";
+		CallableStatement getSecr = null;
+		ResultSet results = null;
+		
+		try {
+			getSecr = conn.prepareCall("{ ? = call SelectOne.getSecretaire(?)}");
+			getSecr.registerOutParameter(1, OracleTypes.CURSOR);
+			getSecr.setDouble(2, id);
+			getSecr.execute();
+			results = (ResultSet)getSecr.getObject(1);
+			if(results.next()) {
+				retour += "<secretaire>";
+				retour += "<id>"+results.getInt("IdPersonne")+"</id>";
+				retour += "<nom>"+results.getString("Nom")+"</nom>";
+				retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
+				retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+				retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
+				retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
+				retour += "<service>"+results.getString("ServiceSecr")+"</service>";
+				retour += "</secretaire>";
+			}
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(results != null)
+				results.close();
+			if(getSecr != null)
+				getSecr.close();
+		}
+		
+		return Response.status(Status.OK).entity(retour).build();
+	}
+	
+	@POST
+	public void insertSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
+		CallableStatement insertSecr = null;
+		
+		try {
+			insertSecr = conn.prepareCall("{call Inserts.insertSecretaire(?,?,?,?,?,?)}");
+			insertSecr.setString(1, nom);
+			insertSecr.setString(2, prenom);
+			insertSecr.setDate(3, dateNaiss);
+			insertSecr.setString(4, numTel);
+			insertSecr.setString(5, mdp);
+			insertSecr.setString(6, service);
+			insertSecr.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(insertSecr != null)
+				insertSecr.close();
+		}
+	}
+	
+	@PUT
+	public void updateSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
+		CallableStatement updateSecr = null;
+		
+		try {
+			updateSecr = conn.prepareCall("{call Updates.updateSecretaire(?,?,?,?,?,?)}");
+			updateSecr.setString(1, nom);
+			updateSecr.setString(2, prenom);
+			updateSecr.setDate(3, dateNaiss);
+			updateSecr.setString(4, numTel);
+			updateSecr.setString(5, mdp);
+			updateSecr.setString(6, service);
+			updateSecr.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(updateSecr != null)
+				updateSecr.close();
+		}
+	}
+	
+	@DELETE
+	public void deleteSecretaire(@FormParam("id") int id) throws SQLException {
+		CallableStatement deleteSecr = null;
+		
+		try {
+			deleteSecr = conn.prepareCall("{call Deletes.deleteSecretaire(?)}");
+			deleteSecr.setDouble(1, id);
+			deleteSecr.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(deleteSecr != null)
+				deleteSecr.close();
+		}
+	}
+}

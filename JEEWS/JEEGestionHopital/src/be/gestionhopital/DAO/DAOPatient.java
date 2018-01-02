@@ -43,6 +43,9 @@ public class DAOPatient extends DAO<Patient> {
 		queryParams.add("numPatient", obj.getNumPatient());
 		
 		ClientResponse response = connect.path("patient").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		
+		obj.setIdPersonne(Integer.parseInt(response.getEntity(String.class)));
+		
 		if(response.getStatus() == 200) {
 			return true;
 		}

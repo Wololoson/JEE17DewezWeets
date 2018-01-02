@@ -1,24 +1,28 @@
 package be.gestionhopital.Models;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Reservation {
+public class Reservation  implements Serializable {
+	private static final long serialVersionUID = 2406742677558119343L;
 	//Variables d'instance
 	private Chirurgien chirurgien;
 	private Salle salle;
 	private Patient patient;
-	private Date dateHeure;
+	private Date dateRes;
+	private String heureRes;
 	
 	//Constructeurs
 	public Reservation() {
 		
 	}
 	
-	public Reservation(Chirurgien chirurgien,Salle salle,Patient patient,Date dateHeure) {
+	public Reservation(Chirurgien chirurgien,Salle salle,Patient patient,Date dateRes,String heureRes) {
 		this.chirurgien = chirurgien;
 		this.salle = salle;
 		this.patient = patient;
-		this.dateHeure = dateHeure;
+		this.dateRes = dateRes;
+		this.heureRes = heureRes;
 	}
 
 	//Propriétés
@@ -45,20 +49,29 @@ public class Reservation {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-
-	public Date getDateHeure() {
-		return dateHeure;
-	}
-
-	public void setDateHeure(Date dateHeure) {
-		this.dateHeure = dateHeure;
-	}
 	
+	public Date getDateRes() {
+		return dateRes;
+	}
+
+	public void setDateRes(Date dateRes) {
+		this.dateRes = dateRes;
+	}
+
+	public String getHeureRes() {
+		return heureRes;
+	}
+
+	public void setHeureRes(String heureRes) {
+		this.heureRes = heureRes;
+	}
+
 	public void modifierReservation(Reservation r) {
 		this.chirurgien = r.getChirurgien();
 		this.salle = r.getSalle();
 		this.patient = r.getPatient();
-		this.dateHeure = r.getDateHeure();
+		this.dateRes = r.getDateRes();
+		this.heureRes = r.getHeureRes();
 	}
 
 	@Override
@@ -66,7 +79,8 @@ public class Reservation {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((chirurgien == null) ? 0 : chirurgien.hashCode());
-		result = prime * result + ((dateHeure == null) ? 0 : dateHeure.hashCode());
+		result = prime * result + ((dateRes == null) ? 0 : dateRes.hashCode());
+		result = prime * result + ((heureRes == null) ? 0 : heureRes.hashCode());
 		result = prime * result + ((patient == null) ? 0 : patient.hashCode());
 		result = prime * result + ((salle == null) ? 0 : salle.hashCode());
 		return result;
@@ -74,16 +88,27 @@ public class Reservation {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Reservation other = (Reservation) obj;
 		if (chirurgien == null) {
 			if (other.chirurgien != null)
 				return false;
 		} else if (!chirurgien.equals(other.chirurgien))
 			return false;
-		if (dateHeure == null) {
-			if (other.dateHeure != null)
+		if (dateRes == null) {
+			if (other.dateRes != null)
 				return false;
-		} else if (!dateHeure.equals(other.dateHeure))
+		} else if (!dateRes.equals(other.dateRes))
+			return false;
+		if (heureRes == null) {
+			if (other.heureRes != null)
+				return false;
+		} else if (!heureRes.equals(other.heureRes))
 			return false;
 		if (patient == null) {
 			if (other.patient != null)
@@ -97,6 +122,6 @@ public class Reservation {
 			return false;
 		return true;
 	}
-	
-	
+
+
 }

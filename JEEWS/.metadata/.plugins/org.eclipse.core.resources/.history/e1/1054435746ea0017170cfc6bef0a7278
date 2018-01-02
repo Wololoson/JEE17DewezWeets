@@ -1,5 +1,0 @@
-package be.gestionhopital.Factory;
-
-public class DAOFactory {
-
-}

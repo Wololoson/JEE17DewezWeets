@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="be.gestionhopital.Models.ListPersonnel" %>
+<%@ page import="be.gestionhopital.Models.Secretaire" %>
+<%@ page import="be.gestionhopital.Models.Chirurgien" %>
+<%@ page import="be.gestionhopital.Models.Directeur" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Connexion</title>
+</head>
+<body>
+	<%
+		ListPersonnel lp = ListPersonnel.getInstance();
+	%>
+	<h1>Connexion</h1>
+	<form action="ServletConnexion" method="post">
+		<table border="1" cellspacing="0" cellpadding="5">
+			<tr>
+				<td>Identifiant :</td>
+				<td>
+					<select>
+						<% 
+						for(Chirurgien c : lp.getListChirurgien()){%>
+							<option value=""><%=c.getNom()%><%=c.getPrenom() %> </option>
+						<%}
+						%>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

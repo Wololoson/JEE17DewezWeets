@@ -1,6 +1,7 @@
 package be.gestionhopital.Models;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import org.xml.sax.SAXException;
 import be.gestionhopital.DAO.DAONotification;
 import be.gestionhopital.Factory.AbstractDAOFactory;
 
-public class ListNotification {
+public class ListNotification implements Serializable {
+	private static final long serialVersionUID = -254715069091466589L;
 	private static ListNotification instance = null;
 	private List<Notification> listNotification = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
@@ -25,13 +27,15 @@ public class ListNotification {
 		}
 	}
 	
-	public void ajouterPatient(Notification n) {
+	public void ajouterNotification(Notification n) {
 		listNotification.add(n);
+		notifDAO.create(n);
 	}
 	
-	public void supprimerPatient(Notification n) {
+	public void supprimerNotification(Notification n) {
 		for(Notification no : listNotification) {
 			if(n.equals(no)) {
+				notifDAO.delete(no);
 				listNotification.remove(no);
 			}
 		}
@@ -43,4 +47,14 @@ public class ListNotification {
 		
 		return instance;
 	}
+
+	public List<Notification> getListNotification() {
+		return listNotification;
+	}
+
+	public void setListNotification(List<Notification> listNotification) {
+		this.listNotification = listNotification;
+	}
+	
+	
 }

@@ -98,7 +98,7 @@ public class DAODirecteur extends DAO<Directeur> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listDirecteurNodes = doc.getElementsByTagName("listeDirecteur");
+		NodeList listDirecteurNodes = doc.getElementsByTagName("listeDirecteurs");
 		
 		for(int i = 0; i < listDirecteurNodes.getLength(); i++) {
 			Element chir = (Element) listDirecteurNodes.item(i);
@@ -120,6 +120,10 @@ public class DAODirecteur extends DAO<Directeur> {
 				line = (Element) prenomNode.item(0);
 				prenom = getCharacterDataFromElement(line);
 				
+				NodeList dateNaissNode = directeur.getElementsByTagName("dateNaissance");
+				line = (Element) dateNaissNode.item(0);
+				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				
 				NodeList numTelNode = directeur.getElementsByTagName("numTelephone");
 				line = (Element) numTelNode.item(0);
 				numTel = getCharacterDataFromElement(line);
@@ -127,10 +131,6 @@ public class DAODirecteur extends DAO<Directeur> {
 				NodeList mdpNode = directeur.getElementsByTagName("motDePasse");
 				line = (Element) mdpNode.item(0);
 				mdp = getCharacterDataFromElement(line);
-				
-				NodeList dateNaissNode = directeur.getElementsByTagName("dateNaissance");
-				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
 				
 				NodeList codeNode = directeur.getElementsByTagName("code");
 				line = (Element) codeNode.item(0);

@@ -1,8 +1,10 @@
 package be.gestionhopital.Models;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public abstract class Personne {
+public abstract class Personne implements Serializable {
+	private static final long serialVersionUID = 273448865750728985L;
 	//Variables d'instance
 	private int idPersonne;
 	private String nom;
@@ -88,7 +90,6 @@ public abstract class Personne {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dateNaiss == null) ? 0 : dateNaiss.hashCode());
-		result = prime * result + idPersonne;
 		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((numTelephone == null) ? 0 : numTelephone.hashCode());
@@ -98,43 +99,42 @@ public abstract class Personne {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Personne other = (Personne) obj;
-		
 		if (dateNaiss == null) {
 			if (other.dateNaiss != null)
 				return false;
 		} else if (!dateNaiss.equals(other.dateNaiss))
 			return false;
-		
-		if (idPersonne != other.idPersonne)
-			return false;
-		
 		if (motDePasse == null) {
 			if (other.motDePasse != null)
 				return false;
 		} else if (!motDePasse.equals(other.motDePasse))
 			return false;
-		
 		if (nom == null) {
 			if (other.nom != null)
 				return false;
 		} else if (!nom.equals(other.nom))
 			return false;
-		
 		if (numTelephone == null) {
 			if (other.numTelephone != null)
 				return false;
 		} else if (!numTelephone.equals(other.numTelephone))
 			return false;
-		
 		if (prenom == null) {
 			if (other.prenom != null)
 				return false;
 		} else if (!prenom.equals(other.prenom))
 			return false;
-		
 		return true;
 	}
+
+	
 	
 	
 }

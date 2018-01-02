@@ -1,0 +1,6 @@
+attrNamesToIgnore=required
+eclipse.preferences.version=1
+elementNamesToIgnore=
+ignoreAttrNames=true
+ignoreElementNames=false
+use-project-settings=true

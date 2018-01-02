@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -26,44 +25,41 @@ import oracle.jdbc.internal.OracleTypes;
 public class ChirurgienCRUD {
 	private Connection conn = DriverACCESS.getInstance();
 	
+	public ChirurgienCRUD() {}
+	
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getChirurgiens() throws SQLException {
 		CallableStatement getChir = null;
 		ResultSet results = null;
-		ResultSet obj = null;
-		int i = 0;
 		String retour = "<?xml version=\"1.0\"?>";
 		
 		retour += "<listeChirurgiens>";
 		
 		try{
 			getChir = conn.prepareCall("{ ? = call SelectAll.getChirurgiens }");
-			getChir.registerOutParameter(1, OracleTypes.PLSQL_INDEX_TABLE); //java.sql.SQLException: Paramètre IN ou OUT absent dans l'index :: 1
+			getChir.registerOutParameter(1, OracleTypes.CURSOR); 
 			getChir.execute();
-			while((results = (ResultSet)getChir.getObject(1)) != null) {
-				while((obj = (ResultSet)results.getObject(i)) != null) {
-					while(obj.next()) {
-						retour += "<chirurgien>";
-						retour += "<id>"+results.getDouble("IdPersonne")+"</id>";
-						retour += "<nom>"+results.getString("Nom")+"</nom>";
-						retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-						retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
-						retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
-						retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
-						retour += "<specialisation>"+results.getString("Specialisation")+"</specialisation>";
-						retour += "</chirurgien>";
-					}
+			if((results = (ResultSet)getChir.getObject(1)) != null) {
+				while(results.next()) {
+					retour += "<chirurgien>";
+					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
+					retour += "<nom>"+results.getString("Nom")+"</nom>";
+					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
+					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
+					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
+					retour += "<specialisation>"+results.getString("Specialisation")+"</specialisation>";
+					retour += "</chirurgien>";
 				}
-				i++;
+				results.close();
 			}
+			getChir.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			if(obj != null)
-				obj.close();
 			if(results != null)
 				results.close();
 			if(getChir != null)
@@ -85,13 +81,13 @@ public class ChirurgienCRUD {
 		
 		try {
 			getChir = conn.prepareCall("{ ? = call SelectOne.getChirurgien(?)}");
-			getChir.registerOutParameter(1, Types.OTHER);
+			getChir.registerOutParameter(1, OracleTypes.CURSOR);
 			getChir.setDouble(2, id);
 			getChir.execute();
 			results = (ResultSet)getChir.getObject(1);
 			if(results.next()) {
 				retour += "<chirurgien>";
-				retour += "<id>"+results.getDouble("IdPersonne")+"</id>";
+				retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 				retour += "<nom>"+results.getString("Nom")+"</nom>";
 				retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
 				retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
@@ -100,7 +96,8 @@ public class ChirurgienCRUD {
 				retour += "<specialisation>"+results.getString("Specialisation")+"</specialisation>";
 				retour += "</chirurgien>";
 			}
-			
+			results.close();
+			getChir.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -116,7 +113,7 @@ public class ChirurgienCRUD {
 	}
 	
 	@POST
-	public void insertChirurgien(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
+	public Response insertChirurgien(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
 		CallableStatement insertChir = null;
 		
 		try {
@@ -128,6 +125,7 @@ public class ChirurgienCRUD {
 			insertChir.setString(5, mdp);
 			insertChir.setString(6, spec);
 			insertChir.executeUpdate();
+			return Response.status(200).entity(insertChir.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -136,6 +134,7 @@ public class ChirurgienCRUD {
 			if(insertChir != null)
 				insertChir.close();
 		}
+		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@PUT

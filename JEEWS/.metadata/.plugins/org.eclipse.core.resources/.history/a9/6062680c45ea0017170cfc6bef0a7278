@@ -1,8 +1,0 @@
-package be.gestionhopital.CRUD;
-
-import javax.ws.rs.*;
-
-@Path("personne")
-public class PersonneCRUD {
-	
-}

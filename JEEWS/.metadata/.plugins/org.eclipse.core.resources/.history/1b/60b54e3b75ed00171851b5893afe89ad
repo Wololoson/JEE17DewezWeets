@@ -1,0 +1,114 @@
+package be.gestionhopital.Controllers;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.ListPersonnel;
+import be.gestionhopital.Models.Personne;
+import be.gestionhopital.Models.Secretaire;
+
+/**
+ * Servlet implementation class ServletConnexion
+ */
+public class ServletConnexion extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String urlValid = null;
+	private String urlConnexion = null;
+	
+	public void init() {
+		ServletConfig config = getServletConfig();
+		urlValid = (String)config.getInitParameter("urlValid");
+		urlConnexion = (String)config.getInitParameter("urlConnexion");
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		init();
+		String idPers = request.getParameter("listPers");
+		String motDePasse = request.getParameter("motDePasse");
+		boolean mdpOK = false;
+		ListPersonnel lp = ListPersonnel.getInstance();
+		Personne connected = null;
+		
+		ArrayList<String> erreursParametres = new ArrayList<String>();
+		
+		if(idPers == null) 
+			erreursParametres.add("Veuillez choisir votre identifiant.");
+		
+		if(motDePasse == null) 
+			erreursParametres.add("Veuillez indiquer un mot de passe.");
+		
+		if(motDePasse.equals("")) 
+			erreursParametres.add("Veuillez indiquer un mot de passe.");
+		
+		if(!motDePasse.matches("^[0-9a-zA-Z]{6,}$"))
+			erreursParametres.add("Le mot de passe doit contenir au moins 6 caractères.");
+		
+		for(Chirurgien c : lp.getListChirurgien()) {
+			if(idPers != null && idPers.equals(Integer.toString(c.getIdPersonne()))) {
+				if(motDePasse != null && motDePasse.equals(c.getMotDePasse())) {
+					mdpOK = true;
+					connected = c;
+				}
+			}
+		}
+		
+		for(Secretaire s : lp.getListSecretaire()) {
+			if(idPers != null && idPers.equals(Integer.toString(s.getIdPersonne()))) {
+				if(motDePasse != null && motDePasse.equals(s.getMotDePasse())) {
+					mdpOK = true;
+					connected = s;
+				}
+			}
+		}
+		
+		if(idPers != null && idPers.equals(Integer.toString(lp.getDirecteur().getIdPersonne()))) {
+			if(motDePasse != null && motDePasse.equals(lp.getDirecteur().getMotDePasse())) {
+				mdpOK = true;
+				connected = lp.getDirecteur();
+			}
+		}
+		
+		if(mdpOK) {
+			if(urlValid == null) 
+				throw new ServletException("URL de validation à null");
+			else {
+				HttpSession sess = request.getSession();
+				if(connected != null)
+					sess.setAttribute("connected", connected);
+				else
+					throw new ServletException("Personne connectée à null");
+				
+				getServletContext().getRequestDispatcher(urlValid).forward(request, response);
+			}
+		}
+		else {
+			erreursParametres.add("Mot de passe incorrect.");
+		}
+		
+		if(erreursParametres.size() > 0) {
+			HttpSession sess = request.getSession();
+			sess.setAttribute("erreurs", erreursParametres);
+			
+			getServletContext().getRequestDispatcher(urlConnexion).forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

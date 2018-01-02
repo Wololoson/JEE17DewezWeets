@@ -1,3 +1,11 @@
-- DAO : Faire comme dans chirurgien avec les autres (copier-coller + modifier)
-- Faire les autres méthodes des DAO
-- PL/SQL : Test avec le java (crash glassfish avec postman)
+- Modifer DB : Reservation => dateHeure devient dateRes et un varchar heureRes
+- Ajouter le found (comme dans ListPatient) dans les autres listes
+- Regarder aux DAO pour les ID : Exemple pour le patient
+- Terminer l'ajout d'une réservation
+- Faire la modification d'une réservation
+- Faire la suppression d'une réservation
+
+- Page d'infos
+- Page de notifications
+- Pages des patients
+- Page du personnel

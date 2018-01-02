@@ -1,6 +1,9 @@
 package be.gestionhopital.Models;
 
-public class Notification {
+import java.io.Serializable;
+
+public class Notification implements Serializable{
+	private static final long serialVersionUID = -8960616417745224950L;
 	//Variables d'instance
 	private int idNotification;
 	private int priorite;
@@ -80,7 +83,8 @@ public class Notification {
 		if (chirurgien == null) {
 			if (other.chirurgien != null)
 				return false;
-		} else if (!chirurgien.equals(other.chirurgien))
+		}
+		if (!chirurgien.equals(other.chirurgien))
 			return false;
 		if (commentaire == null) {
 			if (other.commentaire != null)

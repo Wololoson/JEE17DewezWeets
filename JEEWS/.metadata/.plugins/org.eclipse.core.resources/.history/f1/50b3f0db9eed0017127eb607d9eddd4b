@@ -1,0 +1,58 @@
+package be.gestionhopital.Controllers;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import be.gestionhopital.Models.Chirurgien;
+
+/**
+ * Servlet implementation class ServletAcceuil
+ */
+public class ServletAcceuil extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	String urlReservation = null;
+	String urlNotification = null;
+	String urlInformation = null;
+	String urlPatient = null;
+	String urlPersonnel = null;
+	
+	public void init() {
+		ServletConfig config = getServletConfig();
+		urlReservation = (String)config.getInitParameter("urlReservation");
+		urlNotification = (String)config.getInitParameter("urlNotification");
+		urlInformation = (String)config.getInitParameter("urlInformation");
+		urlPatient = (String)config.getInitParameter("urlPatient");
+		urlPersonnel = (String)config.getInitParameter("urlPersonnel");
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sess = request.getSession();
+		if(sess.getAttribute("type").equals("chirurgien")) {
+			Chirurgien connected = (Chirurgien) sess.getAttribute("chirurgien");
+		}
+		if(sess.getAttribute("type").equals("chirurgien")) {
+					
+				}
+		if(sess.getAttribute("type").equals("chirurgien")) {
+			
+		}
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

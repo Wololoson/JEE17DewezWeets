@@ -154,7 +154,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listChirurgiensNodes = doc.getElementsByTagName("listeChirurgien");
+		NodeList listChirurgiensNodes = doc.getElementsByTagName("listeChirurgiens");
 		
 		for(int i = 0; i < listChirurgiensNodes.getLength(); i++) {
 			Element chir = (Element) listChirurgiensNodes.item(i);
@@ -176,6 +176,10 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 				line = (Element) prenomNode.item(0);
 				prenom = getCharacterDataFromElement(line);
 				
+				NodeList dateNaissNode = chirurgien.getElementsByTagName("dateNaissance");
+				line = (Element) dateNaissNode.item(0);
+				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				
 				NodeList numTelNode = chirurgien.getElementsByTagName("numTelephone");
 				line = (Element) numTelNode.item(0);
 				numTel = getCharacterDataFromElement(line);
@@ -184,16 +188,12 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 				line = (Element) mdpNode.item(0);
 				mdp = getCharacterDataFromElement(line);
 				
-				NodeList dateNaissNode = chirurgien.getElementsByTagName("dateNaissance");
-				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
-				
 				NodeList specialisationNode = chirurgien.getElementsByTagName("specialisation");
 				line = (Element) specialisationNode.item(0);
 				specialisation = getCharacterDataFromElement(line);
+				
+				listChir.add(new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp));
 			}
-			
-			listChir.add(new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp));
 		}
 		
 		return listChir;

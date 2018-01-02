@@ -1,0 +1,310 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="be.gestionhopital.Models.Personne" %>
+<%@ page import="be.gestionhopital.Models.Chirurgien" %>
+<%@ page import="be.gestionhopital.Models.ListPersonnel" %>
+<%@ page import="be.gestionhopital.Models.Reservation" %>
+<%@ page import="java.util.ArrayList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Reservations</title>
+		<link type="text/css" rel="stylesheet" href="../JEEGestionHopital/Views/css/reservation.css"/>
+		<script>
+			window.onload = function(){
+				var modal = document.getElementById("modal");
+				var addBtn = document.getElementById("modalDisplay");
+				var close = document.getElementsByClassName("close")[0];
+			
+				addBtn.onclick = function() {
+				    modal.style.display = "block";
+				}
+				
+				close.onclick = function() {
+				    modal.style.display = "none";
+				}
+				
+				window.onclick = function(event) {
+				    if (event.target == modal) {
+				        modal.style.display = "none";
+				    }
+				}
+			}
+		</script>
+	</head>
+	<body>
+	<h1>Gestion les réservations</h1>
+		<%
+			HttpSession sess = request.getSession();
+			String type = (String) sess.getAttribute("type");
+			Personne p = (Personne) sess.getAttribute(type);
+			ArrayList<Reservation> lr = (ArrayList<Reservation>) request.getAttribute("lr");
+			ListPersonnel lp = ListPersonnel.getInstance();
+		%>
+		
+		<div id="modal" class="modal">
+		<div class="modal-content">
+	    	<span class="close">&times;</span>
+			<form action="ServletReservation" method="post">
+				<table cellspacing="0" cellpadding="5">
+					<% if(type.equals("secretaire") || type.equals("directeur")){ %>
+						<tr>
+							<th colspan="2">
+								Chirurgien
+							</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<select id="listPers" name="listPers">
+									<% 
+									for(Chirurgien c : lp.getListChirurgien()){%>
+										<option value="<%=c.getIdPersonne()%>" onclick="direCodeDisplay(0)"><%=c.getNom()%> <%=c.getPrenom()%></option>
+									<%
+									}
+									%>
+								</select>
+							</td>
+						</tr>
+					<%} %>
+					<tr>
+						<th colspan="2">
+							Patient
+						</th>
+					</tr>
+					<tr>
+						<td>
+							Numéro :
+						</td>
+						<td>
+							<input type="text" name="numPati" id="numPati" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Nom :
+						</td>
+						<td>
+							<input type="text" name="nomPati" id="nomPati" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Prénom :
+						</td>
+						<td>
+							<input type="text" name="prenomPati" id="prenomPati" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Date de naissance :
+						</td>
+						<td>
+							<input type="text" name="dateNaissPatiJ" id="dateNaissPatiJ" value="" size="3" required="required" />
+							<input type="text" name="dateNaissPatiM" id="dateNaissPatiM" value="" size="3" required="required" />
+							<input type="text" name="dateNaissPatiA" id="dateNaissPatiA" value="" size="3" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Numéro de téléphone :
+						</td>
+						<td>
+							<input type="text" name="numTelPati" id="numTelPati" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Numéro de chambre :
+						</td>
+						<td>
+							<input type="text" name="numChPati" id="numChPati" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">
+							Salle
+						</th>
+					</tr>
+					<tr>
+						<td>
+							Numéro :
+						</td>
+						<td>
+							<input type="text" name="numSalle" id="numSalle" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Bloc :
+						</td>
+						<td>
+							<input type="text" name="blocSalle" id="blocSalle" value="" size="20" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">
+							Date et heure
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="heureResH" id="heureResH" value="" size="3" required="required" />
+							:
+							<input type="text" name="heureResM" id="heureResM" value="" size="3" required="required" />
+						</td>
+						<td>
+							<input type="text" name="dateResJ" id="dateResJ" value="" size="3" required="required" />
+							/
+							<input type="text" name="dateResM" id="dateResM" value="" size="3" required="required" />
+							/
+							<input type="text" name="dateResA" id="dateResA" value="" size="3" required="required" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" name="ajout" id="ajout" value="Valider"/>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+		
+		<form action="ServletReservation" method="post">
+			<table border="1" cellspacing="0" cellpadding="5">
+				<tr>
+					<% if(type.equals("secretaire") || type.equals("directeur")){ %>
+						<th colspan="3">
+							Chirurgien
+						</th>
+					<% } %>
+					<th colspan="5">
+						Patient
+					</th>
+					<th colspan="2">
+						Salle d'opération
+					</th>
+					<th rowspan="2">
+						Date et heure
+					</th>
+				</tr>
+				<tr>
+					<% if(type.equals("secretaire") || type.equals("directeur")){ %>
+						<th>
+							Nom
+						</th>
+						<th>
+							Prenom
+						</th>
+						<th>
+							Spécialisation
+						</th>
+					<% } %>
+					<th>
+						Numéro
+					</th>
+					<th>
+						Nom
+					</th>
+					<th>
+						Prénom
+					</th>
+					<th>
+						Téléphone
+					</th>
+					<th>
+						Chambre
+					</th>
+					<th>
+						Numéro
+					</th>
+					<th>
+						Bloc
+					</th>
+				</tr>
+				<%
+					for(Reservation r : lr){%>
+					<tr>
+						<%if(type.equals("secretaire") || type.equals("directeur")){%>
+							<td>
+								r.getChirurgien().getNom();
+							</td>
+							<td>
+								r.getChirurgien().getPrenom();
+							</td>
+							<td>
+								r.getChirurgien().getSpecialisation();
+							</td>
+							<td>
+								r.getPatient.getNumPatient();
+							</td>
+							<td>
+								r.getPatient.getNom();
+							</td>
+							<td>
+								r.getPatient.getPrenom();
+							</td>
+							<td>
+								r.getPatient.getNumTelephone();
+							</td>
+							<td>
+								r.getPatient.getNumChambre();
+							</td>
+							<td>
+								r.getSalle().getNumSalle();
+							</td>
+							<td>
+								r.getSalle().getBloc();
+							</td>
+							<td>
+								r.getDateHeure();
+							</td>
+							<td>
+								<input type="radio" name="res" value="<%=r%>"/>
+							</td>
+						<%}
+						else{
+							if(p.equals(r.getChirurgien())){%>
+								<td>
+									r.getPatient.getNumPatient();
+								</td>
+								<td>
+									r.getPatient.getNom();
+								</td>
+								<td>
+									r.getPatient.getPrenom();
+								</td>
+								<td>
+									r.getPatient.getNumTelephone();
+								</td>
+								<td>
+									r.getPatient.getNumChambre();
+								</td>
+								<td>
+									r.getSalle().getNumSalle();
+								</td>
+								<td>
+									r.getSalle().getBloc();
+								</td>
+								<td>
+									r.getDateHeure();
+								</td>
+								<td>
+									<input type="radio" name="res" value="<%=r%>"/>
+								</td>
+							<%}
+						}%>
+					</tr>
+					<% } %>
+			</table>
+			<%if(type.equals("secretaire") || type.equals("chirurgien")){%>
+				<input type="button" name="modalDisplay" id="modalDisplay" value="Ajouter"/>
+				<input type="submit" name="modif" id="modif" value="Modifier"/>
+				<input type="submit" name="suppr" id="suppr" value="Supprimer"/>
+			<% } %>
+			<input type="submit" name="retour" id="retour" value="Retour"/>
+		</form>
+	</body>
+</html>

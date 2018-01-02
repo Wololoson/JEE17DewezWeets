@@ -1,0 +1,66 @@
+package be.gestionhopital.Controllers;
+
+import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import be.gestionhopital.DAO.DAOReservation;
+import be.gestionhopital.Factory.AbstractDAOFactory;
+import be.gestionhopital.Models.Chirurgien;
+import be.gestionhopital.Models.Personne;
+
+/**
+ * Servlet implementation class ServletReservation
+ */
+public class ServletReservation extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String urlAccueil;
+	
+	public void init() {
+		ServletConfig config = getServletConfig();
+		urlAccueil = (String)config.getInitParameter("urlAccueil");
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Enumeration<String> paramNames = request.getParameterNames();
+		
+		while(paramNames.hasMoreElements()) {
+			String paramName = (String)paramNames.nextElement();
+			AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+			
+			if(paramName.equals("ajout")) {
+				DAOReservation reservationDAO = (DAOReservation)adf.getReservationDAO();
+				HttpSession sess = request.getSession();
+				String type = (String) sess.getAttribute("type");
+				
+				if(type.equals("chirurgien")) {
+					Chirurgien c = (Chirurgien)sess.getAttribute(type);
+					String nomPati = (String)request.getAttribute("nomPati");
+				}
+				else {
+					
+				}
+			}
+			if(paramName.equals("modif")) {
+				
+			}
+			if(paramName.equals("suppr")) {
+				
+			}
+			if(paramName.equals("back")) {
+				getServletContext().getRequestDispatcher(urlAccueil).forward(request, response);
+			}
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

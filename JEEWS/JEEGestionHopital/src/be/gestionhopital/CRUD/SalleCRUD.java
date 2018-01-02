@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -19,10 +18,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import be.gestionhopital.Connexion.DriverACCESS;
+import oracle.jdbc.internal.OracleTypes;
 
 @Path("salle")
 public class SalleCRUD {
 	private Connection conn = DriverACCESS.getInstance();
+	
+	public SalleCRUD() {}
 	
 	@GET
 	@Path("{id}")
@@ -34,18 +36,19 @@ public class SalleCRUD {
 		
 		try {
 			getSalle = conn.prepareCall("{ ? = call SelectOne.getSalle(?)}");
-			getSalle.registerOutParameter(1, Types.OTHER);
+			getSalle.registerOutParameter(1, OracleTypes.CURSOR);
 			getSalle.setDouble(2, id);
 			getSalle.execute();
 			results = (ResultSet)getSalle.getObject(1);
 			if(results.next()) {
 				retour += "<salle>";
-				retour += "<id>"+results.getDouble("IdSalle")+"</id>";
+				retour += "<id>"+results.getInt("IdSalle")+"</id>";
 				retour += "<numero>"+results.getString("Numero")+"</numero>";
 				retour += "<blocSalle>"+results.getString("Bloc_Salle")+"</blocSalle>";
 				retour += "</salle>";
 			}
-			
+			results.close();
+			getSalle.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -61,7 +64,7 @@ public class SalleCRUD {
 	}
 	
 	@POST
-	public void insertSalle(@FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
+	public Response insertSalle(@FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
 		CallableStatement insertSalle = null;
 		
 		try {
@@ -69,6 +72,7 @@ public class SalleCRUD {
 			insertSalle.setString(1, num);
 			insertSalle.setString(2, bloc);
 			insertSalle.executeUpdate();
+			return Response.status(200).entity(insertSalle.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -77,6 +81,7 @@ public class SalleCRUD {
 			if(insertSalle != null)
 				insertSalle.close();
 		}
+		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@PUT

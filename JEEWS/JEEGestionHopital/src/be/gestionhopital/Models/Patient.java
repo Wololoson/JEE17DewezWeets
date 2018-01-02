@@ -3,6 +3,7 @@ package be.gestionhopital.Models;
 import java.sql.Date;
 
 public class Patient extends Personne {
+	private static final long serialVersionUID = -6666981989406454568L;
 	// Variables d'instance
 	private String numChambre;
 	private String numPatient;
