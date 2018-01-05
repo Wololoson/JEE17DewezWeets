@@ -1,4 +1,4 @@
-/* AUTOMATICALLY GENERATED ON Tue Jan 02 21:20:13 CET 2018*/
+/* AUTOMATICALLY GENERATED ON Fri Jan 05 21:32:08 CET 2018*/
 /* DO NOT EDIT */
 
 grant {
@@ -9,10 +9,14 @@ grant {
 grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
   permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ServletPatient", "**";
   permission javax.security.jacc.WebRoleRefPermission "ServletConnexion", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ServletPersonnel", "**";
   permission javax.security.jacc.WebRoleRefPermission "be.gestionhopital.Models.CURDStart", "**";
   permission javax.security.jacc.WebRoleRefPermission "ServletAccueil", "**";
   permission javax.security.jacc.WebRoleRefPermission "ServletReservation", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ServletInformation", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ServletNotification", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
 };
 

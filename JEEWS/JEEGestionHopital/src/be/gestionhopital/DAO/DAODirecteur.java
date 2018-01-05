@@ -2,10 +2,8 @@ package be.gestionhopital.DAO;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.Date;
 
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -17,9 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import be.gestionhopital.Models.Directeur;
 
@@ -30,62 +26,24 @@ public class DAODirecteur extends DAO<Directeur> {
 
 	@Override
 	public boolean create(Directeur obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("nom", obj.getNom());
-		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
-		queryParams.add("numTel", obj.getNumTelephone());
-		queryParams.add("mdp", obj.getMotDePasse());
-		queryParams.add("code", obj.getCode());
-		
-		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
-		if(response.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
 	public boolean delete(Directeur obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
-		
-		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
-		if(response.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
 	public boolean update(Directeur obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("nom", obj.getNom());
-		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
-		queryParams.add("numTel", obj.getNumTelephone());
-		queryParams.add("mdp", obj.getMotDePasse());
-		queryParams.add("code", obj.getCode());
-		
-		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
-		if(response.getStatus() == 200) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
 	public Directeur find(int id) throws SAXException, IOException {
 		Directeur dire = null;
-		String nom = null, prenom = null, numTel = null, mdp = null, code = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, code = null, dateNaiss = null;
 		int idPers = 0;
-		Date dateNaiss = null;
 		String responseText = connect.path("directeur").accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -122,7 +80,7 @@ public class DAODirecteur extends DAO<Directeur> {
 				
 				NodeList dateNaissNode = directeur.getElementsByTagName("dateNaissance");
 				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				dateNaiss = getCharacterDataFromElement(line);
 				
 				NodeList numTelNode = directeur.getElementsByTagName("numTelephone");
 				line = (Element) numTelNode.item(0);

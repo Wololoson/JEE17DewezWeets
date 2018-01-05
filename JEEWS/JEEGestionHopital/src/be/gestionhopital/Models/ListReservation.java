@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import be.gestionhopital.DAO.DAOReservation;
+import be.gestionhopital.DAO.DAOSalle;
 import be.gestionhopital.Factory.AbstractDAOFactory;
 
 public class ListReservation implements Serializable {
@@ -18,6 +19,7 @@ public class ListReservation implements Serializable {
 	private List<Reservation> listReservation = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	private DAOReservation resDAO = (DAOReservation) adf.getReservationDAO();
+	private DAOSalle salleDAO = (DAOSalle)adf.getSalleDAO();
 	
 	private ListReservation() {
 		try {
@@ -35,26 +37,54 @@ public class ListReservation implements Serializable {
 		this.listReservation = listReservation;
 	}
 
-	public void ajouterReservation(Reservation r) {
-		listReservation.add(r);
-		resDAO.create(r);
-	}
-	
-	public void modifierReservation(Reservation before, Reservation after) {
-		for(Reservation res : listReservation) {
-			if(before.equals(res)) {
-				res.modifierReservation(after);
-				resDAO.update(res);
+	public void ajouterReservation(Reservation r, Notification n) {
+		boolean found = false;
+		ListPatient lp = ListPatient.getInstance();
+		lp.ajouterPatient(r.getPatient());
+		salleDAO.create(r.getSalle());
+		
+		for(Reservation re : listReservation) {
+			if(r.equals(re)) {
+				found = true;
+			}
+		}
+		
+		if(!found) {
+			listReservation.add(r);
+			resDAO.create(r);
+			if(n != null) {
+				ListNotification ln = ListNotification.getInstance();
+				ln.ajouterNotification(n);
 			}
 		}
 	}
 	
-	public void supprimerReservation(Reservation r) {
+	public void modifierReservation(Reservation before, Reservation after, Notification n) {
+		for(Reservation res : listReservation) {
+			if(before.equals(res)) {
+				res.modifierReservation(after);
+				resDAO.update(after);
+				if(n != null) {
+					ListNotification ln = ListNotification.getInstance();
+					ln.ajouterNotification(n);
+				}
+			}
+		}
+	}
+	
+	public void supprimerReservation(Reservation r, Notification n) {
+		Reservation foundRes = null;
 		for(Reservation res : listReservation) {
 			if(r.equals(res)) {
-				resDAO.delete(res);
-				listReservation.remove(res);
+				foundRes = res;
 			}
+		}
+		
+		resDAO.delete(foundRes);
+		listReservation.remove(foundRes);
+		if(n != null) {
+			ListNotification ln = ListNotification.getInstance();
+			ln.ajouterNotification(n);
 		}
 	}
 	

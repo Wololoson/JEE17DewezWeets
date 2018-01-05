@@ -1,7 +1,6 @@
 package be.gestionhopital.Models;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public abstract class Personne implements Serializable {
 	private static final long serialVersionUID = 273448865750728985L;
@@ -9,7 +8,7 @@ public abstract class Personne implements Serializable {
 	private int idPersonne;
 	private String nom;
 	private String prenom;
-	private Date dateNaiss;
+	private String dateNaiss;
 	private String numTelephone;
 	private String motDePasse;
 	
@@ -18,7 +17,7 @@ public abstract class Personne implements Serializable {
 		
 	}
 	
-	public Personne(int idPersonne, String nom, String prenom, Date dateNaiss, String numTelephone, String motDePasse) {
+	public Personne(int idPersonne, String nom, String prenom, String dateNaiss, String numTelephone, String motDePasse) {
 		this.idPersonne = idPersonne;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -52,11 +51,11 @@ public abstract class Personne implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public Date getDateNaiss() {
+	public String getDateNaiss() {
 		return dateNaiss;
 	}
 
-	public void setDateNaiss(Date dateNaiss) {
+	public void setDateNaiss(String dateNaiss) {
 		this.dateNaiss = dateNaiss;
 	}
 

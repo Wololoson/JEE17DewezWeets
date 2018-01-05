@@ -1,0 +1,144 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Notifications</title>
+	</head>
+	<body>
+	<h1>Gestion des notifications</h1>
+	
+	<form action="ServletNotification" method="post">
+		<table border="1" cellspacing="0" cellpadding="5">
+			<tr>
+				<th>
+					Priorité
+				</th>
+				<th>
+					Type de notification
+				</th>
+				<th>
+						Commentaire
+				</th>
+					<th rowspan="2">
+						Date et heure
+					</th>
+				</tr>
+				<tr>
+					<% if(type.equals("secretaire") || type.equals("directeur")){ %>
+						<th>
+							Nom
+						</th>
+						<th>
+							Prenom
+						</th>
+						<th>
+							Spécialisation
+						</th>
+					<% } %>
+					<th>
+						Numéro
+					</th>
+					<th>
+						Nom
+					</th>
+					<th>
+						Prénom
+					</th>
+					<th>
+						Téléphone
+					</th>
+					<th>
+						Chambre
+					</th>
+					<th>
+						Numéro
+					</th>
+					<th>
+						Bloc
+					</th>
+				</tr>
+				<%
+					for(Reservation r : lr){%>
+					<tr>
+						<%if(type.equals("secretaire") || type.equals("directeur")){%>
+							<td>
+								<%=r.getChirurgien().getNom() %>
+							</td>
+							<td>
+								<%=r.getChirurgien().getPrenom() %>
+							</td>
+							<td>
+								<%=r.getChirurgien().getSpecialisation() %>
+							</td>
+							<td>
+								<%=r.getPatient().getNumPatient() %>
+							</td>
+							<td>
+								<%=r.getPatient().getNom() %>
+							</td>
+							<td>
+								<%=r.getPatient().getPrenom() %>
+							</td>
+							<td>
+								<%=r.getPatient().getNumTelephone() %>
+							</td>
+							<td>
+								<%=r.getPatient().getNumChambre() %>
+							</td>
+							<td>
+								<%=r.getSalle().getNumSalle() %>
+							</td>
+							<td>
+								<%=r.getSalle().getBloc() %>
+							</td>
+							<td>
+								<%=r.getDateRes() %>
+							</td>
+							<td>
+								<%=r.getHeureRes() %>
+							</td>
+							<td>
+								<input type="radio" name="res" value="<%=r%>"/>
+							</td>
+						<%}
+						else{
+							if(p.equals(r.getChirurgien())){%>
+								<td>
+									<%=r.getPatient().getNumPatient() %>
+								</td>
+								<td>
+									<%=r.getPatient().getNom() %>
+								</td>
+								<td>
+									<%=r.getPatient().getPrenom() %>
+								</td>
+								<td>
+									<%=r.getPatient().getNumTelephone() %>
+								</td>
+								<td>
+									<%=r.getPatient().getNumChambre() %>
+								</td>
+								<td>
+									<%=r.getSalle().getNumSalle() %>
+								</td>
+								<td>
+									<%=r.getSalle().getBloc() %>
+								</td>
+									<td>
+									<%=r.getDateRes() %>
+								</td>
+								<td>
+									<%=r.getHeureRes() %>
+								</td>
+								<td>
+									<input type="radio" name="res" value="<%=r%>"/>
+								</td>
+							<%}
+						}%>
+					</tr>
+					<% } %>
+			</table>
+	</body>
+</html>

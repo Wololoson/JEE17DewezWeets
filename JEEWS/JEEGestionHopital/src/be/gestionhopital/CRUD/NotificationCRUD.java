@@ -1,5 +1,6 @@
 package be.gestionhopital.CRUD;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,14 +39,14 @@ public class NotificationCRUD {
 			getNotif = conn.prepareCall("{ ? = call SelectAll.getNotifications() }");
 			getNotif.registerOutParameter(1, OracleTypes.CURSOR);
 			getNotif.execute();
-			while((results = (ResultSet)getNotif.getObject(1)) != null) {
+			if((results = (ResultSet)getNotif.getObject(1)) != null) {
 				while(results.next()) {
 					retour += "<notification>";
 					retour += "<id>"+results.getInt("IdNotification")+"</id>";
-					retour += "<priorite>"+results.getString("Priorite")+"</priorite>";
-					retour += "<type>"+results.getString("Type_Notification")+"</type>";
-					retour += "<commentaire>"+results.getDate("Commentaire")+"</commentaire>";
-					retour += "<idPers>"+results.getString("IdPersonne")+"</idPers>";
+					retour += "<priorite>"+results.getInt("Priorite")+"</priorite>";
+					retour += "<type>"+results.getInt("Type_Notif")+"</type>";
+					retour += "<commentaire>"+results.getString("Commentaire")+"</commentaire>";
+					retour += "<idPers>"+results.getInt("IdPersonne")+"</idPers>";
 					retour += "</notification>";
 				}
 				results.close();
@@ -67,17 +69,25 @@ public class NotificationCRUD {
 	}
 	
 	@POST
-	public Response insertNotification(@FormParam("priorite") String priorite, @FormParam("type") String type, @FormParam("commentaire") String commentaire, @FormParam("idPers") double idPers) throws SQLException {
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response insertNotification(@FormParam("priorite") String priorite, @FormParam("type") String type, @FormParam("commentaire") String commentaire, @FormParam("idChirurgien") double idPers) throws SQLException {
 		CallableStatement insertNotif = null;
+		BigDecimal tmp;
+		String id = null;
 		
 		try {
-			insertNotif = conn.prepareCall("{call Inserts.insertNotification(?,?,?,?)}");
-			insertNotif.setString(1, priorite);
-			insertNotif.setString(2, type);
-			insertNotif.setString(3, commentaire);
-			insertNotif.setDouble(4, idPers);
+			insertNotif = conn.prepareCall("{? = call Inserts.insertNotification(?,?,?,?)}");
+			insertNotif.registerOutParameter(1, OracleTypes.NUMBER);
+			insertNotif.setString(2, priorite);
+			insertNotif.setString(3, type);
+			insertNotif.setString(4, commentaire);
+			insertNotif.setDouble(5, idPers);
 			insertNotif.executeUpdate();
-			return Response.status(200).entity(insertNotif.getGeneratedKeys().toString()).build();
+
+			tmp = (BigDecimal)insertNotif.getObject(1);
+			id = tmp.toString();
+			
+			return Response.status(200).entity(id).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -90,7 +100,8 @@ public class NotificationCRUD {
 	}
 	
 	@DELETE
-	public void deleteNotification(@FormParam("id") int id) throws SQLException {
+	@Path("{id}")
+	public void deleteNotification(@PathParam("id") int id) throws SQLException {
 		CallableStatement deleteNotif = null;
 		
 		try {

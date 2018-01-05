@@ -3,9 +3,13 @@ package be.gestionhopital.Models;
 import java.io.Serializable;
 import java.sql.Date;
 
+import be.gestionhopital.DAO.DAOSalle;
+import be.gestionhopital.Factory.AbstractDAOFactory;
+
 public class Reservation  implements Serializable {
 	private static final long serialVersionUID = 2406742677558119343L;
 	//Variables d'instance
+	private int idReservation;
 	private Chirurgien chirurgien;
 	private Salle salle;
 	private Patient patient;
@@ -17,12 +21,21 @@ public class Reservation  implements Serializable {
 		
 	}
 	
-	public Reservation(Chirurgien chirurgien,Salle salle,Patient patient,Date dateRes,String heureRes) {
+	public Reservation(int idReservation, Chirurgien chirurgien,Salle salle,Patient patient,Date dateRes,String heureRes) {
+		this.idReservation = idReservation;
 		this.chirurgien = chirurgien;
 		this.salle = salle;
 		this.patient = patient;
 		this.dateRes = dateRes;
 		this.heureRes = heureRes;
+	}
+
+	public int getIdReservation() {
+		return idReservation;
+	}
+
+	public void setIdReservation(int idReservation) {
+		this.idReservation = idReservation;
 	}
 
 	//Propriétés
@@ -67,9 +80,15 @@ public class Reservation  implements Serializable {
 	}
 
 	public void modifierReservation(Reservation r) {
+		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		DAOSalle salleDAO = (DAOSalle)adf.getSalleDAO();
+		ListPatient lp = ListPatient.getInstance();
+		
 		this.chirurgien = r.getChirurgien();
-		this.salle = r.getSalle();
-		this.patient = r.getPatient();
+		
+		lp.ajouterPatient(r.getPatient());
+		salleDAO.create(r.getSalle());
+		
 		this.dateRes = r.getDateRes();
 		this.heureRes = r.getHeureRes();
 	}

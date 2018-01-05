@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -42,10 +43,12 @@ public class ReservationCRUD {
 			if((results = (ResultSet)getRes.getObject(1)) != null) {
 				while(results.next()) {
 					retour += "<reservation>";
+					retour += "<idReservation>"+results.getInt("IdReservation")+"</idReservation>";
 					retour += "<idPers>"+results.getInt("IdPersonne")+"</idPers>";
 					retour += "<idSalle>"+results.getInt("IdSalle")+"</idSalle>";
 					retour += "<numPatient>"+results.getInt("NumeroPatient")+"</numPatient>";
-					retour += "<dateHeure>"+results.getDate("DateHeure")+"</dateHeure>";
+					retour += "<dateRes>"+results.getDate("DateRes")+"</dateRes>";
+					retour += "<heureRes>"+results.getString("HeureRes")+"</heureRes>";
 					retour += "</reservation>";
 				}
 				results.close();
@@ -68,17 +71,17 @@ public class ReservationCRUD {
 	}
 	
 	@POST
-	public Response insertReservation(@FormParam("idPers") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") double numPatient, @FormParam("dateHeure") Date dateHeure) throws SQLException {
+	public void insertReservation(@FormParam("idChirurgien") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") String numPatient, @FormParam("dateRes") Date dateRes, @FormParam("heureRes") String heureRes) throws SQLException {
 		CallableStatement insertRes = null;
 		
 		try {
-			insertRes = conn.prepareCall("{call Inserts.insertReservation(?,?,?,?)}");
+			insertRes = conn.prepareCall("{call Inserts.insertReservation(?,?,?,?,?)}");
 			insertRes.setDouble(1, idPers);
 			insertRes.setDouble(2, idSalle);
-			insertRes.setDouble(3, numPatient);
-			insertRes.setDate(4, dateHeure);
+			insertRes.setString(3, numPatient);
+			insertRes.setDate(4, dateRes);
+			insertRes.setString(5, heureRes);
 			insertRes.executeUpdate();
-			return Response.status(200).entity(insertRes.getGeneratedKeys().toString()).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -87,22 +90,26 @@ public class ReservationCRUD {
 			if(insertRes != null)
 				insertRes.close();
 		}
-		return Response.status(500).entity("ERROR").build();
 	}
 	
 	@PUT
-	public void updateReservation(@FormParam("idPers") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") double numPatient, @FormParam("dateHeure") Date dateHeure) throws SQLException {
+	public void updateReservation(@FormParam("id") int id, @FormParam("idChirurgien") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") String numPatient, @FormParam("dateRes") Date dateRes, @FormParam("heureRes") String heureRes) throws SQLException {
 		CallableStatement updateRes = null;
 		
 		try {
-			updateRes = conn.prepareCall("{call Updates.updateReservation(?,?,?,?)}");
-			updateRes.setDouble(1, idPers);
-			updateRes.setDouble(2, idSalle);
-			updateRes.setDouble(3, numPatient);
-			updateRes.setDate(4, dateHeure);
+			updateRes = conn.prepareCall("{call Updates.updateReservation(?,?,?,?,?,?)}");
+			updateRes.setInt(1, id);
+			updateRes.setDouble(2, idPers);
+			updateRes.setDouble(3, idSalle);
+			updateRes.setString(4, numPatient);
+			updateRes.setDate(5, dateRes);
+			updateRes.setString(6, heureRes);
 			updateRes.executeUpdate();
 		}
 		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		finally {
@@ -112,14 +119,13 @@ public class ReservationCRUD {
 	}
 	
 	@DELETE
-	public void deleteReservation(@FormParam("idPers") int idPers, @FormParam("idSalle") int idSalle, @FormParam("numPatient") int numPatient) throws SQLException {
+	@Path("{id}")
+	public Response deleteReservation(@PathParam("id") int id) throws SQLException {
 		CallableStatement deleteRes = null;
 		
 		try {
-			deleteRes = conn.prepareCall("{call Deletes.deleteNotification(?,?,?)}");
-			deleteRes.setDouble(1, idPers);
-			deleteRes.setDouble(2, idSalle);
-			deleteRes.setDouble(3, numPatient);
+			deleteRes = conn.prepareCall("{call Deletes.deleteReservation(?)}");
+			deleteRes.setDouble(1, id);
 			deleteRes.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -129,5 +135,7 @@ public class ReservationCRUD {
 			if(deleteRes != null)
 				deleteRes.close();
 		}
+		
+		return Response.status(Status.OK).build();
 	}
 }

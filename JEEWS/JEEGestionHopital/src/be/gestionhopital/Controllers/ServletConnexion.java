@@ -96,7 +96,6 @@ public class ServletConnexion extends HttpServlet {
 				HttpSession sess = request.getSession();
 		
 				if(connected != null) {
-					request.setAttribute("type", type);
 					sess.setAttribute("type",type);
 					sess.setAttribute(type, connected);
 					getServletContext().getRequestDispatcher(urlValid).forward(request, response);

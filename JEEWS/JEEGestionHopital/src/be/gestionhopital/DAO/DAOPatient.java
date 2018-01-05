@@ -2,7 +2,6 @@ package be.gestionhopital.DAO;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class DAOPatient extends DAO<Patient> {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		queryParams.add("nom", obj.getNom());
 		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
 		queryParams.add("numChambre", obj.getNumChambre());
@@ -56,10 +55,9 @@ public class DAOPatient extends DAO<Patient> {
 
 	@Override
 	public boolean delete(Patient obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
+		String id =  Integer.toString(obj.getIdPersonne());
 		
-		ClientResponse response = connect.path("patient").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("patient/"+id).type("application/x-www-form-urlencoded").delete(ClientResponse.class);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -71,15 +69,16 @@ public class DAOPatient extends DAO<Patient> {
 	@Override
 	public boolean update(Patient obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
 		queryParams.add("nom", obj.getNom());
 		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
 		queryParams.add("numChambre", obj.getNumChambre());
 		queryParams.add("numPatient", obj.getNumPatient());
 		
-		ClientResponse response = connect.path("patient").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("patient").type("application/x-www-form-urlencoded").put(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -90,9 +89,8 @@ public class DAOPatient extends DAO<Patient> {
 
 	@Override
 	public Patient find(int id) throws SAXException, IOException {
-		String nom = null, prenom = null, numTel = null, mdp = null, numChambre = null, numPatient = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, numChambre = null, numPatient = null, dateNaiss = null;
 		int idPers = 0;
-		Date dateNaiss = null;
 		String responseText = connect.path("patient/"+id).accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -132,7 +130,7 @@ public class DAOPatient extends DAO<Patient> {
 				
 				NodeList dateNaissNode = patient.getElementsByTagName("dateNaissance");
 				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				dateNaiss = getCharacterDataFromElement(line);
 				
 				NodeList numChambreNode = patient.getElementsByTagName("numChambre");
 				line = (Element) numChambreNode.item(0);
@@ -148,9 +146,8 @@ public class DAOPatient extends DAO<Patient> {
 	
 	public List<Patient> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Patient> listPati = new ArrayList<>();
-		String nom = null, prenom = null, numTel = null, mdp = null, numChambre = null, numPatient = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, numChambre = null, numPatient = null, dateNaiss = null;
 		int id = 0;
-		Date dateNaiss = null;
 		String responseText = connect.path("patient").accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -163,7 +160,7 @@ public class DAOPatient extends DAO<Patient> {
 		is.setCharacterStream(new StringReader(responseText));
 
 		Document doc = db.parse(is);
-		NodeList listPatientsNodes = doc.getElementsByTagName("listePatient");
+		NodeList listPatientsNodes = doc.getElementsByTagName("listePatients");
 		
 		for(int i = 0; i < listPatientsNodes.getLength(); i++) {
 			Element pati = (Element) listPatientsNodes.item(i);
@@ -195,7 +192,7 @@ public class DAOPatient extends DAO<Patient> {
 				
 				NodeList dateNaissNode = patient.getElementsByTagName("dateNaissance");
 				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				dateNaiss = getCharacterDataFromElement(line);
 				
 				NodeList numChambreNode = patient.getElementsByTagName("numChambre");
 				line = (Element) numChambreNode.item(0);
@@ -204,9 +201,10 @@ public class DAOPatient extends DAO<Patient> {
 				NodeList numPatientNode = patient.getElementsByTagName("numPatient");
 				line = (Element) numPatientNode.item(0);
 				numPatient = getCharacterDataFromElement(line);
+				
+				if(numChambre != null && numPatient != null && id != 0 && nom != null && prenom != null && dateNaiss != null && numTel != null)
+					listPati.add(new Patient(numChambre, numPatient, id, nom, prenom, dateNaiss, numTel, mdp));
 			}
-			
-			listPati.add(new Patient(numChambre, numPatient, id, nom, prenom, dateNaiss, numTel, mdp));
 		}
 		
 		return listPati;

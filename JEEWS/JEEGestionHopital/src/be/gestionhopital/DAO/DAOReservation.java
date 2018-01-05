@@ -40,8 +40,9 @@ public class DAOReservation extends DAO<Reservation> {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
 		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
-		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
-		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		queryParams.add("numPatient", obj.getPatient().getNumPatient());
+		queryParams.add("dateRes", obj.getDateRes().toString());
+		queryParams.add("heureRes", obj.getHeureRes().toString());
 		
 		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
@@ -54,12 +55,9 @@ public class DAOReservation extends DAO<Reservation> {
 
 	@Override
 	public boolean delete(Reservation obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
-		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
-		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
+		String id =  Integer.toString(obj.getIdReservation());
 		
-		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("reservation/"+id).type("application/x-www-form-urlencoded").delete(ClientResponse.class);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -71,12 +69,14 @@ public class DAOReservation extends DAO<Reservation> {
 	@Override
 	public boolean update(Reservation obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdReservation()));
 		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
 		queryParams.add("idSalle", Integer.toString(obj.getSalle().getIdSalle()));
-		queryParams.add("idPatient", Integer.toString(obj.getPatient().getIdPersonne()));
-		queryParams.add("dateHeure", obj.getDateHeure().toString());
+		queryParams.add("numPatient", obj.getPatient().getNumPatient());
+		queryParams.add("dateRes", obj.getDateRes().toString());
+		queryParams.add("heureRes", obj.getHeureRes().toString());
 		
-		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("reservation").type("application/x-www-form-urlencoded").put(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -97,11 +97,12 @@ public class DAOReservation extends DAO<Reservation> {
 		DAO<Salle> DAOSalle = adf.getSalleDAO();
 		DAO<Patient> DAOPatient = adf.getPatientDAO();
 		
-		String idPers = null, numPatient = null, idSalle = null;
+		String idPers = null, numPatient = null, idSalle = null, heureRes = null;
+		int idRes = 0;
 		Chirurgien chir = null;
 		Salle salle = null;
 		Patient pati = null;
-		Date dateHeure = null;
+		Date dateRes = null;
 		String responseText = connect.path("reservation").accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -124,8 +125,12 @@ public class DAOReservation extends DAO<Reservation> {
 			for(int j = 0; j < reservationNodes.getLength(); j++) {
 				Element reservation = (Element) reservationNodes.item(j);
 				
+				NodeList idResNode = reservation.getElementsByTagName("idReservation");
+				Element line = (Element) idResNode.item(0);
+				idRes = Integer.parseInt(getCharacterDataFromElement(line));
+				
 				NodeList idPersNode = reservation.getElementsByTagName("idPers");
-				Element line = (Element) idPersNode.item(0);
+				line = (Element) idPersNode.item(0);
 				idPers = getCharacterDataFromElement(line);
 				chir = DAOChirurgien.find(Integer.parseInt(idPers));
 				
@@ -139,12 +144,17 @@ public class DAOReservation extends DAO<Reservation> {
 				numPatient = getCharacterDataFromElement(line);
 				pati = DAOPatient.find(Integer.parseInt(numPatient));
 				
-				NodeList dateHeureNode = reservation.getElementsByTagName("dateHeure");
-				line = (Element) dateHeureNode.item(0);
-				dateHeure = Date.valueOf(getCharacterDataFromElement(line));
+				NodeList dateResNode = reservation.getElementsByTagName("dateRes");
+				line = (Element) dateResNode.item(0);
+				dateRes = Date.valueOf(getCharacterDataFromElement(line));
+				
+				NodeList heureResNode = reservation.getElementsByTagName("heureRes");
+				line = (Element) heureResNode.item(0);
+				heureRes = getCharacterDataFromElement(line);
+				
+				if(idRes != 0 && chir != null && salle != null && pati != null && dateRes != null && heureRes != null)
+					listRes.add(new Reservation(idRes, chir, salle, pati, dateRes, heureRes));
 			}
-			
-			listRes.add(new Reservation(chir, salle, pati, dateHeure));
 		}
 		
 		return listRes;

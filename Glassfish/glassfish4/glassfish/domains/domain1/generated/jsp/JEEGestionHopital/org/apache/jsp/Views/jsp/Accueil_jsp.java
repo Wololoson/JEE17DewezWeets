@@ -62,10 +62,11 @@ public final class Accueil_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<body>\r\n");
       out.write("\t");
 
+		HttpSession sess = request.getSession();
 		ArrayList<String> boutons = new ArrayList<String>();
 		ArrayList<String> btnNames = new ArrayList<String>();
 		ArrayList<String> servletNames = new ArrayList<String>();
-		String type = (String) request.getAttribute("type");
+		String type = (String) sess.getAttribute("type");
 		if(type.equals("chirurgien")){
 			
       out.write("\r\n");

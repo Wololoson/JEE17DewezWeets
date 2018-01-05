@@ -49,12 +49,15 @@ public class ListPatient implements Serializable {
 	}
 	
 	public void supprimerPatient(Patient p) {
+		Patient foundPati = null;
 		for(Patient pa : listPatient) {
 			if(p.equals(pa)) {
-				patiDAO.delete(pa);
-				listPatient.remove(pa);
+				foundPati = pa;
 			}
 		}
+		
+		patiDAO.delete(foundPati);
+		listPatient.remove(foundPati);
 	}
 	
 	public static synchronized ListPatient getInstance() {

@@ -41,9 +41,49 @@
     </init-param>
   </servlet>
   <servlet>
-  	<servlet-name>ServletReservation</servlet-name>
-  	<servlet-class>be.gestionhopital.Controllers.ServletReservation</servlet-class>
-  	<init-param>
+    <servlet-name>ServletReservation</servlet-name>
+    <servlet-class>be.gestionhopital.Controllers.ServletReservation</servlet-class>
+    <init-param>
+      <param-name>urlAccueil</param-name>
+      <param-value>/Views\\jsp\\Accueil.jsp</param-value>
+    </init-param>
+    <init-param>
+      <param-name>urlReservation</param-name>
+      <param-value>/Views\\jsp\\Reservation.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletInformation</servlet-name>
+    <servlet-class>be.gestionhopital.Controllers.ServletInformation</servlet-class>
+    <init-param>
+      <param-name>urlAccueil</param-name>
+      <param-value>/Views\\jsp\\Accueil.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletNotification</servlet-name>
+    <servlet-class>be.gestionhopital.Controllers.ServletNotification</servlet-class>
+    <init-param>
+      <param-name>urlAccueil</param-name>
+      <param-value>/Views\\jsp\\Accueil.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletPatient</servlet-name>
+    <servlet-class>be.gestionhopital.Controllers.ServletPatient</servlet-class>
+    <init-param>
+      <param-name>urlAccueil</param-name>
+      <param-value>/Views\\jsp\\Accueil.jsp</param-value>
+    </init-param>
+    <init-param>
+      <param-name>urlPatient</param-name>
+      <param-value>/Views\\jsp\\Patient.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>ServletPersonnel</servlet-name>
+    <servlet-class>be.gestionhopital.Controllers.ServletPersonnel</servlet-class>
+    <init-param>
       <param-name>urlAccueil</param-name>
       <param-value>/Views\\jsp\\Accueil.jsp</param-value>
     </init-param>
@@ -57,7 +97,26 @@
     <url-pattern>/ServletAccueil</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>ServletReservation</servlet-name>
-  	<url-pattern>/ServletReservation</url-pattern>
+    <servlet-name>ServletReservation</servlet-name>
+    <url-pattern>/ServletReservation</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletInformation</servlet-name>
+    <url-pattern>/ServletInformation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletNotification</servlet-name>
+    <url-pattern>/ServletNotification</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletPatient</servlet-name>
+    <url-pattern>/ServletPatient</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletPersonnel</servlet-name>
+    <url-pattern>/ServletPersonnel</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
 </web-app>

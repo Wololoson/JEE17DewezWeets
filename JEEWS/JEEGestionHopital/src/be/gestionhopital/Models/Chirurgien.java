@@ -1,7 +1,5 @@
 package be.gestionhopital.Models;
 
-import java.sql.Date;
-
 public class Chirurgien extends Personne{
 	private static final long serialVersionUID = -6713247746739201921L;
 	//Variable d'instance
@@ -12,7 +10,7 @@ public class Chirurgien extends Personne{
 		super();
 	}
 	
-	public Chirurgien(String specialisation,int idPersonne,String nom,String prenom,Date dateNaiss, String numTelephone, String motDePasse) {
+	public Chirurgien(String specialisation,int idPersonne,String nom,String prenom,String dateNaiss, String numTelephone, String motDePasse) {
 		super(idPersonne,nom,prenom,dateNaiss,numTelephone,motDePasse);
 		this.specialisation = specialisation;
 	}
@@ -32,4 +30,24 @@ public class Chirurgien extends Personne{
 		super.modifierInfos(p);
 		this.specialisation = ((Chirurgien)p).specialisation;
 	};
+	
+	public void ajouterReservation(Reservation r) {
+		ListReservation lr = ListReservation.getInstance();
+		lr.ajouterReservation(r, null);
+	}
+	
+	public void modifierReservation(Reservation before, Reservation after) {
+		ListReservation lr = ListReservation.getInstance();
+		lr.modifierReservation(before, after, null);
+	}
+	
+	public void supprimerReservation(Reservation r) {
+		ListReservation lr = ListReservation.getInstance();
+		lr.supprimerReservation(r, null);
+	}
+	
+	public void supprimerNotification(Notification n) {
+		ListNotification ln = ListNotification.getInstance();
+		ln.supprimerNotification(n);
+	}
 }

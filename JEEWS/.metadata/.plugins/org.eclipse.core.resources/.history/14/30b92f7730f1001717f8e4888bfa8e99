@@ -1,0 +1,140 @@
+package be.gestionhopital.Models;
+
+import java.io.Serializable;
+import java.sql.Date;
+
+public abstract class Personne implements Serializable {
+	private static final long serialVersionUID = 273448865750728985L;
+	//Variables d'instance
+	private int idPersonne;
+	private String nom;
+	private String prenom;
+	private String dateNaiss;
+	private String numTelephone;
+	private String motDePasse;
+	
+	//Constructeurs
+	public Personne() {
+		
+	}
+	
+	public Personne(int idPersonne, String nom, String prenom, Date dateNaiss, String numTelephone, String motDePasse) {
+		this.idPersonne = idPersonne;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaiss = dateNaiss;
+		this.numTelephone = numTelephone;
+		this.motDePasse = motDePasse;
+	}
+
+	//Propriétés
+	public int getIdPersonne() {
+		return idPersonne;
+	}
+
+	public void setIdPersonne(int idPersonne) {
+		this.idPersonne = idPersonne;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public Date getDateNaiss() {
+		return dateNaiss;
+	}
+
+	public void setDateNaiss(Date dateNaiss) {
+		this.dateNaiss = dateNaiss;
+	}
+
+	public String getNumTelephone() {
+		return numTelephone;
+	}
+
+	public void setNumTelephone(String numTelephone) {
+		this.numTelephone = numTelephone;
+	}
+
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+	
+	//Méthodes
+	public void modifierInfos(Personne p) {
+		this.idPersonne = p.idPersonne;
+		this.nom = p.nom;
+		this.prenom = p.prenom;
+		this.dateNaiss = p.dateNaiss;
+		this.numTelephone = p.numTelephone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateNaiss == null) ? 0 : dateNaiss.hashCode());
+		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((numTelephone == null) ? 0 : numTelephone.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personne other = (Personne) obj;
+		if (dateNaiss == null) {
+			if (other.dateNaiss != null)
+				return false;
+		} else if (!dateNaiss.equals(other.dateNaiss))
+			return false;
+		if (motDePasse == null) {
+			if (other.motDePasse != null)
+				return false;
+		} else if (!motDePasse.equals(other.motDePasse))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (numTelephone == null) {
+			if (other.numTelephone != null)
+				return false;
+		} else if (!numTelephone.equals(other.numTelephone))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		return true;
+	}
+
+	
+	
+	
+}

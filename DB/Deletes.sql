@@ -4,7 +4,7 @@ procedure deleteChirurgien(idChir Chirurgien.IdPersonne%type);
 procedure deleteSecretaire(idSecr Secretaire.IdPersonne%type);
 procedure deletePatient(idPati Patient.IdPersonne%type);
 procedure deleteNotification(idNoti Notifications.IdNotification%type);
-procedure deleteReservation(idPers Reservation.IdPersonne%type,idSall Reservation.IdSalle%type,numPati Reservation.NumeroPatient%type,dateHeur Reservation.DateHeure%type);
+procedure deleteReservation(idPers Reservation.IdPersonne%type,idSall Reservation.IdSalle%type,numPati Reservation.NumeroPatient%type);
 procedure deleteSalle(idSall Salle.IdSalle%type);
 end Deletes;
 

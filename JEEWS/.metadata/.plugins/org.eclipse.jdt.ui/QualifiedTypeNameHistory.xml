@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.schemagen.xmlschema.List"/>
-<fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
-<fullyQualifiedTypeName name="org.glassfish.jersey.client.ClientConfig"/>
-<fullyQualifiedTypeName name="com.sun.jersey.api.client.config.DefaultClientConfig"/>
 <fullyQualifiedTypeName name="com.sun.jersey.api.client.config.ClientConfig"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Factory.DAOFactory"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Connexion.DriverACCESS"/>
@@ -17,7 +13,6 @@
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="javax.ws.rs.core.UriBuilder"/>
 <fullyQualifiedTypeName name="com.sun.jersey.api.client.WebResource"/>
-<fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
 <fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilder"/>
 <fullyQualifiedTypeName name="jdk.internal.org.xml.sax.InputSource"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Document"/>
@@ -28,17 +23,13 @@
 <fullyQualifiedTypeName name="com.sun.jersey.core.util.MultivaluedMapImpl"/>
 <fullyQualifiedTypeName name="com.sun.jersey.api.client.ClientResponse"/>
 <fullyQualifiedTypeName name="java.lang.Character"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOSecretaire"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOPatient"/>
-<fullyQualifiedTypeName name="be.gestionhopital.DAO.DAONotification"/>
 <fullyQualifiedTypeName name="oracle.jdbc.driver.OracleTypes"/>
 <fullyQualifiedTypeName name="oracle.jdbc.internal.OracleTypes"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAODirecteur"/>
 <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="be.gestionhopital.Models.ListPersonnel"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Secretaire"/>
@@ -49,15 +40,24 @@
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAO"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOReservation"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Personne"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Chirurgien"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOChirurgien"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Patient"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
-<fullyQualifiedTypeName name="be.gestionhopital.Models.ListPatient"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Salle"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Factory.AbstractDAOFactory"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Reservation"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
+<fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOSalle"/>
+<fullyQualifiedTypeName name="be.gestionhopital.Models.Notification"/>
+<fullyQualifiedTypeName name="be.gestionhopital.DAO.DAONotification"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.ListReservation"/>
+<fullyQualifiedTypeName name="be.gestionhopital.Models.ListNotification"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="be.gestionhopital.Models.ListPatient"/>
+<fullyQualifiedTypeName name="be.gestionhopital.Models.ListPersonnel"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="be.gestionhopital.Models.Personne" %>
+<%@ page import="be.gestionhopital.Models.Notification" %>
+<%@ page import="java.util.ArrayList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Notifications</title>
+	</head>
+	<body>
+	<h1>Gestion des notifications</h1>
+	<%
+		HttpSession sess = request.getSession();
+		String type = (String) sess.getAttribute("type");
+		Personne p = (Personne) sess.getAttribute(type);
+		ArrayList<Notification> ln = (ArrayList<Notification>) request.getAttribute("ln");
+	%>
+	
+	<form action="ServletNotification" method="post">
+		<table border="1" cellspacing="0" cellpadding="5">
+			<tr>
+				<th>
+					Priorité
+				</th>
+				<th>
+					Type de notification
+				</th>
+				<th>
+					Commentaire
+				</th>
+			</tr>
+			<%
+				for(Notification n : ln){%>
+				<tr>
+					<td>
+						<%=n.getPriorite() %>
+					</td>
+					<td>
+						<%=r.getChirurgien().getPrenom() %>
+					</td>
+					<td>
+						<%=r.getChirurgien().getSpecialisation() %>
+					</td>
+				</tr>
+				<% } %>
+			</table>
+	</body>
+</html>

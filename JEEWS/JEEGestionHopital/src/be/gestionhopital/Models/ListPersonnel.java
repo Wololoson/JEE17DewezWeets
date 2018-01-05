@@ -60,32 +60,56 @@ public class ListPersonnel implements Serializable {
 	}
 
 	public void ajouterPersonnel(Personne p) {
+		boolean found = false;		
+		
 		if(p instanceof Secretaire) {
-			listSecretaire.add((Secretaire)p);
-			secrDAO.create((Secretaire)p);
+			for(Personne pe : listSecretaire) {
+				if(p.equals(pe)) {
+					found = true;
+				}
+			}
+			
+			if(!found) {
+				listSecretaire.add((Secretaire)p);
+				secrDAO.create((Secretaire)p);
+			}
 		}
 		else {
-			listChirurgien.add((Chirurgien)p);
-			chirDAO.create((Chirurgien)p);
+			for(Personne pe : listChirurgien) {
+				if(p.equals(pe)) {
+					found = true;
+				}
+			}
+			
+			if(!found) {
+				listChirurgien.add((Chirurgien)p);
+				chirDAO.create((Chirurgien)p);
+			}
 		}
 	}
 	
 	public void supprimerPersonnel(Personne p) {
+		Secretaire foundSecr = null;
+		Chirurgien foundChir = null;
 		if(p instanceof Secretaire) {
 			for(Secretaire s : listSecretaire) {
 				if(p.equals(s)) {
-					secrDAO.delete(s);
-					listSecretaire.remove(s);
+					foundSecr = s;
 				}
 			}
+			
+			secrDAO.delete(foundSecr);
+			listSecretaire.remove(foundSecr);
 		}
 		else {
 			for(Chirurgien c : listChirurgien) {
 				if(p.equals(c)) {
-					chirDAO.delete(c);
-					listChirurgien.remove(c);
+					foundChir = c;
 				}
 			}
+			
+			chirDAO.delete(foundChir);
+			listChirurgien.remove(foundChir);
 		}
 	}
 	

@@ -40,7 +40,7 @@ public class DirecteurCRUD {
 					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 					retour += "<nom>"+results.getString("Nom")+"</nom>";
 					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<dateNaissance>"+results.getString("DateNaissance")+"</dateNaissance>";
 					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
 					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
 					retour += "<code>"+results.getString("Code")+"</code>";

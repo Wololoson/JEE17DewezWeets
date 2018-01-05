@@ -1,8 +1,8 @@
 package be.gestionhopital.CRUD;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -46,7 +46,7 @@ public class SecretaireCRUD {
 					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 					retour += "<nom>"+results.getString("Nom")+"</nom>";
 					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<dateNaissance>"+results.getString("DateNaissance")+"</dateNaissance>";
 					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
 					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
 					retour += "<service>"+results.getString("Service_Secr")+"</service>";
@@ -90,7 +90,7 @@ public class SecretaireCRUD {
 				retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 				retour += "<nom>"+results.getString("Nom")+"</nom>";
 				retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-				retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+				retour += "<dateNaissance>"+results.getString("DateNaissance")+"</dateNaissance>";
 				retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
 				retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
 				retour += "<service>"+results.getString("ServiceSecr")+"</service>";
@@ -113,19 +113,27 @@ public class SecretaireCRUD {
 	}
 	
 	@POST
-	public Response insertSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response insertSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
 		CallableStatement insertSecr = null;
+		BigDecimal tmp;
+		String id = null;
 		
 		try {
-			insertSecr = conn.prepareCall("{call Inserts.insertSecretaire(?,?,?,?,?,?)}");
-			insertSecr.setString(1, nom);
-			insertSecr.setString(2, prenom);
-			insertSecr.setDate(3, dateNaiss);
-			insertSecr.setString(4, numTel);
-			insertSecr.setString(5, mdp);
-			insertSecr.setString(6, service);
+			insertSecr = conn.prepareCall("{? = call Inserts.insertSecretaire(?,?,?,?,?,?)}");
+			insertSecr.registerOutParameter(1, OracleTypes.NUMBER);
+			insertSecr.setString(2, nom);
+			insertSecr.setString(3, prenom);
+			insertSecr.setString(4, dateNaiss);
+			insertSecr.setString(5, numTel);
+			insertSecr.setString(6, mdp);
+			insertSecr.setString(7, service);
 			insertSecr.executeUpdate();
-			return Response.status(200).entity(insertSecr.getGeneratedKeys().toString()).build();
+
+			tmp = (BigDecimal)insertSecr.getObject(1);
+			id = tmp.toString();
+			
+			return Response.status(200).entity(id).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -138,17 +146,18 @@ public class SecretaireCRUD {
 	}
 	
 	@PUT
-	public void updateSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") Date dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
+	public void updateSecretaire(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
 		CallableStatement updateSecr = null;
 		
 		try {
-			updateSecr = conn.prepareCall("{call Updates.updateSecretaire(?,?,?,?,?,?)}");
-			updateSecr.setString(1, nom);
-			updateSecr.setString(2, prenom);
-			updateSecr.setDate(3, dateNaiss);
-			updateSecr.setString(4, numTel);
-			updateSecr.setString(5, mdp);
-			updateSecr.setString(6, service);
+			updateSecr = conn.prepareCall("{call Updates.updateSecretaire(?,?,?,?,?,?,?)}");
+			updateSecr.setInt(1, id);
+			updateSecr.setString(2, nom);
+			updateSecr.setString(3, prenom);
+			updateSecr.setString(4, dateNaiss);
+			updateSecr.setString(5, numTel);
+			updateSecr.setString(6, mdp);
+			updateSecr.setString(7, service);
 			updateSecr.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -161,7 +170,8 @@ public class SecretaireCRUD {
 	}
 	
 	@DELETE
-	public void deleteSecretaire(@FormParam("id") int id) throws SQLException {
+	@Path("{id}")
+	public void deleteSecretaire(@PathParam("id") int id) throws SQLException {
 		CallableStatement deleteSecr = null;
 		
 		try {

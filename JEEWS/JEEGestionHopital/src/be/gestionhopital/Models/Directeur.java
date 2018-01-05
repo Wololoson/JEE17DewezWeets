@@ -1,7 +1,5 @@
 package be.gestionhopital.Models;
 
-import java.sql.Date;
-
 public class Directeur extends Personne {
 	private static final long serialVersionUID = 1457950990267848045L;
 	// Variable d'instance
@@ -12,7 +10,7 @@ public class Directeur extends Personne {
 		super();
 	}
 	
-	public Directeur(String code,int idPersonne,String nom,String prenom,Date dateNaiss, String numTelephone, String motDePasse) {
+	public Directeur(String code,int idPersonne,String nom,String prenom,String dateNaiss, String numTelephone, String motDePasse) {
 		super(idPersonne,nom,prenom,dateNaiss,numTelephone,motDePasse);
 		this.code = code;
 	}
@@ -28,8 +26,15 @@ public class Directeur extends Personne {
 
 	// Méthodes
 	@Override
-	public void modifierInfos(Personne p) {
-		super.modifierInfos(p);
-		this.code = ((Directeur)p).code;
-	};
+	public void modifierInfos(Personne p) {};
+	
+	public void ajouterPersonnel(Personne p) {
+		ListPersonnel lp = ListPersonnel.getInstance();
+		lp.ajouterPersonnel(p);
+	}
+	
+	public void supprimerPersonnel(Personne p) {
+		ListPersonnel lp = ListPersonnel.getInstance();
+		lp.supprimerPersonnel(p);
+	}
 }

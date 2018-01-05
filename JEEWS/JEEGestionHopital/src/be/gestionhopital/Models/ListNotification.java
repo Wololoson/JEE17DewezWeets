@@ -28,17 +28,29 @@ public class ListNotification implements Serializable {
 	}
 	
 	public void ajouterNotification(Notification n) {
-		listNotification.add(n);
-		notifDAO.create(n);
+		boolean found = false;
+		for(Notification no : listNotification) {
+			if(n.equals(no)) {
+				found = true;
+			}
+		}
+		
+		if(!found) {
+			listNotification.add(n);
+			notifDAO.create(n);
+		}
 	}
 	
 	public void supprimerNotification(Notification n) {
+		Notification foundNoti = null;
 		for(Notification no : listNotification) {
 			if(n.equals(no)) {
-				notifDAO.delete(no);
-				listNotification.remove(no);
+				foundNoti = no;
 			}
 		}
+		
+		notifDAO.delete(foundNoti);
+		listNotification.remove(foundNoti);
 	}
 	
 	public static synchronized ListNotification getInstance() {

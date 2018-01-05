@@ -41,6 +41,9 @@ public class DAONotification extends DAO<Notification> {
 		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
 		
 		ClientResponse response = connect.path("notification").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		
+		obj.setIdNotification(Integer.parseInt(response.getEntity(String.class)));
+		
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -51,10 +54,9 @@ public class DAONotification extends DAO<Notification> {
 
 	@Override
 	public boolean delete(Notification obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("id", Integer.toString(obj.getIdNotification()));
+		String id =  Integer.toString(obj.getIdNotification());
 		
-		ClientResponse response = connect.path("notification").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("notification/"+id).type("application/x-www-form-urlencoded").delete(ClientResponse.class);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -66,12 +68,13 @@ public class DAONotification extends DAO<Notification> {
 	@Override
 	public boolean update(Notification obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdNotification()));
 		queryParams.add("priorite", Integer.toString(obj.getPriorite()));
 		queryParams.add("type", Integer.toString(obj.getType()));
 		queryParams.add("commentaire", obj.getCommentaire());
 		queryParams.add("idChirurgien", Integer.toString(obj.getChirurgien().getIdPersonne()));
 		
-		ClientResponse response = connect.path("notification").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("notification").type("application/x-www-form-urlencoded").put(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -134,9 +137,10 @@ public class DAONotification extends DAO<Notification> {
 				line = (Element) chirNode.item(0);
 				idPers = getCharacterDataFromElement(line);
 				chir = DAOChirurgien.find(Integer.parseInt(idPers));
+				
+				if(priorite != 0 && id != 0 && type != 0 && commentaire != null && chir != null)
+					listNoti.add(new Notification(id, priorite, type, commentaire, chir));
 			}
-			
-			listNoti.add(new Notification(id, priorite, type, commentaire, chir));
 		}
 		
 		return listNoti;

@@ -2,7 +2,6 @@ package be.gestionhopital.DAO;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +35,15 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		queryParams.add("nom", obj.getNom());
 		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
 		queryParams.add("spec", obj.getSpecialisation());
 		
 		ClientResponse response = connect.path("chirurgien").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		
+		obj.setIdPersonne(Integer.parseInt(response.getEntity(String.class)));
+		
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -52,10 +54,9 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 
 	@Override
 	public boolean delete(Chirurgien obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
+		String id =  Integer.toString(obj.getIdPersonne());
 		
-		ClientResponse response = connect.path("chirurgien").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("chirurgien/"+id).type("application/x-www-form-urlencoded").delete(ClientResponse.class);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -67,9 +68,10 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 	@Override
 	public boolean update(Chirurgien obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
 		queryParams.add("nom", obj.getNom());
 		queryParams.add("prenom", obj.getPrenom());
-		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
 		queryParams.add("spec", obj.getSpecialisation());
@@ -85,9 +87,8 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 
 	@Override
 	public Chirurgien find(int id) throws SAXException, IOException {
-		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null, dateNaiss = null;
 		int idPers = 0;
-		Date dateNaiss = null;
 		String responseText = connect.path("chirurgien/"+id).accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -127,7 +128,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 				
 				NodeList dateNaissNode = chirurgien.getElementsByTagName("dateNaissance");
 				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				dateNaiss = getCharacterDataFromElement(line);
 				
 				NodeList specialisationNode = chirurgien.getElementsByTagName("specialisation");
 				line = (Element) specialisationNode.item(0);
@@ -139,9 +140,8 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 	
 	public List<Chirurgien> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Chirurgien> listChir = new ArrayList<>();
-		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null, dateNaiss = null;
 		int id = 0;
-		Date dateNaiss = null;
 		String responseText = connect.path("chirurgien").accept(MediaType.TEXT_XML).get(String.class);
 		
 		DocumentBuilder db = null;
@@ -178,7 +178,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 				
 				NodeList dateNaissNode = chirurgien.getElementsByTagName("dateNaissance");
 				line = (Element) dateNaissNode.item(0);
-				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				dateNaiss = getCharacterDataFromElement(line);
 				
 				NodeList numTelNode = chirurgien.getElementsByTagName("numTelephone");
 				line = (Element) numTelNode.item(0);
@@ -192,7 +192,8 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 				line = (Element) specialisationNode.item(0);
 				specialisation = getCharacterDataFromElement(line);
 				
-				listChir.add(new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp));
+				if(specialisation != null && id != 0 && nom != null && prenom != null && dateNaiss != null && numTel != null && mdp != null)
+					listChir.add(new Chirurgien(specialisation, id, nom, prenom, dateNaiss, numTel, mdp));
 			}
 		}
 		

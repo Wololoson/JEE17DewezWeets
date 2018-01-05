@@ -1,5 +1,6 @@
 package be.gestionhopital.CRUD;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class SalleCRUD {
 			if(results.next()) {
 				retour += "<salle>";
 				retour += "<id>"+results.getInt("IdSalle")+"</id>";
-				retour += "<numero>"+results.getString("Numero")+"</numero>";
+				retour += "<numSalle>"+results.getString("Numero")+"</numSalle>";
 				retour += "<blocSalle>"+results.getString("Bloc_Salle")+"</blocSalle>";
 				retour += "</salle>";
 			}
@@ -64,15 +65,23 @@ public class SalleCRUD {
 	}
 	
 	@POST
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertSalle(@FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
 		CallableStatement insertSalle = null;
+		BigDecimal tmp;
+		String id = null;
 		
 		try {
-			insertSalle = conn.prepareCall("{call Inserts.insertSalle(?,?)}");
-			insertSalle.setString(1, num);
-			insertSalle.setString(2, bloc);
+			insertSalle = conn.prepareCall("{? = call Inserts.insertSalle(?,?)}");
+			insertSalle.registerOutParameter(1, OracleTypes.NUMBER);
+			insertSalle.setString(2, num);
+			insertSalle.setString(3, bloc);
 			insertSalle.executeUpdate();
-			return Response.status(200).entity(insertSalle.getGeneratedKeys().toString()).build();
+
+			tmp = (BigDecimal)insertSalle.getObject(1);
+			id = tmp.toString();
+			
+			return Response.status(200).entity(id).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -85,13 +94,14 @@ public class SalleCRUD {
 	}
 	
 	@PUT
-	public void updateSalle(@FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
+	public void updateSalle(@FormParam("id") int id, @FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
 		CallableStatement updateSalle = null;
 		
 		try {
-			updateSalle = conn.prepareCall("{call Updates.updateSalle(?,?)}");
-			updateSalle.setString(1, num);
-			updateSalle.setString(2, bloc);
+			updateSalle = conn.prepareCall("{call Updates.updateSalle(?,?,?)}");
+			updateSalle.setInt(1, id);
+			updateSalle.setString(2, num);
+			updateSalle.setString(3, bloc);
 			updateSalle.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -104,7 +114,8 @@ public class SalleCRUD {
 	}
 	
 	@DELETE
-	public void deleteSalle(@FormParam("id") int id) throws SQLException {
+	@Path("{id}")
+	public void deleteSalle(@PathParam("id") int id) throws SQLException {
 		CallableStatement deleteSalle = null;
 		
 		try {

@@ -1,11 +1,4 @@
-- Modifer DB : Reservation => dateHeure devient dateRes et un varchar heureRes
-- Ajouter le found (comme dans ListPatient) dans les autres listes
-- Regarder aux DAO pour les ID : Exemple pour le patient
-- Terminer l'ajout d'une réservation
-- Faire la modification d'une réservation
-- Faire la suppression d'une réservation
-
-- Page d'infos
-- Page de notifications
-- Pages des patients
-- Page du personnel
+- Servlet d'infos
+- Servlet de notifications
+- Servlet des patients
+- Servlet du personnel

@@ -1,0 +1,157 @@
+package be.gestionhopital.DAO;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.sql.Date;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
+import be.gestionhopital.Models.Directeur;
+
+public class DAODirecteur extends DAO<Directeur> {
+	public DAODirecteur(WebResource conn) {
+		super(conn);
+	}
+
+	@Override
+	public boolean create(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("code", obj.getCode());
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		
+		obj.setIdPersonne(response.getEntity(Integer.class));
+		
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean delete(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdPersonne()));
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(Directeur obj) {
+		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("nom", obj.getNom());
+		queryParams.add("prenom", obj.getPrenom());
+		queryParams.add("dateNaiss", obj.getDateNaiss().toString());
+		queryParams.add("numTel", obj.getNumTelephone());
+		queryParams.add("mdp", obj.getMotDePasse());
+		queryParams.add("code", obj.getCode());
+		
+		ClientResponse response = connect.path("directeur").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public Directeur find(int id) throws SAXException, IOException {
+		Directeur dire = null;
+		String nom = null, prenom = null, numTel = null, mdp = null, code = null;
+		int idPers = 0;
+		Date dateNaiss = null;
+		String responseText = connect.path("directeur").accept(MediaType.TEXT_XML).get(String.class);
+		
+		DocumentBuilder db = null;
+		try {
+			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(responseText));
+
+		Document doc = db.parse(is);
+		NodeList listDirecteurNodes = doc.getElementsByTagName("listeDirecteurs");
+		
+		for(int i = 0; i < listDirecteurNodes.getLength(); i++) {
+			Element chir = (Element) listDirecteurNodes.item(i);
+			
+			NodeList directeurNodes = chir.getElementsByTagName("directeur");
+			
+			for(int j = 0; j < directeurNodes.getLength(); j++) {
+				Element directeur = (Element) directeurNodes.item(j);
+				
+				NodeList idNode = directeur.getElementsByTagName("id");
+				Element line = (Element) idNode.item(0);
+				idPers = Integer.parseInt(getCharacterDataFromElement(line));
+				
+				NodeList nomNode = directeur.getElementsByTagName("nom");
+				line = (Element) nomNode.item(0);
+				nom = getCharacterDataFromElement(line);
+				
+				NodeList prenomNode = directeur.getElementsByTagName("prenom");
+				line = (Element) prenomNode.item(0);
+				prenom = getCharacterDataFromElement(line);
+				
+				NodeList dateNaissNode = directeur.getElementsByTagName("dateNaissance");
+				line = (Element) dateNaissNode.item(0);
+				dateNaiss = Date.valueOf(getCharacterDataFromElement(line));
+				
+				NodeList numTelNode = directeur.getElementsByTagName("numTelephone");
+				line = (Element) numTelNode.item(0);
+				numTel = getCharacterDataFromElement(line);
+				
+				NodeList mdpNode = directeur.getElementsByTagName("motDePasse");
+				line = (Element) mdpNode.item(0);
+				mdp = getCharacterDataFromElement(line);
+				
+				NodeList codeNode = directeur.getElementsByTagName("code");
+				line = (Element) codeNode.item(0);
+				code = getCharacterDataFromElement(line);
+			}
+			
+			dire = new Directeur(code, idPers, nom, prenom, dateNaiss, numTel, mdp);
+		}
+		
+		return dire;
+	}
+	
+	public static String getCharacterDataFromElement(Element e) {
+	    Node child = e.getFirstChild();
+	    if (child instanceof CharacterData) {
+	      CharacterData cd = (CharacterData) child;
+	      return cd.getData();
+	    }
+	    return "";
+	  }
+}

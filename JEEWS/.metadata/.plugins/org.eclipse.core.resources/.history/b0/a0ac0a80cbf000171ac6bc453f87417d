@@ -1,0 +1,179 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="be.gestionhopital.Models.Personne" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Informations</title>
+	</head>
+	<body>
+	<h1>Gestion des informations</h1>
+	<%
+			HttpSession sess = request.getSession();
+			String type = (String) sess.getAttribute("type");
+			Personne p = (Personne) sess.getAttribute(type);
+	%>
+	
+	<form action="ServletInformation" method="post">
+		<table cellspacing="0" cellpadding="5">
+			<tr>
+				<th colspan="2">
+					Chirurgien
+				</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+							<% if(type.equals("secretaire")){ %>
+								<select id="listChir" name="listChir">
+									<% 
+									for(Chirurgien c : lp.getListChirurgien()){%>
+										<option value="<%=c.getIdPersonne()%>"><%=c.getNom()%> <%=c.getPrenom()%></option>
+									<%
+									}
+									%>
+								</select>
+							<%}
+							else{%>
+								<%=p.getNom() %> <%=p.getPrenom() %>
+							<% }%>
+							</td>
+						</tr>
+					<tr>
+						<th colspan="2">
+							Patient
+						</th>
+					</tr>
+					<tr>
+						<td>
+							Numéro :
+						</td>
+						<td>
+							<input type="text" name="numPati" id="numPati" value="" size="20" required="required" maxlength="5" placeholder="12345" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Nom :
+						</td>
+						<td>
+							<input type="text" name="nomPati" id="nomPati" value="" size="20" required="required" maxlength="50" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Prénom :
+						</td>
+						<td>
+							<input type="text" name="prenomPati" id="prenomPati" value="" size="20" required="required" maxlength="50" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Date de naissance :
+						</td>
+						<td>
+							<input type="text" name="dateNaissPatiJ" id="dateNaissPatiJ" value="" size="3" required="required" maxlength="2" placeholder="01" />
+							<input type="text" name="dateNaissPatiM" id="dateNaissPatiM" value="" size="3" required="required" maxlength="2" placeholder="01" />
+							<input type="text" name="dateNaissPatiA" id="dateNaissPatiA" value="" size="3" required="required" maxlength="4" placeholder="2000" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Numéro de téléphone :
+						</td>
+						<td>
+							<input type="text" name="numTelPati" id="numTelPati" value="" size="20" required="required" maxlength="20" placeholder="0123/45.67.89" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Numéro de chambre :
+						</td>
+						<td>
+							<input type="text" name="numChPati" id="numChPati" value="" size="20" required="required" maxlength="3" placeholder="001" />
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">
+							Salle
+						</th>
+					</tr>
+					<tr>
+						<td>
+							Numéro :
+						</td>
+						<td>
+							<input type="text" name="numSalle" id="numSalle" value="" size="20" required="required" maxlength="2" placeholder="01" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Bloc :
+						</td>
+						<td>
+							<input type="text" name="blocSalle" id="blocSalle" value="" size="20" required="required" maxlength="1" placeholder="A" />
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">
+							Date et heure
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="heureResH" id="heureResH" value="" size="3" required="required" maxlength="2" placeholder="01" />
+							:
+							<input type="text" name="heureResM" id="heureResM" value="" size="3" required="required" maxlength="2" placeholder="00" />
+						</td>
+						<td>
+							<input type="text" name="dateResJ" id="dateResJ" value="" size="3" required="required" maxlength="2" placeholder="01" />
+							/
+							<input type="text" name="dateResM" id="dateResM" value="" size="3" required="required" maxlength="2" placeholder="01" />
+							/
+							<input type="text" name="dateResA" id="dateResA" value="" size="3" required="required" maxlength="4" placeholder="2000" />
+						</td>
+					</tr>
+					<% if(type.equals("secretaire")){ %>
+						<tr>
+							<th colspan="2">
+								Notification
+							</th>
+						</tr>
+						<tr>
+							<td>
+								Priorité
+							</td>
+							<td>
+								<select  id="listPrio" name="listPrio">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Commentaire
+							</td>
+							<td>
+								<textarea id="comm" name="commentaire" cols="20" rows="15" maxlength="300"></textarea>
+							</td>
+						</tr>
+					<%}%>
+					<tr>
+						<td colspan="2">
+							<input type="submit" name="ajout" id="ajout" value="Valider"/>
+						</td>
+					</tr>
+				</table>
+			</form>
+	</body>
+</html>

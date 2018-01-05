@@ -1,7 +1,5 @@
 package be.gestionhopital.Models;
 
-import java.sql.Date;
-
 public class Patient extends Personne {
 	private static final long serialVersionUID = -6666981989406454568L;
 	// Variables d'instance
@@ -13,7 +11,7 @@ public class Patient extends Personne {
 		super();
 	}
 	
-	public Patient(String numChambre,String numPatient,int idPersonne,String nom,String prenom,Date dateNaiss, String numTelephone, String motDePasse) {
+	public Patient(String numChambre,String numPatient,int idPersonne,String nom,String prenom,String dateNaiss, String numTelephone, String motDePasse) {
 		super(idPersonne,nom,prenom,dateNaiss,numTelephone,motDePasse);
 		this.numChambre = numChambre;
 		this.numPatient = numPatient;

@@ -1,8 +1,4 @@
 drop table Personne;
-drop table Secretaire;
-drop table Patient;
-drop table Directeur;
-drop table Chirurgien;
 drop table Notifications;
 drop table Salle;
 drop table Reservation;
@@ -11,7 +7,7 @@ create table Personne (
                        IdPersonne       number not null,
                        Nom              varchar2(50),
                        Prenom           varchar2(50),
-                       DateNaissance    date,
+                       DateNaissance    varchar2(10),
                        NumeroTelephone  varchar2(20),
                        MotDePasse       varchar2(30),
                        constraint PK_Personne primary key (IdPersonne)
@@ -72,7 +68,8 @@ create table Reservation (
                         IdPersonne      number not null,
                         IdSalle         number not null,
                         NumeroPatient   varchar2(5) not null,
-                        DateHeure       date,
+                        DateRes         date,
+			HeureRes        varchar2(4),
                         constraint PK_Reservation primary key (IdPersonne,IdSalle,NumeroPatient),
                         constraint FK_Reservation_Chirurgien foreign key (IdPersonne)
                         references Chirurgien (IdPersonne),

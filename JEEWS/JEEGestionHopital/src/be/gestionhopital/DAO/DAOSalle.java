@@ -30,10 +30,13 @@ public class DAOSalle extends DAO<Salle> {
 	@Override
 	public boolean create(Salle obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("numSalle", obj.getNumSalle());
+		queryParams.add("num", obj.getNumSalle());
 		queryParams.add("bloc", String.valueOf(obj.getBloc()));
 		
 		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		
+		obj.setIdSalle(Integer.parseInt(response.getEntity(String.class)));
+		
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -44,10 +47,9 @@ public class DAOSalle extends DAO<Salle> {
 
 	@Override
 	public boolean delete(Salle obj) {
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add("id", Integer.toString(obj.getIdSalle()));
+		String id =  Integer.toString(obj.getIdSalle());
 		
-		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").delete(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("salle/"+id).type("application/x-www-form-urlencoded").delete(ClientResponse.class);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -59,10 +61,11 @@ public class DAOSalle extends DAO<Salle> {
 	@Override
 	public boolean update(Salle obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("id", Integer.toString(obj.getIdSalle()));
 		queryParams.add("numSalle", obj.getNumSalle());
 		queryParams.add("bloc", String.valueOf(obj.getBloc()));
 		
-		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
+		ClientResponse response = connect.path("salle").type("application/x-www-form-urlencoded").put(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
 			return true;
 		}
@@ -101,9 +104,12 @@ public class DAOSalle extends DAO<Salle> {
 				line = (Element) numSalleNode.item(0);
 				numSalle = getCharacterDataFromElement(line);
 				
-				NodeList blocNode = salle.getElementsByTagName("bloc");
+				NodeList blocNode = salle.getElementsByTagName("blocSalle");
 				line = (Element) blocNode.item(0);
-				bloc = (char) getCharacterDataFromElement(line).charAt(0);
+				if(getCharacterDataFromElement(line) != "")
+					bloc = (char) getCharacterDataFromElement(line).charAt(0);
+				else
+					bloc = '\0';
 		}
 		
 		return new Salle(idSalle, numSalle, bloc);

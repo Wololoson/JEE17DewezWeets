@@ -3,7 +3,7 @@ is
 procedure updateChirurgien(nom Personne.nom%type,prenom Personne.prenom%type,dateNaissance Personne.DateNaissance%type,numTelephone Personne.NumeroTelephone%type,motDePasse Personne.MotDePasse%type,specialisation Chirurgien.Specialisation%type);
 procedure updateSecretaire(nom Personne.nom%type,prenom Personne.prenom%type,dateNaissance Personne.DateNaissance%type,numTelephone Personne.NumeroTelephone%type,motDePasse Personne.MotDePasse%type,service_secr Secretaire.Service_secr%type);
 procedure updatePatient(nom Personne.nom%type,prenom Personne.prenom%type,dateNaissance Personne.DateNaissance%type,numTelephone Personne.NumeroTelephone%type,motDePasse Personne.MotDePasse%type,numeroChambre Patient.NumeroChambre%type,numeroPatient Patient.NumeroPatient%type);
-procedure updateReservation(idPersonne Reservation.IdPersonne%type,idSalle Reservation.IdSalle%type,numeroPatient Reservation.NumeroPatient%type,dateHeure Reservation.DateHeure%type);
+procedure updateReservation(idPersonne Reservation.IdPersonne%type,idSalle Reservation.IdSalle%type,numeroPatient Reservation.NumeroPatient%type,dateRes Reservation.DateRes%type,heureRes Reservation.HeureRes%type);
 procedure updateSalle(numero Salle.numero%type,bloc_salle Salle.bloc_salle%type);
 
 id_pers number;
@@ -29,9 +29,9 @@ is begin
     update Patient set IdPersonne = id_pers, numeroChambre = numeroChambre,numeroPatient = numeroPatient;
 end updatePatient;
 
-procedure updateReservation(idPersonne Reservation.IdPersonne%type,idSalle Reservation.IdSalle%type,numeroPatient Reservation.NumeroPatient%type,dateHeure Reservation.DateHeure%type)
+procedure updateReservation(idPersonne Reservation.IdPersonne%type,idSalle Reservation.IdSalle%type,numeroPatient Reservation.NumeroPatient%type,dateRes Reservation.DateRes%type,heureRes Reservation.HeureRes%type)
 is begin
-    update Reservation set idPersonne = idPersonne,idSalle = idSalle,numeroPatient = numeroPatient,dateHeure = dateHeure;
+    update Reservation set idPersonne = idPersonne,idSalle = idSalle,numeroPatient = numeroPatient,dateRes = dateRes,heureRes = heureRes;
 end updateReservation;
 
 procedure updateSalle(numero Salle.numero%type,bloc_salle Salle.bloc_salle%type)

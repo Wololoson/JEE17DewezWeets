@@ -2,20 +2,17 @@ package be.gestionhopital.Controllers;
 
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import be.gestionhopital.DAO.DAOReservation;
-import be.gestionhopital.Factory.AbstractDAOFactory;
-import be.gestionhopital.Models.Reservation;
+import be.gestionhopital.Models.ListNotification;
+import be.gestionhopital.Models.ListPatient;
+import be.gestionhopital.Models.ListPersonnel;
+import be.gestionhopital.Models.ListReservation;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -42,41 +39,66 @@ public class ServletAccueil extends HttpServlet {
 
 		while(paramNames.hasMoreElements()) {
 			String paramName = (String)paramNames.nextElement();
-			AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-			DAOReservation reservationDAO = (DAOReservation) adf.getReservationDAO();
 			
 		    if(paramName.equals("chirRes")) {
-		    	try {
-					List<Reservation> lr = (List<Reservation>) reservationDAO.findAll();
-					request.setAttribute("lr", lr);
-		    	} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				}
-		    	
+		    	ListReservation lr = ListReservation.getInstance();
+				request.setAttribute("lr", lr);
+				request.setAttribute("isModif", false);
+				request.setAttribute("i",-1);
 		    	getServletContext().getRequestDispatcher(urlReservation).forward(request, response);
 		    }
-		    if(paramName.equals("chirNoti"))
+		    
+		    if(paramName.equals("chirNoti")) {
+				ListNotification ln = ListNotification.getInstance();
+				request.setAttribute("ln", ln);
 		    	getServletContext().getRequestDispatcher(urlNotification).forward(request, response);
-		    if(paramName.equals("chirInfo")) 
-		    	getServletContext().getRequestDispatcher(urlInformation).forward(request, response);
+		    }
 		    
-		    if(paramName.equals("secrRes"))
-		    	getServletContext().getRequestDispatcher(urlReservation).forward(request, response);
-		    if(paramName.equals("secrPati")) 
-		    	getServletContext().getRequestDispatcher(urlPatient).forward(request, response);
-		    if(paramName.equals("secrInfo"))
+		    if(paramName.equals("chirInfo")) {
 		    	getServletContext().getRequestDispatcher(urlInformation).forward(request, response);
+		    }
 		    
-		    if(paramName.equals("direRes")) 
+		    if(paramName.equals("secrRes")) {
+		    	ListReservation lr = ListReservation.getInstance();
+				request.setAttribute("lr", lr);
+				request.setAttribute("isModif", false);
+				request.setAttribute("i",-1);
 		    	getServletContext().getRequestDispatcher(urlReservation).forward(request, response);
-		    if(paramName.equals("direPati"))
+		    }
+		    
+		    if(paramName.equals("secrPati")) {
+		    	ListPatient lp = ListPatient.getInstance();
+		    	request.setAttribute("lp", lp);
+				request.setAttribute("isModif", false);
+				request.setAttribute("i",-1);
 		    	getServletContext().getRequestDispatcher(urlPatient).forward(request, response);
-		    if(paramName.equals("direPers")) 
+		    }
+		    
+		    if(paramName.equals("secrInfo")) {
+		    	getServletContext().getRequestDispatcher(urlInformation).forward(request, response);
+		    }
+		    
+		    if(paramName.equals("direRes")) {
+		    	ListReservation lr = ListReservation.getInstance();
+		    	request.setAttribute("lr", lr);
+				request.setAttribute("isModif", false);
+				request.setAttribute("i",-1);
+		    	getServletContext().getRequestDispatcher(urlReservation).forward(request, response);
+		    }
+		    
+		    if(paramName.equals("direPati")) {
+		    	ListPatient lp = ListPatient.getInstance();
+		    	request.setAttribute("lp", lp);
+				request.setAttribute("isModif", false);
+				request.setAttribute("i",-1);
+		    	getServletContext().getRequestDispatcher(urlPatient).forward(request, response);
+		    }
+		    
+		    if(paramName.equals("direPers")) {
+		    	ListPersonnel lp = ListPersonnel.getInstance();
+		    	request.setAttribute("lp", lp);
 		    	getServletContext().getRequestDispatcher(urlPersonnel).forward(request, response);
-		    if(paramName.equals("direInfo"))
-		    	getServletContext().getRequestDispatcher(urlInformation).forward(request, response);
+		    }
 		}
 	}
 

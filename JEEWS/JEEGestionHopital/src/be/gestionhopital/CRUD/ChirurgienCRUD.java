@@ -1,8 +1,8 @@
 package be.gestionhopital.CRUD;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -46,7 +46,7 @@ public class ChirurgienCRUD {
 					retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 					retour += "<nom>"+results.getString("Nom")+"</nom>";
 					retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-					retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+					retour += "<dateNaissance>"+results.getString("DateNaissance")+"</dateNaissance>";
 					retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
 					retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
 					retour += "<specialisation>"+results.getString("Specialisation")+"</specialisation>";
@@ -90,7 +90,7 @@ public class ChirurgienCRUD {
 				retour += "<id>"+results.getInt("IdPersonne")+"</id>";
 				retour += "<nom>"+results.getString("Nom")+"</nom>";
 				retour += "<prenom>"+results.getString("Prenom")+"</prenom>";
-				retour += "<dateNaissance>"+results.getDate("DateNaissance")+"</dateNaissance>";
+				retour += "<dateNaissance>"+results.getString("DateNaissance")+"</dateNaissance>";
 				retour += "<numTelephone>"+results.getString("NumeroTelephone")+"</numTelephone>";
 				retour += "<motDePasse>"+results.getString("MotDePasse")+"</motDePasse>";
 				retour += "<specialisation>"+results.getString("Specialisation")+"</specialisation>";
@@ -113,19 +113,27 @@ public class ChirurgienCRUD {
 	}
 	
 	@POST
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertChirurgien(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
 		CallableStatement insertChir = null;
+		BigDecimal tmp;
+		String id = null;
 		
 		try {
-			insertChir = conn.prepareCall("{call Inserts.insertChirurgien(?,?,?,?,?,?)}");
-			insertChir.setString(1, nom);
-			insertChir.setString(2, prenom);
-			insertChir.setDate(3, Date.valueOf(dateNaiss));
-			insertChir.setString(4, numTel);
-			insertChir.setString(5, mdp);
-			insertChir.setString(6, spec);
+			insertChir = conn.prepareCall("{? = call Inserts.insertChirurgien(?,?,?,?,?,?)}");
+			insertChir.registerOutParameter(1, OracleTypes.NUMBER);
+			insertChir.setString(2, nom);
+			insertChir.setString(3, prenom);
+			insertChir.setString(4, dateNaiss);
+			insertChir.setString(5, numTel);
+			insertChir.setString(6, mdp);
+			insertChir.setString(7, spec);
 			insertChir.executeUpdate();
-			return Response.status(200).entity(insertChir.getGeneratedKeys().toString()).build();
+
+			tmp = (BigDecimal)insertChir.getObject(1);
+			id = tmp.toString();
+			
+			return Response.status(200).entity(id).build();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -138,17 +146,18 @@ public class ChirurgienCRUD {
 	}
 	
 	@PUT
-	public void updateChirurgien(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
+	public void updateChirurgien(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
 		CallableStatement updateChir = null;
 		
 		try {
-			updateChir = conn.prepareCall("{call Updates.updateChirurgien(?,?,?,?,?,?)}");
-			updateChir.setString(1, nom);
-			updateChir.setString(2, prenom);
-			updateChir.setDate(3, Date.valueOf(dateNaiss));
-			updateChir.setString(4, numTel);
-			updateChir.setString(5, mdp);
-			updateChir.setString(6, spec);
+			updateChir = conn.prepareCall("{call Updates.updateChirurgien(?,?,?,?,?,?,?)}");
+			updateChir.setInt(1, id);
+			updateChir.setString(2, nom);
+			updateChir.setString(3, prenom);
+			updateChir.setString(4, dateNaiss);
+			updateChir.setString(5, numTel);
+			updateChir.setString(6, mdp);
+			updateChir.setString(7, spec);
 			updateChir.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -161,7 +170,8 @@ public class ChirurgienCRUD {
 	}
 	
 	@DELETE
-	public void deleteChirurgien(@FormParam("id") int id) throws SQLException {
+	@Path("{id}")
+	public void deleteChirurgien(@PathParam("id") int id) throws SQLException {
 		CallableStatement deleteDire = null;
 		
 		try {

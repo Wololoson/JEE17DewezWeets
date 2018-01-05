@@ -1,0 +1,64 @@
+package be.gestionhopital.Controllers;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ServletPatient
+ */
+public class ServletPatient extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private String urlAccueil;
+	
+	public void init() {
+		ServletConfig config = getServletConfig();
+		urlAccueil = (String)config.getInitParameter("urlAccueil");
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Enumeration<String> paramNames = request.getParameterNames();
+		ArrayList<String> erreurs = new ArrayList<>();
+		
+		while(paramNames.hasMoreElements()) {
+			String paramName = (String)paramNames.nextElement();
+			
+			if(paramName.equals("modif")) {
+				if(request.getParameter("pat") != null) {
+					request.setAttribute("erreurs", erreurs);
+					request.setAttribute("lp", lp);
+					request.setAttribute("isModif", true);
+					request.setAttribute("i",Integer.parseInt(request.getParameter("pat")));
+					getServletContext().getRequestDispatcher(urlPatient).forward(request, response);
+				}
+				else {
+					erreurs.add("Veuillez sélectionner un patient");
+					request.setAttribute("erreurs", erreurs);
+					request.setAttribute("lp", lp);
+					request.setAttribute("isModif", false);
+					request.setAttribute("i",-1);
+					getServletContext().getRequestDispatcher(urlPatient).forward(request, response);
+			}
+			if(paramName.equals("suppr")) {
+				
+			}
+			if(paramName.equals("retour")) {
+				getServletContext().getRequestDispatcher(urlAccueil).forward(request, response);
+			}
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
