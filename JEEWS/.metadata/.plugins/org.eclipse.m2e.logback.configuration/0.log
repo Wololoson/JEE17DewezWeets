@@ -9039,3 +9039,119 @@ org.eclipse.core.runtime.CoreException: Runtime GlassFish 4 (2) does not support
 2018-01-05 21:36:18,443 [Worker-86] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
 2018-01-05 21:36:18,444 [Worker-86] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2018-01-05 21:36:18,445 [Worker-86] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:44:00,190 [Worker-9] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:44:00,193 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:44:00,195 [Worker-9] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:44:00,196 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:46:45,257 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:46:45,259 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:46:45,260 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:46:45,261 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:48:29,911 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:48:29,912 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:48:29,913 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:48:29,914 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:51:03,054 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:51:03,055 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:51:03,056 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:51:03,057 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:52:15,494 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:52:15,495 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:52:15,497 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:52:15,498 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:52:23,773 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:52:23,774 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:52:23,775 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:52:23,776 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:53:46,402 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:53:46,404 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:53:46,405 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:53:46,406 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:58:52,259 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:58:52,260 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:58:52,262 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:58:52,263 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:59:27,998 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:59:27,999 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:59:28,000 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:59:28,001 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 21:59:39,678 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:59:39,679 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 21:59:39,681 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 21:59:39,681 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:00:28,521 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:00:28,522 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:00:28,523 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:00:28,524 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:01:17,762 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:17,764 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:01:17,765 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:17,766 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:01:47,490 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:47,491 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:01:47,492 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:47,493 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:01:56,103 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:56,103 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:01:56,104 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:01:56,105 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:02:00,212 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:02:00,213 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:02:00,215 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:02:00,216 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:02:35,079 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:02:35,080 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:02:35,082 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:02:35,083 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:03:49,127 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:03:49,129 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:03:49,130 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:03:49,131 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:04:01,057 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:01,058 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:04:01,059 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:01,060 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:04:11,790 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:11,792 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:04:11,793 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:11,794 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:04:44,343 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:44,345 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:04:44,346 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:04:44,346 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:05:17,168 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:05:17,168 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:05:17,169 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:05:17,170 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:09:02,956 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:09:02,958 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:09:02,959 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:09:02,960 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:09:07,261 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:09:07,262 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:09:07,263 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:09:07,264 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:10:21,495 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:10:21,495 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:10:21,496 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:10:21,497 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:10:25,692 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:10:25,693 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:10:25,694 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:10:25,695 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:17:07,558 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:17:07,559 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:17:07,560 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:17:07,561 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:17:57,756 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:17:57,757 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:17:57,758 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:17:57,758 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:19:43,394 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:19:43,395 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:19:43,396 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:19:43,397 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources
+2018-01-05 22:21:17,202 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:21:17,203 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\main\resources
+2018-01-05 22:21:17,204 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-01-05 22:21:17,205 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shado\Dropbox\JEE\JEEWS\JEEGestionHopital\src\test\resources

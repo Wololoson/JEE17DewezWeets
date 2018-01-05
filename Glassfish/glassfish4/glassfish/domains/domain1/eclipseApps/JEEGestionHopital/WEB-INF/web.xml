@@ -59,6 +59,10 @@
       <param-name>urlAccueil</param-name>
       <param-value>/Views\\jsp\\Accueil.jsp</param-value>
     </init-param>
+    <init-param>
+      <param-name>urlInformation</param-name>
+      <param-value>/Views\\jsp\\Information.jsp</param-value>
+    </init-param>
   </servlet>
   <servlet>
     <servlet-name>ServletNotification</servlet-name>

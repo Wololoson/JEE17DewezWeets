@@ -1,5 +1,11 @@
 package be.gestionhopital.Models;
 
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
+import be.gestionhopital.Factory.AbstractDAOFactory;
+
 public class Secretaire extends Personne {
 	private static final long serialVersionUID = 3955384103009827636L;
 	// Variable d'instance
@@ -29,6 +35,14 @@ public class Secretaire extends Personne {
 	public void modifierInfos(Personne p) {
 		super.modifierInfos(p);
 		this.service = ((Secretaire)p).service;
+		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		try {
+			adf.getSecretaireDAO().update((Secretaire)p);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	};
 	
 	public void ajouterReservation(Reservation r, Notification n) {

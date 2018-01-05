@@ -77,7 +77,6 @@ public abstract class Personne implements Serializable {
 	
 	//Méthodes
 	public void modifierInfos(Personne p) {
-		this.idPersonne = p.idPersonne;
 		this.nom = p.nom;
 		this.prenom = p.prenom;
 		this.dateNaiss = p.dateNaiss;

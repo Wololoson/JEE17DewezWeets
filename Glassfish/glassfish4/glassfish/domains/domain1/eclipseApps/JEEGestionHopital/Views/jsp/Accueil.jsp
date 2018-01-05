@@ -81,17 +81,14 @@
 				boutons.add("Gérer les réservations");
 				boutons.add("Consulter la liste des patients");
 				boutons.add("Gérer le personnel");
-				boutons.add("Gérer les informations");
 				
 				btnNames.add("direRes");
 				btnNames.add("direPati");
 				btnNames.add("direPers");
-				btnNames.add("direInfo");
 				
 				servletNames.add("ServletReservation");
 				servletNames.add("ServletPatient");
 				servletNames.add("ServletPersonnel");
-				servletNames.add("ServletInformation");
 		}
 	%>
 	
@@ -99,9 +96,6 @@
 		<input id="<%=btnNames.get(0) %>" name="<%=btnNames.get(0) %>" value="<%=boutons.get(0) %>" type="submit"/>
 		<input id="<%=btnNames.get(1) %>" name="<%=btnNames.get(1) %>" value="<%=boutons.get(1) %>" type="submit"/>
 		<input id="<%=btnNames.get(2) %>" name="<%=btnNames.get(2) %>" value="<%=boutons.get(2) %>" type="submit"/>
-		<% if(type.equals("directeur")){ %>
-			<input id="<%=btnNames.get(3) %>" name="<%=btnNames.get(3) %>" value="<%=boutons.get(3) %>" type="submit"/>
-		<%} %>
 	</form>
 </body>
 </html>

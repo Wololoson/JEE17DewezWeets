@@ -46,9 +46,7 @@
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Patient"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Salle"/>
-<fullyQualifiedTypeName name="be.gestionhopital.Factory.AbstractDAOFactory"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.Reservation"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 <fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
 <fullyQualifiedTypeName name="be.gestionhopital.DAO.DAOSalle"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="be.gestionhopital.Models.ListPatient"/>
 <fullyQualifiedTypeName name="be.gestionhopital.Models.ListPersonnel"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="be.gestionhopital.Factory.AbstractDAOFactory"/>
 </qualifiedTypeNameHistroy>

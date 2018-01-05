@@ -4,6 +4,7 @@
 <%@ page import="be.gestionhopital.Models.Chirurgien" %>
 <%@ page import="be.gestionhopital.Models.Secretaire" %>
 <%@ page import="be.gestionhopital.Models.Directeur" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -22,6 +23,7 @@
 			String annee = date.substring(0,premierSlash);
 			String mois = date.substring(premierSlash+1,deuxiemeSlash);
 			String jour = date.substring(deuxiemeSlash+1);
+			ArrayList<String> erreurs = (ArrayList<String>) request.getAttribute("erreurs");
 	%>
 	
 		<form action="ServletInformation" method="post">
@@ -65,7 +67,7 @@
 						Mot de passe :
 					</td>
 					<td>
-						<input type="password" name="motDePasse" id="motDePasse" value="" size="20"/>
+						<input type="password" name="motDePasse" id="motDePasse" value="" size="20" maxlength="30"/>
 					</td>
 				</tr>
 				<% if(type.equals("chirurgien")){ %>
@@ -88,16 +90,6 @@
 					</td>
 				</tr>
 				<%}%>
-				<% if(type.equals("directeur")){ %>
-				<tr>
-					<td>
-						Code :
-					</td>
-					<td>
-						<input type="text" name="code" id="code" value="<%=((Directeur)p).getCode() %>" size="20" required="required" maxlength="30"/>
-					</td>
-				</tr>
-				<%}%>
 				<tr>
 					<td>
 						<input type="submit" name="valider" id="valider" value="Valider"/>
@@ -108,5 +100,18 @@
 				</tr>
 			</table>
 		</form>
+		<ul style="color:RED">
+		<%
+			if(erreurs != null){
+				for (String s : erreurs) {
+		%>
+				<li>
+					<%=s %>
+				</li>
+		<%	
+				}
+			}
+		%>
+		</ul>
 	</body>
 </html>

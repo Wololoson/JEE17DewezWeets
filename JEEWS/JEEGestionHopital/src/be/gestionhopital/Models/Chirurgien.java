@@ -1,5 +1,11 @@
 package be.gestionhopital.Models;
 
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
+import be.gestionhopital.Factory.AbstractDAOFactory;
+
 public class Chirurgien extends Personne{
 	private static final long serialVersionUID = -6713247746739201921L;
 	//Variable d'instance
@@ -29,6 +35,14 @@ public class Chirurgien extends Personne{
 	public void modifierInfos(Personne p) {
 		super.modifierInfos(p);
 		this.specialisation = ((Chirurgien)p).specialisation;
+		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		try {
+			adf.getChirurgienDAO().update((Chirurgien)p);
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	};
 	
 	public void ajouterReservation(Reservation r) {

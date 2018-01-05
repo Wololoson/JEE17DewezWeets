@@ -222,7 +222,7 @@
 								Commentaire
 							</td>
 							<td>
-								<textarea id="comm" name="commentaire" cols="20" rows="15" maxlength="300"></textarea>
+								<textarea id="comm" name="commentaire" cols="20" rows="3" maxlength="300"></textarea>
 							</td>
 						</tr>
 					<%}%>
@@ -270,7 +270,7 @@
 							Commentaire
 						</td>
 						<td>
-							<textarea id="commentaireSuppr" name="commentaireSuppr" cols="20" rows="15" maxlength="300"></textarea>
+							<textarea id="commentaireSuppr" name="commentaireSuppr" cols="20" rows="3" maxlength="300"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -570,6 +570,6 @@
 				}
 			}
 		%>
-	</ul>
+		</ul>
 	</body>
 </html>

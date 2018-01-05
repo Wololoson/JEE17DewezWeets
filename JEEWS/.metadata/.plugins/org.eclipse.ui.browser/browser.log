@@ -1893,3 +1893,68 @@ janv. 05, 2018 21:32:11.60 IPDL protocol error: Handler returned error code!
 janv. 05, 2018 21:32:11.60 
 janv. 05, 2018 21:32:11.60 ###!!! [Parent][DispatchAsyncMessage] Error: PAPZCTreeManager::Msg_SetTargetAPZC Processing error: message was deserialized, but the handler returned false (indicating failure)
 janv. 05, 2018 21:32:11.60 
+
+janv. 05, 2018 22:11:23.44 NEW SESSION
+janv. 05, 2018 22:11:23.44 IPDL protocol error: Handler returned error code!
+janv. 05, 2018 22:11:23.44 
+janv. 05, 2018 22:11:23.44 ###!!! [Parent][DispatchAsyncMessage] Error: PAPZCTreeManager::Msg_SetTargetAPZC Processing error: message was deserialized, but the handler returned false (indicating failure)
+janv. 05, 2018 22:11:23.44 
+janv. 05, 2018 22:12:05.66 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:12:05.66 [Child 2088, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:12:05.66 [Child 2088, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:00.19 IPDL protocol error: Handler returned error code!
+janv. 05, 2018 22:16:00.19 
+janv. 05, 2018 22:16:00.19 ###!!! [Parent][DispatchAsyncMessage] Error: PAPZCTreeManager::Msg_SetTargetAPZC Processing error: message was deserialized, but the handler returned false (indicating failure)
+janv. 05, 2018 22:16:00.19 
+janv. 05, 2018 22:16:03.47 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:03.48 [Parent 6116, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 [Parent 6116, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:03.48 [Child 16376, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 [Child 16376, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:03.48 [Child 17536, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 [Child 17536, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:03.48 [Child 10008, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.48 [Child 10008, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.61 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:03.61 [GPU 9592, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:03.63 
+janv. 05, 2018 22:16:03.63 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+janv. 05, 2018 22:16:03.63 
+janv. 05, 2018 22:16:43.08 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:43.08 [Child 19300, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:43.08 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:16:43.08 [Child 19764, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:43.08 [Child 19764, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:16:43.26 
+janv. 05, 2018 22:16:43.26 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+janv. 05, 2018 22:16:43.26 
+janv. 05, 2018 22:16:43.29 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:19:51.76 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:19:51.76 [Parent 9576, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 [Parent 9576, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:19:51.77 [Child 19552, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 [Child 19552, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:19:51.77 [Child 19348, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 [Child 19348, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.77 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:19:51.77 [Child 11824, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:19:51.92 
+janv. 05, 2018 22:19:51.92 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+janv. 05, 2018 22:19:51.92 
+janv. 05, 2018 22:22:55.17 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:22:55.17 [Parent 8936, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:22:55.18 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:22:55.18 [Child 8384, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:22:55.18 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:22:55.18 [Child 19232, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:22:55.18 [Child 19232, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:22:55.34 Unable to read VR Path Registry from C:\Users\shado\AppData\Local\openvr\openvrpaths.vrpath
+janv. 05, 2018 22:22:55.34 [GPU 12436, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+janv. 05, 2018 22:22:55.36 
+janv. 05, 2018 22:22:55.36 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+janv. 05, 2018 22:22:55.36 
