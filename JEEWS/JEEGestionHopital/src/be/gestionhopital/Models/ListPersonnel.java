@@ -16,6 +16,8 @@ import be.gestionhopital.Factory.AbstractDAOFactory;
 
 public class ListPersonnel implements Serializable {
 	private static final long serialVersionUID = -6163591791108782171L;
+	
+	// Variable d'instance
 	private static ListPersonnel instance = null;
 	private List<Secretaire> listSecretaire = new ArrayList<>();
 	private List<Chirurgien> listChirurgien = new ArrayList<>();
@@ -24,7 +26,8 @@ public class ListPersonnel implements Serializable {
 	private DAOSecretaire secrDAO = (DAOSecretaire) adf.getSecretaireDAO();
 	private DAOChirurgien chirDAO = (DAOChirurgien) adf.getChirurgienDAO();
 	private DAODirecteur direDAO = (DAODirecteur) adf.getDirecteurDAO();
-	
+
+	// Constructeur
 	private ListPersonnel() {
 		try {
 			listSecretaire = secrDAO.findAll();
@@ -34,7 +37,8 @@ public class ListPersonnel implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	// Propriétés
 	public Directeur getDirecteur() {
 		return directeur;
 	}
@@ -59,6 +63,7 @@ public class ListPersonnel implements Serializable {
 		this.listChirurgien = listChirurgien;
 	}
 
+	// Méthodes
 	public void ajouterPersonnel(Personne p) {
 		boolean found = false;		
 		
@@ -112,7 +117,8 @@ public class ListPersonnel implements Serializable {
 			listChirurgien.remove(foundChir);
 		}
 	}
-	
+
+	// Création ou récupération de l'instance du singleton
 	public static synchronized ListPersonnel getInstance() {
 		if(instance == null)
 			instance = new ListPersonnel();

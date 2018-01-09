@@ -14,11 +14,14 @@ import be.gestionhopital.Factory.AbstractDAOFactory;
 
 public class ListNotification implements Serializable {
 	private static final long serialVersionUID = -254715069091466589L;
+	
+	// Variable d'instance
 	private static ListNotification instance = null;
 	private List<Notification> listNotification = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	private DAONotification notifDAO = (DAONotification) adf.getNotificationDAO();
 	
+	// Constructeur
 	private ListNotification() {
 		try {
 			listNotification = notifDAO.findAll();
@@ -27,6 +30,7 @@ public class ListNotification implements Serializable {
 		}
 	}
 	
+	// Méthodes
 	public void ajouterNotification(Notification n) {
 		boolean found = false;
 		for(Notification no : listNotification) {
@@ -53,6 +57,12 @@ public class ListNotification implements Serializable {
 		listNotification.remove(foundNoti);
 	}
 	
+	public void supprimerToutesNotification() {
+		notifDAO.deleteAll();
+		listNotification.clear();
+	}
+	
+	// Création ou récupération de l'instance du singleton
 	public static synchronized ListNotification getInstance() {
 		if(instance == null)
 			instance = new ListNotification();
@@ -60,6 +70,7 @@ public class ListNotification implements Serializable {
 		return instance;
 	}
 
+	// Propriétés
 	public List<Notification> getListNotification() {
 		return listNotification;
 	}

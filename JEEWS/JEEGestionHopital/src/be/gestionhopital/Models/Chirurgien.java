@@ -64,4 +64,36 @@ public class Chirurgien extends Personne{
 		ListNotification ln = ListNotification.getInstance();
 		ln.supprimerNotification(n);
 	}
+	
+	public void supprimerToutesNotification() {
+		ListNotification ln = ListNotification.getInstance();
+		ln.supprimerToutesNotification();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((specialisation == null) ? 0 : specialisation.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Chirurgien other = (Chirurgien) obj;
+		super.equals(obj);
+		if (specialisation == null) {
+			if (other.specialisation != null)
+				return false;
+		} else if (!specialisation.equals(other.specialisation))
+			return false;
+		return true;
+	}
+	
 }

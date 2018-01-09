@@ -59,4 +59,9 @@ public class Secretaire extends Personne {
 		ListReservation lr = ListReservation.getInstance();
 		lr.supprimerReservation(r, n);
 	}
+	
+	public void modifierPatient(Patient before, Patient after) {
+		ListPatient lp = ListPatient.getInstance();
+		lp.modifierPatient(before, after);
+	}
 }

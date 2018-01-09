@@ -35,6 +35,7 @@ public class DAOReservation extends DAO<Reservation> {
 		super(conn);
 	}
 
+	// Appel du Service Web (insertion d'une réservation)
 	@Override
 	public boolean create(Reservation obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -53,6 +54,7 @@ public class DAOReservation extends DAO<Reservation> {
 		}
 	}
 
+	// Appel du Service Web (suppression d'une réservation)
 	@Override
 	public boolean delete(Reservation obj) {
 		String id =  Integer.toString(obj.getIdReservation());
@@ -66,6 +68,7 @@ public class DAOReservation extends DAO<Reservation> {
 		}
 	}
 
+	// Appel du Service Web (mise à jour d'une réservation)
 	@Override
 	public boolean update(Reservation obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -90,6 +93,7 @@ public class DAOReservation extends DAO<Reservation> {
 		return null;
 	}
 	
+	// Appel du Service Web (récupération de toutes les réservations)
 	public List<Reservation> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Reservation> listRes = new ArrayList<>();
 		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);

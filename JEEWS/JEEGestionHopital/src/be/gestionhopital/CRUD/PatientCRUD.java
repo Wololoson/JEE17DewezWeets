@@ -27,6 +27,7 @@ public class PatientCRUD {
 	
 	public PatientCRUD() {}
 	
+	// Récupération de tous les patients
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getPatients() throws SQLException {
@@ -72,6 +73,7 @@ public class PatientCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Récupération d'un patient
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.TEXT_XML)
@@ -113,6 +115,7 @@ public class PatientCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'un patient
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertPatient(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("numChambre") String numCh, @FormParam("numPatient") String numPa) throws SQLException {
@@ -147,8 +150,9 @@ public class PatientCRUD {
 		return Response.status(500).entity("ERROR").build();
 	}
 	
+	// Mise à jour d'un patient
 	@PUT
-	public void updatePatient(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("numCh") String numCh, @FormParam("numPa") String numPa) throws SQLException {
+	public void updatePatient(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("numChambre") String numCh, @FormParam("numPatient") String numPa) throws SQLException {
 		CallableStatement updatePati = null;
 		
 		try {
@@ -172,6 +176,7 @@ public class PatientCRUD {
 		}
 	}
 	
+	// Suppression d'une notification
 	@DELETE
 	@Path("{id}")
 	public void deletePatient(@PathParam("id") int id) throws SQLException {

@@ -4,6 +4,7 @@ procedure deleteChirurgien(idChir Chirurgien.IdPersonne%type);
 procedure deleteSecretaire(idSecr Secretaire.IdPersonne%type);
 procedure deletePatient(idPati Patient.IdPersonne%type);
 procedure deleteNotification(idNoti Notifications.IdNotification%type);
+procedure deleteAllNotification;
 procedure deleteReservation(idPers Reservation.IdPersonne%type,idSall Reservation.IdSalle%type,numPati Reservation.NumeroPatient%type);
 procedure deleteSalle(idSall Salle.IdSalle%type);
 end Deletes;
@@ -24,6 +25,11 @@ procedure deletePatient(idPati Patient.IdPersonne%type)
 is begin
     delete from Patient where IdPersonne = idPati;
 end deletePatient;
+
+procedure deleteAllNotification
+is begin
+	delete from Notifications;
+end deleteAllNotification;
 
 procedure deleteNotification(idNoti Notifications.IdNotification%type)
 is begin

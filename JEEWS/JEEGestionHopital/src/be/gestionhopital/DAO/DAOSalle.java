@@ -27,6 +27,7 @@ public class DAOSalle extends DAO<Salle> {
 		super(conn);
 	}
 
+	// Appel du Service Web (insertion d'une salle)
 	@Override
 	public boolean create(Salle obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -45,6 +46,7 @@ public class DAOSalle extends DAO<Salle> {
 		}
 	}
 
+	// Appel du Service Web (suppression d'une salle)
 	@Override
 	public boolean delete(Salle obj) {
 		String id =  Integer.toString(obj.getIdSalle());
@@ -58,6 +60,7 @@ public class DAOSalle extends DAO<Salle> {
 		}
 	}
 
+	// Appel du Service Web (mise à jour d'une salle)
 	@Override
 	public boolean update(Salle obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -73,7 +76,8 @@ public class DAOSalle extends DAO<Salle> {
 			return false;
 		}
 	}
-
+	
+	// Appel du Service Web (récupération d'une salle)
 	@Override
 	public Salle find(int id) throws SAXException, IOException {
 		String numSalle = null;

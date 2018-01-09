@@ -39,6 +39,7 @@ public class DAODirecteur extends DAO<Directeur> {
 		return false;
 	}
 
+	// Appel du Service Web (récupération du directeur)
 	@Override
 	public Directeur find(int id) throws SAXException, IOException {
 		Directeur dire = null;

@@ -101,8 +101,6 @@ public abstract class Personne implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		Personne other = (Personne) obj;
 		if (dateNaiss == null) {
 			if (other.dateNaiss != null)
@@ -113,7 +111,9 @@ public abstract class Personne implements Serializable {
 			if (other.motDePasse != null)
 				return false;
 		} else if (!motDePasse.equals(other.motDePasse))
-			return false;
+			if(!other.motDePasse.equals("null")) {
+				return false;
+			}
 		if (nom == null) {
 			if (other.nom != null)
 				return false;

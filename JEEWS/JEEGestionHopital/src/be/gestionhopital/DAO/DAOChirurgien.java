@@ -30,6 +30,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		super(conn);
 	}
 
+	// Appel du Service Web (insertion d'un chirurgien)
 	@Override
 	public boolean create(Chirurgien obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -52,6 +53,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		}
 	}
 
+	// Appel du Service Web (suppression d'un chirurgien)
 	@Override
 	public boolean delete(Chirurgien obj) {
 		String id =  Integer.toString(obj.getIdPersonne());
@@ -65,6 +67,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		}
 	}
 
+	// Appel du Service Web (mise à jour d'un chirurgien)
 	@Override
 	public boolean update(Chirurgien obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -85,6 +88,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		}
 	}
 
+	// Appel du Service Web (récupération d'un chirurgien)
 	@Override
 	public Chirurgien find(int id) throws SAXException, IOException {
 		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null, dateNaiss = null;
@@ -138,6 +142,7 @@ public class DAOChirurgien extends DAO<Chirurgien> {
 		return new Chirurgien(specialisation, idPers, nom, prenom, dateNaiss, numTel, mdp);
 	}
 	
+	// Appel du Service Web (récupération de tous les chirurgiens)
 	public List<Chirurgien> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Chirurgien> listChir = new ArrayList<>();
 		String nom = null, prenom = null, numTel = null, mdp = null, specialisation = null, dateNaiss = null;

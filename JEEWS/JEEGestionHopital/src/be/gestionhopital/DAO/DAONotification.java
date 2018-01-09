@@ -32,6 +32,7 @@ public class DAONotification extends DAO<Notification> {
 		super(conn);
 	}
 
+	// Appel du Service Web (insertion d'une notification)
 	@Override
 	public boolean create(Notification obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -52,6 +53,7 @@ public class DAONotification extends DAO<Notification> {
 		}
 	}
 
+	// Appel du Service Web (suppression d'une notification)
 	@Override
 	public boolean delete(Notification obj) {
 		String id =  Integer.toString(obj.getIdNotification());
@@ -64,7 +66,20 @@ public class DAONotification extends DAO<Notification> {
 			return false;
 		}
 	}
+	
+	// Appel du Service Web (suppression de toutes les notifications)
+	public boolean deleteAll() {
+		
+		ClientResponse response = connect.path("notification").type("application/x-www-form-urlencoded").delete(ClientResponse.class);
+		if(response.getStatus() == 200) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
+	// Appel du Service Web (mise à jour d'une notification)
 	@Override
 	public boolean update(Notification obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -88,6 +103,7 @@ public class DAONotification extends DAO<Notification> {
 		return null;
 	}
 	
+	// Appel du Service Web (récupération de toutes les notifications)
 	public List<Notification> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Notification> listNoti = new ArrayList<>();
 		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);

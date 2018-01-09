@@ -4,6 +4,8 @@
   <welcome-file-list>
     <welcome-file>/Views\\jsp\\Connexion.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- Serlvet de connexion -->
   <servlet>
     <servlet-name>ServletConnexion</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletConnexion</servlet-class>
@@ -16,6 +18,8 @@
       <param-value>/Views\\jsp\\Connexion.jsp</param-value>
     </init-param>
   </servlet>
+  
+  <!-- Serlvet d'accueil -->
   <servlet>
     <servlet-name>ServletAccueil</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletAccueil</servlet-class>
@@ -39,7 +43,13 @@
       <param-name>urlPersonnel</param-name>
       <param-value>/Views\\jsp\\Personnel.jsp</param-value>
     </init-param>
+    <init-param>
+      <param-name>urlConnexion</param-name>
+      <param-value>/Views\\jsp\\Connexion.jsp</param-value>
+    </init-param>
   </servlet>
+  
+  <!-- Serlvet des réservations -->
   <servlet>
     <servlet-name>ServletReservation</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletReservation</servlet-class>
@@ -52,6 +62,8 @@
       <param-value>/Views\\jsp\\Reservation.jsp</param-value>
     </init-param>
   </servlet>
+  
+  <!-- Serlvet des informations -->
   <servlet>
     <servlet-name>ServletInformation</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletInformation</servlet-class>
@@ -64,6 +76,8 @@
       <param-value>/Views\\jsp\\Information.jsp</param-value>
     </init-param>
   </servlet>
+  
+  <!-- Serlvet des notifications -->
   <servlet>
     <servlet-name>ServletNotification</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletNotification</servlet-class>
@@ -71,7 +85,13 @@
       <param-name>urlAccueil</param-name>
       <param-value>/Views\\jsp\\Accueil.jsp</param-value>
     </init-param>
+    <init-param>
+      <param-name>urlNotification</param-name>
+      <param-value>/Views\\jsp\\Notification.jsp</param-value>
+    </init-param>
   </servlet>
+  
+  <!-- Serlvet de la liste patients -->
   <servlet>
     <servlet-name>ServletPatient</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletPatient</servlet-class>
@@ -84,6 +104,8 @@
       <param-value>/Views\\jsp\\Patient.jsp</param-value>
     </init-param>
   </servlet>
+  
+  <!-- Serlvet du personnel -->
   <servlet>
     <servlet-name>ServletPersonnel</servlet-name>
     <servlet-class>be.gestionhopital.Controllers.ServletPersonnel</servlet-class>
@@ -91,35 +113,55 @@
       <param-name>urlAccueil</param-name>
       <param-value>/Views\\jsp\\Accueil.jsp</param-value>
     </init-param>
+    <init-param>
+      <param-name>urlPersonnel</param-name>
+      <param-value>/Views\\jsp\\Personnel.jsp</param-value>
+    </init-param>
   </servlet>
+  
+  <!-- Serlvet mapping de connexion -->
   <servlet-mapping>
     <servlet-name>ServletConnexion</servlet-name>
     <url-pattern>/ServletConnexion</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping d'accueil -->
   <servlet-mapping>
     <servlet-name>ServletAccueil</servlet-name>
     <url-pattern>/ServletAccueil</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping des réservations -->
   <servlet-mapping>
     <servlet-name>ServletReservation</servlet-name>
     <url-pattern>/ServletReservation</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping des informations -->
   <servlet-mapping>
     <servlet-name>ServletInformation</servlet-name>
     <url-pattern>/ServletInformation</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping des notifications -->
   <servlet-mapping>
     <servlet-name>ServletNotification</servlet-name>
     <url-pattern>/ServletNotification</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping de la liste des patients -->
   <servlet-mapping>
     <servlet-name>ServletPatient</servlet-name>
     <url-pattern>/ServletPatient</url-pattern>
   </servlet-mapping>
+  
+  <!-- Serlvet mapping de la liste du personnel -->
   <servlet-mapping>
     <servlet-name>ServletPersonnel</servlet-name>
     <url-pattern>/ServletPersonnel</url-pattern>
   </servlet-mapping>
+  
+  <!-- Configuration de la session -->
   <session-config>
     <session-timeout>60</session-timeout>
   </session-config>

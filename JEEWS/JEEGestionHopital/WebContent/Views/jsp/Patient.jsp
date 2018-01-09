@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="be.gestionhopital.Models.Patient" %>
 <%@ page import="be.gestionhopital.Models.ListPatient" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -11,10 +12,12 @@
 	<body>
 	<h1>Gestion de la liste des patients</h1>
 	<%
+		HttpSession sess = request.getSession();
 		ListPatient lp = (ListPatient) request.getAttribute("lp");
 		boolean isModif = (Boolean) request.getAttribute("isModif");
 		int selected = (Integer) request.getAttribute("i");
 		int i = 0;
+		ArrayList<String> erreurs = (ArrayList<String>) request.getAttribute("erreurs");
 	%>
 	
 	<form action="ServletPatient" method="post">
@@ -43,6 +46,7 @@
 			</tr>
 			<%
 				for(Patient p : lp.getListPatient()){
+					sess.setAttribute("pati"+Integer.toString(i), p);
 					if(isModif && i == selected){%>
 						<tr>
 							<td>
@@ -109,8 +113,21 @@
 				}%>
 			</table>
 			<input type="submit" name="modif" id="modif" value="Modifier"/>
-			<input type="submit" name="suppr" id="suppr" value="Supprimer"/>
 			<input type="submit" name="retour" id="retour" value="Retour"/>
 		</form>
+		
+		<ul style="color:RED">
+		<%
+			if(erreurs != null){
+				for (String s : erreurs) {
+		%>
+				<li>
+					<%=s %>
+				</li>
+		<%	
+				}
+			}
+		%>
+	</ul>
 	</body>
 </html>

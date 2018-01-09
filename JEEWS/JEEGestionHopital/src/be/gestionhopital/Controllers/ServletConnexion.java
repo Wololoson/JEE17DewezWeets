@@ -20,9 +20,12 @@ import be.gestionhopital.Models.Secretaire;
  */
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	// Déclaration des variables qui contiennent les URL
 	private String urlValid = null;
 	private String urlConnexion = null;
 	
+	// Initialisation des variables qui contiennent les URL
 	public void init() {
 		ServletConfig config = getServletConfig();
 		urlValid = (String)config.getInitParameter("urlValid");
@@ -33,6 +36,7 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Déclaration des variables locales
 		String idPers = request.getParameter("listPers");
 		String motDePasse = request.getParameter("motDePasse");
 		String code = request.getParameter("code");
@@ -44,6 +48,7 @@ public class ServletConnexion extends HttpServlet {
 		
 		ArrayList<String> erreursParametres = new ArrayList<String>();
 		
+		//Vérification des informations entrées
 		if(idPers == null) 
 			erreursParametres.add("Veuillez choisir votre identifiant.");
 		
@@ -56,6 +61,7 @@ public class ServletConnexion extends HttpServlet {
 		if(!motDePasse.matches("^[0-9a-zA-Z]{6,}$"))
 			erreursParametres.add("Le mot de passe doit contenir au moins 6 caractères.");
 		
+		// Si la personne est un chirurgien
 		for(Chirurgien c : lp.getListChirurgien()) {
 			if(idPers != null && idPers.equals(Integer.toString(c.getIdPersonne()))) {
 				if(motDePasse != null && motDePasse.equals(c.getMotDePasse())) {
@@ -67,6 +73,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		
+		// Si la personne est un secrétaire
 		for(Secretaire s : lp.getListSecretaire()) {
 			if(idPers != null && idPers.equals(Integer.toString(s.getIdPersonne()))) {
 				if(motDePasse != null && motDePasse.equals(s.getMotDePasse())) {
@@ -78,6 +85,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		
+		// Si la personne est le directeur
 		if(idPers != null && idPers.equals("dire")) {
 			if(motDePasse != null && motDePasse.equals(lp.getDirecteur().getMotDePasse())) {
 				mdpOK = true;
@@ -89,15 +97,19 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		
+		// Tout est validé
 		if(mdpOK && codeOK) {
 			if(urlValid == null) 
 				throw new ServletException("URL de validation à null");
 			else {
+				// Incription des informations importantes dans la session
 				HttpSession sess = request.getSession();
 		
 				if(connected != null) {
 					sess.setAttribute("type",type);
 					sess.setAttribute(type, connected);
+					
+					// Redirection vers l'accueil
 					getServletContext().getRequestDispatcher(urlValid).forward(request, response);
 				}
 				else
@@ -105,6 +117,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 		}
 		else {
+			// Gestion des erreurs
 			if(!mdpOK)
 				erreursParametres.add("Mot de passe incorrect.");
 			if(!codeOK)
@@ -112,6 +125,7 @@ public class ServletConnexion extends HttpServlet {
 		}
 		
 		if(erreursParametres.size() > 0) {
+			// Redirection vers la même page en cas d'erreur
 			request.setAttribute("erreurs", erreursParametres);
 			
 			getServletContext().getRequestDispatcher(urlConnexion).forward(request, response);

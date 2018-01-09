@@ -30,6 +30,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		super(conn);
 	}
 
+	// Appel du Service Web (insertion d'un secrétaire)
 	@Override
 	public boolean create(Secretaire obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -38,7 +39,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
-		queryParams.add("serv", obj.getService());
+		queryParams.add("service", obj.getService());
 		
 		ClientResponse response = connect.path("secretaire").type("application/x-www-form-urlencoded").post(ClientResponse.class, queryParams);
 		
@@ -52,6 +53,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		}
 	}
 
+	// Appel du Service Web (suppression d'un secrétaire)
 	@Override
 	public boolean delete(Secretaire obj) {
 		String id =  Integer.toString(obj.getIdPersonne());
@@ -65,6 +67,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		}
 	}
 
+	// Appel du Service Web (mise à jour d'un secrétaire)
 	@Override
 	public boolean update(Secretaire obj) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -74,7 +77,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		queryParams.add("dateNaiss", obj.getDateNaiss());
 		queryParams.add("numTel", obj.getNumTelephone());
 		queryParams.add("mdp", obj.getMotDePasse());
-		queryParams.add("serv", obj.getService());
+		queryParams.add("service", obj.getService());
 		
 		ClientResponse response = connect.path("secretaire").type("application/x-www-form-urlencoded").put(ClientResponse.class, queryParams);
 		if(response.getStatus() == 200) {
@@ -85,6 +88,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		}
 	}
 
+	// Appel du Service Web (récupération d'un secrétaire)
 	@Override
 	public Secretaire find(int id) throws SAXException, IOException {
 		String nom = null, prenom = null, numTel = null, mdp = null, service = null, dateNaiss = null;
@@ -138,6 +142,7 @@ public class DAOSecretaire extends DAO<Secretaire> {
 		return new Secretaire(service, idPers, nom, prenom, dateNaiss, numTel, mdp);
 	}
 	
+	// Appel du Service Web (récupération de tous les secrétaires)
 	public List<Secretaire> findAll() throws ParserConfigurationException, SAXException, IOException{
 		List<Secretaire> listSecr = new ArrayList<>();
 		String nom = null, prenom = null, numTel = null, mdp = null, service = null, dateNaiss = null;

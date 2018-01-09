@@ -25,6 +25,7 @@ import be.gestionhopital.Models.Reservation;
 import be.gestionhopital.Models.Salle;
 import be.gestionhopital.Models.Secretaire;
 
+// Classe du patterne Factory
 public class DAOFactory extends AbstractDAOFactory {
 	protected static final ClientConfig config = new DefaultClientConfig();
 	protected static final Client client = Client.create(config);
@@ -65,6 +66,7 @@ public class DAOFactory extends AbstractDAOFactory {
 		return new DAOSecretaire(service);
 	}
 	
+	// URI de base du service Web
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri("http://localhost:9090/JEEGestionHopital/rest").build();
 	}

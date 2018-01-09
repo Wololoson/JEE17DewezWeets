@@ -40,5 +40,37 @@ public class Patient extends Personne {
 		super.modifierInfos(p);
 		this.numChambre = ((Patient)p).numChambre;
 		this.numPatient = ((Patient)p).numPatient;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((numChambre == null) ? 0 : numChambre.hashCode());
+		result = prime * result + ((numPatient == null) ? 0 : numPatient.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Patient other = (Patient) obj;
+		if (numChambre == null) {
+			if (other.numChambre != null)
+				return false;
+		} else if (!numChambre.equals(other.numChambre))
+			return false;
+		if (numPatient == null) {
+			if (other.numPatient != null)
+				return false;
+		} else if (!numPatient.equals(other.numPatient))
+			return false;
+		return true;
 	};
+	
 }

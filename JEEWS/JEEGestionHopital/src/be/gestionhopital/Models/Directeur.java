@@ -37,4 +37,9 @@ public class Directeur extends Personne {
 		ListPersonnel lp = ListPersonnel.getInstance();
 		lp.supprimerPersonnel(p);
 	}
+	
+	public void modifierPatient(Patient before, Patient after) {
+		ListPatient lp = ListPatient.getInstance();
+		lp.modifierPatient(before, after);
+	}
 }

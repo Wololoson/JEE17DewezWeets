@@ -27,6 +27,7 @@ public class SalleCRUD {
 	
 	public SalleCRUD() {}
 	
+	// Récupération d'une salle
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.TEXT_XML)
@@ -64,6 +65,7 @@ public class SalleCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'une salle
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertSalle(@FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
@@ -93,6 +95,7 @@ public class SalleCRUD {
 		return Response.status(500).entity("ERROR").build();
 	}
 	
+	// Mise à jour d'une salle
 	@PUT
 	public void updateSalle(@FormParam("id") int id, @FormParam("num") String num, @FormParam("bloc") String bloc) throws SQLException {
 		CallableStatement updateSalle = null;
@@ -113,6 +116,7 @@ public class SalleCRUD {
 		}
 	}
 	
+	// Suppression d'une salle
 	@DELETE
 	@Path("{id}")
 	public void deleteSalle(@PathParam("id") int id) throws SQLException {

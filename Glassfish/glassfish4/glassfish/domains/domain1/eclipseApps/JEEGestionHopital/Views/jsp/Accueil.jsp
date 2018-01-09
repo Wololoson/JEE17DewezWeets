@@ -16,7 +16,6 @@
 		HttpSession sess = request.getSession();
 		ArrayList<String> boutons = new ArrayList<String>();
 		ArrayList<String> btnNames = new ArrayList<String>();
-		ArrayList<String> servletNames = new ArrayList<String>();
 		String type = (String) sess.getAttribute("type");
 		if(type.equals("chirurgien")){
 			%>
@@ -49,10 +48,6 @@
 				btnNames.add("chirRes");
 				btnNames.add("chirNoti");
 				btnNames.add("chirInfo");
-				
-				servletNames.add("ServletReservation");
-				servletNames.add("ServletNotification");
-				servletNames.add("ServletInformation");
 		}
 		if(type.equals("secretaire")){
 			%>
@@ -67,10 +62,6 @@
 				btnNames.add("secrRes");
 				btnNames.add("secrPati");
 				btnNames.add("secrInfo");
-				
-				servletNames.add("ServletReservation");
-				servletNames.add("ServletPatient");
-				servletNames.add("ServletInformation");
 		}
 		if(type.equals("directeur")){
 			%>
@@ -85,17 +76,17 @@
 				btnNames.add("direRes");
 				btnNames.add("direPati");
 				btnNames.add("direPers");
-				
-				servletNames.add("ServletReservation");
-				servletNames.add("ServletPatient");
-				servletNames.add("ServletPersonnel");
 		}
+		
+		boutons.add("Se déconnecter");
+		btnNames.add("leave");
 	%>
 	
 	<form action="ServletAccueil" method="post">
 		<input id="<%=btnNames.get(0) %>" name="<%=btnNames.get(0) %>" value="<%=boutons.get(0) %>" type="submit"/>
 		<input id="<%=btnNames.get(1) %>" name="<%=btnNames.get(1) %>" value="<%=boutons.get(1) %>" type="submit"/>
 		<input id="<%=btnNames.get(2) %>" name="<%=btnNames.get(2) %>" value="<%=boutons.get(2) %>" type="submit"/>
+		<input id="<%=btnNames.get(3) %>" name="<%=btnNames.get(3) %>" value="<%=boutons.get(3) %>" type="submit"/>
 	</form>
 </body>
 </html>

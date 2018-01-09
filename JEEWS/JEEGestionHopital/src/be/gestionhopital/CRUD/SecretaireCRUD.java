@@ -27,6 +27,7 @@ public class SecretaireCRUD {
 	
 	public SecretaireCRUD() {}
 	
+	// Récupération de tous les secrétaires
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getSecretaires() throws SQLException {
@@ -71,6 +72,7 @@ public class SecretaireCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Récupération d'un secrétaire
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.TEXT_XML)
@@ -112,6 +114,7 @@ public class SecretaireCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'un secrétaire
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertSecretaire(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
@@ -145,6 +148,7 @@ public class SecretaireCRUD {
 		return Response.status(500).entity("ERROR").build();
 	}
 	
+	// Mise à jour d'un secrétaire
 	@PUT
 	public void updateSecretaire(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("service") String service) throws SQLException {
 		CallableStatement updateSecr = null;
@@ -169,6 +173,7 @@ public class SecretaireCRUD {
 		}
 	}
 	
+	// Suppression d'un secrétaire
 	@DELETE
 	@Path("{id}")
 	public void deleteSecretaire(@PathParam("id") int id) throws SQLException {

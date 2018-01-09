@@ -26,6 +26,7 @@ public class NotificationCRUD {
 	
 	public NotificationCRUD() {}
 	
+	// Récupération de toutes les notifications
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getNotifications() throws SQLException {
@@ -68,6 +69,7 @@ public class NotificationCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'une notification
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertNotification(@FormParam("priorite") String priorite, @FormParam("type") String type, @FormParam("commentaire") String commentaire, @FormParam("idChirurgien") double idPers) throws SQLException {
@@ -99,6 +101,7 @@ public class NotificationCRUD {
 		return Response.status(500).entity("ERROR").build();
 	}
 	
+	// Suppression d'une notification
 	@DELETE
 	@Path("{id}")
 	public void deleteNotification(@PathParam("id") int id) throws SQLException {
@@ -107,6 +110,24 @@ public class NotificationCRUD {
 		try {
 			deleteNotif = conn.prepareCall("{call Deletes.deleteNotification(?)}");
 			deleteNotif.setDouble(1, id);
+			deleteNotif.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(deleteNotif != null)
+				deleteNotif.close();
+		}
+	}
+	
+	// Suppression de toutes les notifications
+	@DELETE
+	public void deleteNotification() throws SQLException {
+		CallableStatement deleteNotif = null;
+		
+		try {
+			deleteNotif = conn.prepareCall("{call Deletes.deleteAllNotification()}");
 			deleteNotif.executeUpdate();
 		}
 		catch(SQLException e) {

@@ -27,6 +27,7 @@ public class ChirurgienCRUD {
 	
 	public ChirurgienCRUD() {}
 	
+	// Récupération de tous les chirurgiens
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getChirurgiens() throws SQLException {
@@ -71,6 +72,7 @@ public class ChirurgienCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Récupération d'un chirurgien
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.TEXT_XML)
@@ -112,6 +114,7 @@ public class ChirurgienCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'un chirurgien
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response insertChirurgien(@FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
@@ -145,6 +148,7 @@ public class ChirurgienCRUD {
 		return Response.status(500).entity("ERROR").build();
 	}
 	
+	// Mise à jour d'un chirurgien
 	@PUT
 	public void updateChirurgien(@FormParam("id") int id, @FormParam("nom") String nom, @FormParam("prenom") String prenom, @FormParam("dateNaiss") String dateNaiss, @FormParam("numTel") String numTel, @FormParam("mdp") String mdp, @FormParam("spec") String spec) throws SQLException {
 		CallableStatement updateChir = null;
@@ -169,6 +173,7 @@ public class ChirurgienCRUD {
 		}
 	}
 	
+	// Suppression d'un chirurgien
 	@DELETE
 	@Path("{id}")
 	public void deleteChirurgien(@PathParam("id") int id) throws SQLException {

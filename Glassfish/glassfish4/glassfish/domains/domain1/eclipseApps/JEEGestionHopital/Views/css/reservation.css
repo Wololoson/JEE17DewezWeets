@@ -33,11 +33,3 @@
     text-decoration: none;
     cursor: pointer;
 }
-
-#comm{
-	overflow-y: auto;
-}
-
-#resTab {
-    border: 1px solid black;
-}

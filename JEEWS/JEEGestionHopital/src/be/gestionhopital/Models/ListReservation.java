@@ -15,12 +15,15 @@ import be.gestionhopital.Factory.AbstractDAOFactory;
 
 public class ListReservation implements Serializable {
 	private static final long serialVersionUID = 6264935516442700531L;
+	
+	// Variable d'instance
 	private static ListReservation instance = null;
 	private List<Reservation> listReservation = new ArrayList<>();
 	private AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	private DAOReservation resDAO = (DAOReservation) adf.getReservationDAO();
 	private DAOSalle salleDAO = (DAOSalle)adf.getSalleDAO();
-	
+
+	// Constructeur
 	private ListReservation() {
 		try {
 			listReservation = resDAO.findAll();
@@ -28,7 +31,8 @@ public class ListReservation implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	// Propriétés
 	public List<Reservation> getListReservation() {
 		return listReservation;
 	}
@@ -37,6 +41,7 @@ public class ListReservation implements Serializable {
 		this.listReservation = listReservation;
 	}
 
+	// Méthodes
 	public void ajouterReservation(Reservation r, Notification n) {
 		boolean found = false;
 		ListPatient lp = ListPatient.getInstance();
@@ -87,7 +92,8 @@ public class ListReservation implements Serializable {
 			ln.ajouterNotification(n);
 		}
 	}
-	
+
+	// Création ou récupération de l'instance du singleton
 	public static synchronized ListReservation getInstance() {
 		if(instance == null)
 			instance = new ListReservation();

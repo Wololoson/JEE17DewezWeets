@@ -27,6 +27,7 @@ public class ReservationCRUD {
 	
 	public ReservationCRUD() {}
 	
+	// Récupération de toutes les réservations
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getReservations() throws SQLException {
@@ -70,6 +71,7 @@ public class ReservationCRUD {
 		return Response.status(Status.OK).entity(retour).build();
 	}
 	
+	// Insertion d'une réservation
 	@POST
 	public void insertReservation(@FormParam("idChirurgien") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") String numPatient, @FormParam("dateRes") Date dateRes, @FormParam("heureRes") String heureRes) throws SQLException {
 		CallableStatement insertRes = null;
@@ -92,6 +94,7 @@ public class ReservationCRUD {
 		}
 	}
 	
+	// Mise à jour d'une réservation
 	@PUT
 	public void updateReservation(@FormParam("id") int id, @FormParam("idChirurgien") double idPers, @FormParam("idSalle") double idSalle, @FormParam("numPatient") String numPatient, @FormParam("dateRes") Date dateRes, @FormParam("heureRes") String heureRes) throws SQLException {
 		CallableStatement updateRes = null;
@@ -118,6 +121,7 @@ public class ReservationCRUD {
 		}
 	}
 	
+	// Suppression d'une réservation
 	@DELETE
 	@Path("{id}")
 	public Response deleteReservation(@PathParam("id") int id) throws SQLException {

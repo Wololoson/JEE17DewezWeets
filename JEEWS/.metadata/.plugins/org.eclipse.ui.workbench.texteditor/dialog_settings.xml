@@ -2,14 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="textarea" key="selection"/>
+		<item value="listChir" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="textarea"/>
 			<item value="listChir"/>
+			<item value="servletNames"/>
+			<item value="textarea"/>
 			<item value="System.out.println("/>
 			<item value="request"/>
 			<item value="modalBtn"/>

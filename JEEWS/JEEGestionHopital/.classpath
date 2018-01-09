@@ -12,7 +12,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/shado/Dropbox/JEE/JEEWS/JEEGestionHopital/classes12.jar">
+	<classpathentry kind="lib" path="C:/Users/basti/Dropbox/JEE/Glassfish/glassfish4/glassfish/lib/classes12.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>

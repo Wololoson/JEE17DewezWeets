@@ -1,5 +1,1 @@
-- Erreurs dans réservation (vérifier les formats des dates,...)
-- Erreurs des infos
-- Servlet de notifications
-- Servlet des patients
-- Servlet du personnel
+- git commit/push

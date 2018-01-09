@@ -21,6 +21,7 @@ public class DirecteurCRUD {
 	
 	public DirecteurCRUD() {}
 	
+	// Récupération du directeur
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Response getDirecteurs() throws SQLException {

@@ -16,6 +16,7 @@
 		String type = (String) sess.getAttribute("type");
 		Personne p = (Personne) sess.getAttribute(type);
 		ListNotification ln = (ListNotification) request.getAttribute("ln");
+		int i = 0;
 	%>
 	
 	<form action="ServletNotification" method="post">
@@ -30,11 +31,14 @@
 				<th>
 					Commentaire
 				</th>
+				<th>
+				</th>
 			</tr>
 			<%
 				for(Notification n : ln.getListNotification()){%>
 				<tr>
-				<% if(p.equals(n.getChirurgien())){ %>
+				<% if(p.equals(n.getChirurgien())){
+					sess.setAttribute("noti"+Integer.toString(i), n);%>
 					<td>
 						<%=n.getPriorite() %>
 					</td>
@@ -54,9 +58,14 @@
 					<td>
 						<%=n.getCommentaire() %>
 					</td>
+					<td>
+						<input type="radio" id="noti" name="noti" value="<%=i%>"/>
+					</td>
 				<%}%>
 				</tr>
-				<% } %>
+				<%
+				i++;
+				} %>
 			</table>
 			<input type="submit" name="suppr" id="suppr" value="Supprimer"/>
 			<input type="submit" name="supprAll" id="supprAll" value="Tout supprimer"/>
